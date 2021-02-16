@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
-
+import Firebase
 @main
 struct MaumoApp: App {
+    @StateObject var session: SessionStore = SessionStore()
+    init() {
+        FirebaseApp.configure()
+      }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(modelView:MainModelView()).environmentObject(session)
         }
     }
 }
