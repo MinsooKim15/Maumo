@@ -63,16 +63,16 @@ struct SignUpView:View{
                             text: $password
                         )
                         Text(self.session.signUpErrorMessage)
-                            .padding([.leading], 8)
+                            .padding([.leading], 16)
                             .adjustFont(fontSetting: self.signUpErrorMessageSetting)
                             .foregroundColor(.salmon)
                     }
                     .padding([.bottom], 20)
                     
-                    SignUpInfoView()
+                    SignUpInfoView().padding([.leading],  8)
                     .padding([.bottom], 34)
                     Text("기존 회원 로그인하기")
-                        .padding([.leading], 8)
+                        .padding([.leading],  16)
                         .adjustFont(fontSetting: self.signUpMessageSetting)
                         .onTapGesture {
                             self.willMoveToSignInView = true
@@ -135,24 +135,7 @@ struct SignUpInfoView: View{
         }.frame(width: 260, height : 40)
     }
 }
-struct LoginTextField: View{
-    var placeHolder : String
-    @Binding var text: String
-    let textFieldFontSetting = FontSetting(
-        fontWeight: .regular,
-        fontSize: .medium20)
-    var body: some View{
-        VStack(alignment: .leading, spacing:0){
-            Group{
-                TextField(placeHolder, text:$text)
-            }
-            .padding([.leading], 16)
-            .padding([.bottom],9)
-            .adjustFont(fontSetting: textFieldFontSetting)
-            HorizontalLine(color: .beige)
-        }.frame(height:16)
-    }
-}
+
 
 struct LoginSecureField: View{
     var placeHolder : String

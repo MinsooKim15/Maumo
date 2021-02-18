@@ -85,7 +85,17 @@ class SessionStore: ObservableObject {
         email: String,
         password: String,
         handler : @escaping AuthDataResultCallback){
-        Auth.auth().signIn(withEmail:email, password: password, completion:handler)
+        Auth.auth().signIn(withEmail:email, password: password){(result, error) in
+            
+            if let authError = error{
+                print(authError)
+                print(authError._code)
+                print(AuthErrorCode(rawValue: authError._code)?.errorMessage)
+                self.signUpErrorMessage = AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
+                print(self.signUpErrorMessage)
+            }
+            
+        }
     }
     func signOut() -> Bool{
         do {

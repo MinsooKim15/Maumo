@@ -61,6 +61,7 @@
 		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
 		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
 		02F2D4DB25DE0822007EED58 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4DA25DE0822007EED58 /* SignInView.swift */; };
+		02F2D4E125DE27B2007EED58 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4E025DE27B2007EED58 /* LoginTextField.swift */; };
 		C8D64040279A0195BEF308E2 /* Pods_MaumoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */; };
 		EA2F63A336A197025EBD2C83 /* Pods_Maumo_MaumoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563EF2D282F5937A9564D643 /* Pods_Maumo_MaumoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -134,6 +135,7 @@
 		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
 		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
 		02F2D4DA25DE0822007EED58 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		02F2D4E025DE27B2007EED58 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		279B0035132B1EE2669C7A31 /* Pods-MaumoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaumoTests.release.xcconfig"; path = "Target Support Files/Pods-MaumoTests/Pods-MaumoTests.release.xcconfig"; sourceTree = "<group>"; };
 		37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaumoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BBB810DE765F1CAB2E3D85F /* Pods-Maumo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maumo.debug.xcconfig"; path = "Target Support Files/Pods-Maumo/Pods-Maumo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 		0230AB2B25C79C7900D6A771 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				02F2D4DF25DE279C007EED58 /* AuthSubViews */,
 				0230AB5525C8181000D6A771 /* UserSubModels */,
 				0230AB2C25C79C9500D6A771 /* SessionStore.swift */,
 				0230AB5025C79D5000D6A771 /* User.swift */,
@@ -343,6 +346,14 @@
 				02F2D4D025DE023B007EED58 /* SmallCloud2.swift */,
 			);
 			path = DrawResource;
+			sourceTree = "<group>";
+		};
+		02F2D4DF25DE279C007EED58 /* AuthSubViews */ = {
+			isa = PBXGroup;
+			children = (
+				02F2D4E025DE27B2007EED58 /* LoginTextField.swift */,
+			);
+			path = AuthSubViews;
 			sourceTree = "<group>";
 		};
 		15266B6A78A6F732B370A4C9 /* Frameworks */ = {
@@ -664,6 +675,7 @@
 				0230AB6E25C83AA800D6A771 /* SignUpView.swift in Sources */,
 				0230AA9325C6ED3900D6A771 /* SimpleInformMessageView.swift in Sources */,
 				0230AAC125C6EDF500D6A771 /* ChattingModel.swift in Sources */,
+				02F2D4E125DE27B2007EED58 /* LoginTextField.swift in Sources */,
 				0230AB2D25C79C9600D6A771 /* SessionStore.swift in Sources */,
 				0230AA9E25C6ED6F00D6A771 /* Message.swift in Sources */,
 				0230AB6925C8199C00D6A771 /* MissionInfo.swift in Sources */,
