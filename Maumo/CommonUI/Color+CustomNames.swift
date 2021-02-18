@@ -15,4 +15,8 @@ extension Color{
     public static var salmon: Color {
         return Color(UIColor(red: 250.0 / 255.0, green: 134.0 / 255.0, blue: 119.0 / 255.0, alpha: 1.0))
       }
+    public static var navy: Color {
+        return Color(UIColor(red: 36.0 / 255.0, green: 56.0 / 255.0, blue: 100.0 / 255.0, alpha: 1.0))
+      }
+
 }

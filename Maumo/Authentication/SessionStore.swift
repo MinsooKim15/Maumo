@@ -114,4 +114,7 @@ class SessionStore: ObservableObject {
     
     // SignUpView용 Variables
     @Published var signUpErrorMessage : String = ""
+    func cleanErrorMessage(){
+        signUpErrorMessage = ""
+    }
 }

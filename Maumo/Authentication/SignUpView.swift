@@ -25,6 +25,10 @@ struct SignUpView:View{
             print(error)
         }
     }
+    func moveToSignIn(){
+        self.willMoveToSignInView = true
+        self.session.cleanErrorMessage()
+    }
     var body:some View{
         ZStack{
             Color.beigeWhite.edgesIgnoringSafeArea(.all)
@@ -75,7 +79,8 @@ struct SignUpView:View{
                         .padding([.leading],  16)
                         .adjustFont(fontSetting: self.signUpMessageSetting)
                         .onTapGesture {
-                            self.willMoveToSignInView = true
+                            self.moveToSignIn()
+
                         }
                 }
                 .padding([.leading], 65)
