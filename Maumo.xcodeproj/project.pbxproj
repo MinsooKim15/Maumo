@@ -50,13 +50,17 @@
 		025180F125DC39A4004D17DE /* NanumSquareOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B725CEC4940085DFC4 /* NanumSquareOTFBold.otf */; };
 		02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */; };
 		02A3E2A325CEBF9B0085DFC4 /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */; };
-		02A3E2A825CEC1C50085DFC4 /* Color+CustonNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A725CEC1C50085DFC4 /* Color+CustonNames.swift */; };
+		02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */; };
 		02A3E2AD25CEC39D0085DFC4 /* EndEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2AC25CEC39D0085DFC4 /* EndEditing.swift */; };
 		02A3E2B225CEC3CF0085DFC4 /* AdjustFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2B125CEC3CE0085DFC4 /* AdjustFont.swift */; };
 		02A3E2BB25CEC4940085DFC4 /* NanumSquareOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B725CEC4940085DFC4 /* NanumSquareOTFBold.otf */; };
 		02A3E2BC25CEC4940085DFC4 /* NanumSquareOTFLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B825CEC4940085DFC4 /* NanumSquareOTFLight.otf */; };
 		02A3E2BD25CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B925CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf */; };
 		02A3E2BE25CEC4940085DFC4 /* NanumSquareOTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */; };
+		02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */; };
+		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
+		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
+		02F2D4DB25DE0822007EED58 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4DA25DE0822007EED58 /* SignInView.swift */; };
 		C8D64040279A0195BEF308E2 /* Pods_MaumoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */; };
 		EA2F63A336A197025EBD2C83 /* Pods_Maumo_MaumoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563EF2D282F5937A9564D643 /* Pods_Maumo_MaumoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -119,13 +123,17 @@
 		0230AB6D25C83AA800D6A771 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthErrorCode+Message.swift"; sourceTree = "<group>"; };
 		02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
-		02A3E2A725CEC1C50085DFC4 /* Color+CustonNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CustonNames.swift"; sourceTree = "<group>"; };
+		02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CustomNames.swift"; sourceTree = "<group>"; };
 		02A3E2AC25CEC39D0085DFC4 /* EndEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndEditing.swift; sourceTree = "<group>"; };
 		02A3E2B125CEC3CE0085DFC4 /* AdjustFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustFont.swift; sourceTree = "<group>"; };
 		02A3E2B725CEC4940085DFC4 /* NanumSquareOTFBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFBold.otf; sourceTree = "<group>"; };
 		02A3E2B825CEC4940085DFC4 /* NanumSquareOTFLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFLight.otf; sourceTree = "<group>"; };
 		02A3E2B925CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFExtraBold.otf; sourceTree = "<group>"; };
 		02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFRegular.otf; sourceTree = "<group>"; };
+		02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud.swift; sourceTree = "<group>"; };
+		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
+		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
+		02F2D4DA25DE0822007EED58 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		279B0035132B1EE2669C7A31 /* Pods-MaumoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaumoTests.release.xcconfig"; path = "Target Support Files/Pods-MaumoTests/Pods-MaumoTests.release.xcconfig"; sourceTree = "<group>"; };
 		37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaumoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BBB810DE765F1CAB2E3D85F /* Pods-Maumo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maumo.debug.xcconfig"; path = "Target Support Files/Pods-Maumo/Pods-Maumo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,6 +198,7 @@
 		0230AA3F25C6EC9A00D6A771 /* Maumo */ = {
 			isa = PBXGroup;
 			children = (
+				02F2D4C425DD5B30007EED58 /* DrawResource */,
 				02A3E2B625CEC4940085DFC4 /* Fonts */,
 				02A3E2A125CEBF8B0085DFC4 /* CommonUI */,
 				0230AB2B25C79C7900D6A771 /* Authentication */,
@@ -287,6 +296,7 @@
 				0230AB5025C79D5000D6A771 /* User.swift */,
 				0230AB6D25C83AA800D6A771 /* SignUpView.swift */,
 				02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */,
+				02F2D4DA25DE0822007EED58 /* SignInView.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -306,9 +316,10 @@
 			isa = PBXGroup;
 			children = (
 				02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */,
-				02A3E2A725CEC1C50085DFC4 /* Color+CustonNames.swift */,
+				02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */,
 				02A3E2AC25CEC39D0085DFC4 /* EndEditing.swift */,
 				02A3E2B125CEC3CE0085DFC4 /* AdjustFont.swift */,
+				02F2D4D525DE07DC007EED58 /* View+Navigation.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -324,6 +335,15 @@
 			name = Fonts;
 			path = Maumo/Fonts;
 			sourceTree = SOURCE_ROOT;
+		};
+		02F2D4C425DD5B30007EED58 /* DrawResource */ = {
+			isa = PBXGroup;
+			children = (
+				02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */,
+				02F2D4D025DE023B007EED58 /* SmallCloud2.swift */,
+			);
+			path = DrawResource;
+			sourceTree = "<group>";
 		};
 		15266B6A78A6F732B370A4C9 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -635,6 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0230AA8425C6ED0C00D6A771 /* MessageView.swift in Sources */,
+				02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */,
 				0230AA7325C6ECB900D6A771 /* TimerHelper.swift in Sources */,
 				0230AA9825C6ED4500D6A771 /* TimerMessageView.swift in Sources */,
 				0230AA4325C6EC9A00D6A771 /* ContentView.swift in Sources */,
@@ -646,13 +667,16 @@
 				0230AB2D25C79C9600D6A771 /* SessionStore.swift in Sources */,
 				0230AA9E25C6ED6F00D6A771 /* Message.swift in Sources */,
 				0230AB6925C8199C00D6A771 /* MissionInfo.swift in Sources */,
+				02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */,
 				0230AB5125C79D5000D6A771 /* User.swift in Sources */,
 				02A3E2B225CEC3CF0085DFC4 /* AdjustFont.swift in Sources */,
 				0230AA8925C6ED1800D6A771 /* ImageMessageView.swift in Sources */,
 				02A3E2AD25CEC39D0085DFC4 /* EndEditing.swift in Sources */,
+				02F2D4DB25DE0822007EED58 /* SignInView.swift in Sources */,
 				0230AA4125C6EC9A00D6A771 /* MaumoApp.swift in Sources */,
 				0230AAA325C6ED7A00D6A771 /* Context.swift in Sources */,
-				02A3E2A825CEC1C50085DFC4 /* Color+CustonNames.swift in Sources */,
+				02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */,
+				02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */,
 				0230AA7F25C6ED0200D6A771 /* TextMessageView.swift in Sources */,
 				0230AB6425C8183B00D6A771 /* UserContext.swift in Sources */,
 				0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */,

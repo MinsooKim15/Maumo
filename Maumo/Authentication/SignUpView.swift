@@ -15,37 +15,90 @@ struct SignUpView:View{
     @State var firstName:String = ""
     @State var lastName:String = ""
     @State var password:String = ""
-    func SignUp(){
+    @State var willMoveToSignInView: Bool = false
+    let titleTextSetting = FontSetting(fontWeight: .regular, fontSize: .large40)
+    let signUpMessageSetting = FontSetting(fontWeight: .bold, fontSize : .small14)
+    let signUpErrorMessageSetting = FontSetting(fontWeight: .bold, fontSize : .small14)
+    func signUp(){
         session.signUp(email: emailAddress, password: password,firstName:firstName, lastName: lastName){(result,error) in
             print(result)
             print(error)
         }
     }
     var body:some View{
-        VStack{
-//            TextField("이메일 주소", text:$emailAddress)
-//        아래 Group 안은 입력 필드만
-            Group{
-                HStack{
-                    LoginTextField(
-                        placeHolder: "성",
-                        text: $firstName)
-                        .frame(width: 100)
-                    LoginTextField(
-                        placeHolder: "이름",
-                        text: $lastName)
+        ZStack{
+            Color.beigeWhite.edgesIgnoringSafeArea(.all)
+            VStack(alignment: .leading,spacing:0){
+                
+                ZStack(alignment:.leading){
+                    SmallCloud().padding([.leading], 0)
+                    Text("계정")
+                        .padding([.leading], 30)
+                        .adjustFont(fontSetting: self.titleTextSetting)
                 }
-                LoginTextField(
-                    placeHolder: "메일 주소",
-                    text: $emailAddress)
-                LoginSecureField(
-                    placeHolder : "비밀 번호",
-                    text: $password
-                )
+                .frame(width:140, height:70)
+                .padding([.top], 10)
+                .padding([.bottom], 40)
+                .padding([.leading], 46)
+                
+                Group{
+                    Group{
+                        HStack{
+                            LoginTextField(
+                                placeHolder: "성",
+                                text: $firstName)
+                                .frame(width: 100)
+                            LoginTextField(
+                                placeHolder: "이름",
+                                text: $lastName)
+                            
+                        }
+                        .padding([.bottom], 16)
+                        LoginTextField(
+                            placeHolder: "메일 주소",
+                            text: $emailAddress)
+                            .padding([.bottom], 16)
+                         LoginSecureField(
+                            placeHolder : "비밀 번호",
+                            text: $password
+                        )
+                        Text(self.session.signUpErrorMessage)
+                            .padding([.leading], 8)
+                            .adjustFont(fontSetting: self.signUpErrorMessageSetting)
+                            .foregroundColor(.salmon)
+                    }
+                    .padding([.bottom], 20)
+                    
+                    SignUpInfoView()
+                    .padding([.bottom], 34)
+                    Text("기존 회원 로그인하기")
+                        .padding([.leading], 8)
+                        .adjustFont(fontSetting: self.signUpMessageSetting)
+                        .onTapGesture {
+                            self.willMoveToSignInView = true
+                        }
+                }
+                .padding([.leading], 65)
+                .padding([.trailing], 58)
+                
+                Spacer()
+                HStack{
+                    Spacer()
+                    ZStack{
+                        SmallCloud2()
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white)
+                    }
+                    .frame(width:82, height:88)
+                    .onTapGesture {
+                        self.signUp()
+                    }
+                    Spacer()
+                }
+                .padding([.bottom], 74)
             }
-            SignUpInfoView()
-
-        }
+        }.navigate(to: SignInView(), when: $willMoveToSignInView)
     }
 }
 struct SignUpInfoView: View{
@@ -54,8 +107,8 @@ struct SignUpInfoView: View{
     let linkedTextSetting = FontSetting(fontWeight: .bold, fontSize: .verySmall12)
     let plainTextSetting = FontSetting(fontWeight: .regular, fontSize: .verySmall12)
     var body : some View{
-        VStack{
-            HStack{
+        VStack(alignment: .leading, spacing: 0){
+            HStack(spacing:0){
                 Text("회원가입시 Maumo의 ")
                     .adjustFont(fontSetting: self.plainTextSetting)
                 Text("이용약관 및")
@@ -67,7 +120,7 @@ struct SignUpInfoView: View{
                 }
                 
             }
-            HStack{
+            HStack(spacing:0){
                 Text("개인정보 처리방침")
                     .onTapGesture{
                         if let encoded  = self.termsOfServiceLink.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed),let myURL = URL(string: encoded){
@@ -79,7 +132,7 @@ struct SignUpInfoView: View{
                 Text("에 동의하는 것으로 간주됩니다.")
                     .adjustFont(fontSetting: self.plainTextSetting)
             }
-        }
+        }.frame(width: 260, height : 40)
     }
 }
 struct LoginTextField: View{
@@ -89,14 +142,15 @@ struct LoginTextField: View{
         fontWeight: .regular,
         fontSize: .medium20)
     var body: some View{
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing:0){
             Group{
                 TextField(placeHolder, text:$text)
             }
             .padding([.leading], 16)
+            .padding([.bottom],9)
             .adjustFont(fontSetting: textFieldFontSetting)
             HorizontalLine(color: .beige)
-        }
+        }.frame(height:16)
     }
 }
 
@@ -107,13 +161,14 @@ struct LoginSecureField: View{
         fontWeight: .regular,
         fontSize: .medium20)
     var body: some View{
-        VStack(alignment: .leading){
+        VStack(alignment: .leading, spacing:0){
             Group{
                 SecureField(placeHolder, text:$text)
             }
             .padding([.leading], 16)
+            .padding([.bottom],9)
             .adjustFont(fontSetting: textFieldFontSetting)
             HorizontalLine(color: .beige)
-        }
+        }.frame(height:30)
     }
 }
