@@ -50,7 +50,6 @@ struct ReplyTimer:Codable{
     var imageUrl:String
     var successPostback: PostbackPayload
     var failPostback: PostbackPayload
-    var used :Bool
 }
 struct SimpleInform:Codable{
     var title:String

@@ -8,29 +8,42 @@
 import SwiftUI
 struct MessageView : View {
     var currentMessage: Message
+    var isDifferentBefore: Bool
     @ObservedObject var modelView: MainModelView
+    var computedMaumoFace: some View{
+        return Group{
+            if self.isDifferentBefore{
+                    Image("MaumoFace")
+                    .resizable()
+                    .frame(width: 44, height: 37, alignment: .center)
+                    .scaledToFit()
+                
+            }else{
+                Spacer().frame(width: 44, height: 37, alignment: .center)
+            }
+        }
+    }
     var body: some View {
+        HStack(alignment: .bottom, spacing: 15) {
+
+        Group{
+                if(!currentMessage.fromUser){
+                    computedMaumoFace
+                }else{
+                    Spacer()
+                }
+        }
         Group{
             if currentMessage.category == MessageCategory.text{
-                HStack(alignment: .bottom, spacing: 15) {
-                    if !currentMessage.fromUser {
-                        Image("아이유")
-                        .resizable()
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .cornerRadius(20)
-                    } else {
-                        Spacer()
-                    }
-                    TextMessageView(contentMessage: currentMessage.data.text ?? "값이 없음",
-                                    isCurrentUser: currentMessage.fromUser)
-                }
+                TextMessageView(contentMessage: currentMessage.data.text ?? "값이 없음", isCurrentUser: currentMessage.fromUser)
             }else if(currentMessage.category == MessageCategory.attachment){
                 AttachmentView(attachment: currentMessage.data.attachment!,fromUser: currentMessage.fromUser)
             }else if(currentMessage.category == MessageCategory.reply){
-                ReplyView(replyType : currentMessage.replyType!, replyData: currentMessage.data, fromUser: currentMessage.fromUser, modelView:modelView)
-            }else{
+                ReplyView(message : currentMessage, replyType : currentMessage.replyType!, replyData: currentMessage.data, fromUser: currentMessage.fromUser, modelView:modelView)
+             }else{
                 Text("이벤트")
             }
+        }
         }
     }
 }
@@ -46,6 +59,7 @@ struct AttachmentView:View{
     }
 }
 struct ReplyView:View{
+    var message: Message
     var replyType : ReplyType
     var replyData : MessageData
     var fromUser : Bool
@@ -53,15 +67,14 @@ struct ReplyView:View{
     var body: some View{
         Group{
             if (replyType == ReplyType.quickReply){
-                QuickReplyMessageView(quickReplies: replyData.quickReplies ?? [QuickReply](), modelView: modelView)
+                QuickReplyMessageView(message:message, quickReplies: replyData.quickReplies ?? [QuickReply](), modelView: modelView)
             }else if(replyType == ReplyType.simpleInform){
                 SimpleInformMessageView()
             }else if(replyType == ReplyType.timer){
-                TimerMessageView(modelView:modelView,timer:replyData.timer!)
+                TimerMessageView(modelView:modelView,message:message)
             }else{
                 SimpleInformMessageView()
             }
         }
     }
-    
 }

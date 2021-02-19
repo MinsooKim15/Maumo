@@ -40,7 +40,7 @@ struct TimerModel{
             defaults.set(timerData.time, forKey: "timerLength")
             self.secondsLeft = timerData.time
             self.timerMode = .initial
-            self.used = timerData.used
+            self.used = message.used
             self.message = message
         }
     }

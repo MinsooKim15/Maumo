@@ -9,10 +9,10 @@ import SwiftUI
 
 struct TimerMessageView: View {
     @ObservedObject var modelView: MainModelView
-    var timer :ReplyTimer
+    var message: Message
     var body: some View {
         Group{
-            if(!timer.used){
+            if(!message.used){
                 TimerView(modelView:modelView)
             }else{
                 UsedTimerView()

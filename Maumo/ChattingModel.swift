@@ -38,7 +38,7 @@ struct ChattingModel{
         for message in self.messages{
             if let replyType_ = message.replyType, replyType_ == .timer{
                 if let timerTemp = message.data.timer{
-                    if !timerTemp.used{
+                    if !message.used{
                         return message
                     }
                 }

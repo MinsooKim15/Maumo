@@ -82,7 +82,10 @@ class MainModelView:ObservableObject{
         )
         addMessage(message: newMessage)
     }
-    func tapQuickReply(at quickReply: QuickReply){
+    func tapQuickReply(at quickReply: QuickReply, of message:Message){
+        let index = self.chattingModel.messages.firstIndex(matching: message)
+        self.chattingModel.messages[index!].setReplyDone()
+        self.updateMessage(message: self.chattingModel.messages[index!])
         sendPostback(postback: quickReply.payload)
     }
     func sendPostback(postback: PostbackPayload){
@@ -135,9 +138,19 @@ class MainModelView:ObservableObject{
     func finishTimer(withSuccess:Bool){
         self.timerModel.finishTimer()
         var message = self.timerModel.message!
-        message.setTimerDone()
+        message.setReplyDone()
         self.updateMessage(message: message)
         let postback = self.timerModel.getPostback(withSuccess: withSuccess)
         self.sendPostback(postback: postback)
+    }
+//    MARK:- 임시조치. 개별 Message를 받으면, 그 Message의 위치를 찾고, 그 직전이 같은 값인지를 반환한다.
+    func isDifferentBefore(message:Message)->Bool{
+        var index = self.chattingModel.messages.firstIndex(matching: message)
+        if let indexNumber = index, indexNumber != 0{
+            if !self.chattingModel.messages[indexNumber-1].fromUser && !message.fromUser{
+                return false
+            }
+        }
+            return true
     }
 }

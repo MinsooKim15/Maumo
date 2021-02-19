@@ -19,6 +19,7 @@ struct Message : Identifiable, Codable{
     var sessionId: String
     var contexts : [Context]
     var data : MessageData
+    var used : Bool
     
 //    init(snapshot:QueryDocumentSnapshot){
 //        id = snapshot.documentId
@@ -44,6 +45,7 @@ struct Message : Identifiable, Codable{
         fromUser = true
         sentTime = Date()
         self.sessionId = sessionId
+        self.used = false
         if contexts != nil{
             self.contexts = contexts!
         }else{
@@ -58,6 +60,7 @@ struct Message : Identifiable, Codable{
         fromUser = true
         sentTime = Date()
         self.sessionId = sessionId
+        self.used = false
         if contexts != nil{
             self.contexts = contexts!
         }else{
@@ -65,10 +68,8 @@ struct Message : Identifiable, Codable{
         }
         data = MessageData(event:event)
     }
-    mutating func setTimerDone(){
-        if self.data.timer != nil{
-            self.data.timer!.used = true
-        }
+    mutating func setReplyDone(){
+        self.used = true
     }
 }
 
