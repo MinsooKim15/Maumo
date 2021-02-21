@@ -7,7 +7,7 @@
 
 
 import Foundation
-struct Context:Codable{
+struct Context:Codable,Hashable{
     var name: String
     var lifespanCount:Int
     var parameters:Dictionary<String,CustomParameters>?

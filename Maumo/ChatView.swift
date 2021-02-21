@@ -27,51 +27,108 @@ struct ChatView:View{
     func sendEventMessage(){
         modelView.send(eventName:"actions_intent_WELCOME")
     }
-    var computedView:some View{
-        return Group{
-            if !self.modelView.timerIsActive{
-                HStack {
-                    TextField("Message...", text: $typingMessage)
-                       .textFieldStyle(RoundedBorderTextFieldStyle())
-                       .frame(minHeight: CGFloat(30))
-                     Button(action: sendMessage) {
-                         Text("Send")
-                      }
-                 }.frame(minHeight: CGFloat(50)).padding()
-            }
-        }
-        
-    }
+    
     var body: some View{
         ZStack{
             VStack {
-                ScrollView{
-                    ScrollViewReader{value in
+                ScrollViewReader{value in
+                    ScrollView{
                         LazyVStack(alignment: .leading){
+                            Spacer().frame(height:50)
                             ForEach(modelView.chattingModel.messages) { msg in
-                                MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView)
+                                MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg)
                             }
                             
                         }
-                        .onAppear{
-                            value.scrollTo(modelView.chattingModel.messages.count)
-                        }
+                        
                         .padding([.leading],20)
                         .padding([.trailing],12)
                     }
+                    .onChange(of: modelView.chattingModel.messages.count){ count in
+                        withAnimation{value.scrollTo(modelView.chattingModel.messages[count-1])}
+                    }
+                    .onAppear{
+                        withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                    }
                 }
-                Group{
-                    computedView
-                }
+                Spacer().frame(maxHeight:8)
+                ChattingTextField(modelView: self.modelView, textFieldActice: self.modelView.timerIsActive)
+                Spacer().frame(maxHeight:8)
             }
             VStack{
-                CustomNavigationBar(hasTitleText: false, titleText: "")
+                CustomNavigationBar(hasTitleText: true, titleText: "대화")
                 Spacer()
             }
 
+        }.onTapGesture {
+            hideKeyboard()
         }
 
         
+    }
+}
+struct ChattingTextField:View{
+    @ObservedObject var modelView : MainModelView
+    @State var typingMessage : String = ""
+    var textFieldActice : Bool
+    var buttonActive: Bool{
+        return !(typingMessage == "")
+    }
+    func sendMessage(){
+        modelView.send(text:typingMessage)
+        self.typingMessage = ""
+        hideKeyboard()
+    }
+    func sendButtonTapped(){
+        if self.buttonActive{
+            sendMessage()
+        }
+    }
+    var body: some View{
+            HStack{
+                Group{
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 10).foregroundColor(.whiteGray)
+                        Group{
+                            if (textFieldActice){
+                                TextField("입력", text: $typingMessage).padding([.leading],8)
+                            }else{
+                                Text("지금은 사용할 수 없어요.")
+                            }
+
+                        }
+
+                    }
+                    .frame(height:36)
+
+                    SendChatButton(isActive: buttonActive)
+                        .onTapGesture {
+                            sendButtonTapped()
+                        }
+                }.padding([.leading,.trailing],16)
+            }
+        .frame(height:36)
+    }
+}
+struct SendChatButton: View{
+    var isActive : Bool
+    var backgroundColor: Color{
+        if isActive{
+            return .salmon
+        }else{
+            return .whiteGray
+        }
+    }
+    var foregroundColor: Color{
+        return .white
+    }
+    var body : some View{
+        ZStack{
+            Circle()
+                .foregroundColor(backgroundColor)
+            Image(systemName: "paperplane")
+                .foregroundColor(foregroundColor)
+        }.frame(width:32, height:32)
     }
 }
 struct ChatView_Previews: PreviewProvider {

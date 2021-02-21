@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CustomParameters : Codable, Equatable {
+enum CustomParameters : Codable, Equatable,Hashable {
      case int(Int)
      case string(String)
      case list([CustomParameters])

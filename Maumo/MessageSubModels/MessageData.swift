@@ -9,6 +9,7 @@
 import Foundation
 
 struct MessageData:Codable{
+    
     var text : String?
     var event: Event?
     var quickReplies : [QuickReply]?
@@ -23,6 +24,21 @@ struct MessageData:Codable{
     }
 
 }
+extension MessageData : Hashable{
+    static func == (lhs: MessageData, rhs: MessageData) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+    
+    func hash(into hasher: inout Hasher){
+        hasher.combine(text)
+        hasher.combine(event)
+        hasher.combine(quickReplies)
+        hasher.combine(timer)
+        hasher.combine(simpleInform)
+        hasher.combine(attachment)
+    }
+}
+
 // TODO : payload를 변경해야 하나
 struct QuickReply:Codable,Hashable{
     var contentType : QuickReplyContentType
@@ -44,17 +60,17 @@ enum PostbackType:String, Codable, Hashable{
 enum QuickReplyContentType:String,Codable, Hashable{
     case text
 }
-struct ReplyTimer:Codable{
+struct ReplyTimer:Codable,Hashable{
     var title:String
     var time:Int
     var imageUrl:String
     var successPostback: PostbackPayload
     var failPostback: PostbackPayload
 }
-struct SimpleInform:Codable{
+struct SimpleInform:Codable, Hashable{
     var title:String
 }
-struct Attachment:Codable{
+struct Attachment:Codable, Hashable{
     var attachmentType : AttachmentType
     var url : String
 }

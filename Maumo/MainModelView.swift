@@ -63,6 +63,14 @@ class MainModelView:ObservableObject{
             print(error)
         }
     }
+    func setAllUsed(){
+        for (index,message) in self.chattingModel.messages.enumerated(){
+            if (!message.used){
+                self.chattingModel.messages[index].setReplyDone()
+                self.updateMessage(message: self.chattingModel.messages[index])
+            }
+        }
+    }
     func send(text : String){
         let newMessage = Message(
             text:text,
@@ -70,6 +78,7 @@ class MainModelView:ObservableObject{
             sessionId:currentSessionId,
             contexts : currentContexts
         )
+        self.setAllUsed()
         addMessage(message:newMessage)
     }
     func send(eventName: String){
@@ -80,6 +89,7 @@ class MainModelView:ObservableObject{
             sessionId:currentSessionId,
             contexts : currentContexts
         )
+        self.setAllUsed()
         addMessage(message: newMessage)
     }
     func tapQuickReply(at quickReply: QuickReply, of message:Message){
@@ -109,8 +119,14 @@ class MainModelView:ObservableObject{
     var timerIsActive:Bool{
         return self.timerModel.isActive
     }
-    var timerSecondsLeft:Int{
-        self.timerModel.secondsLeft
+    var timerSecondsLeft:String{
+        secondsToMinutesAndSeconds(seconds: self.timerModel.secondsLeft)
+    }
+    var timerImage:String{
+        self.timerModel.imageUrl
+    }
+    var timerTitle:String{
+        self.timerModel.title
     }
     // MARK: - Timer Intents
     func startTimer(){
@@ -121,8 +137,10 @@ class MainModelView:ObservableObject{
             print(self.timerModel.secondsLeft)
             if self.timerModel.secondsLeft == 0 {
                 self.endTimer()
+            }else{
+                self.timerModel.secondsLeft -= 1
             }
-            self.timerModel.secondsLeft -= 1
+
         })
 //        timerModel.startTimer()
     }

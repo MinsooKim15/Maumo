@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseFirestoreSwift
 
-struct Message : Identifiable, Codable{
+struct Message : Identifiable, Codable,Hashable{
     @DocumentID var id: String? = UUID().uuidString
     var userId : String
     var category : MessageCategory
