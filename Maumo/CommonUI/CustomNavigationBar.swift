@@ -15,10 +15,11 @@ struct CustomNavigationBar : View{
     let titleFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
     var hasTitleText : Bool
     var titleText : String
+    var backgroundColor : Color = Color.white.opacity(0.95)
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body : some View{
         ZStack{
-            Color.white.opacity(0.95)
+            self.backgroundColor
                 .edgesIgnoringSafeArea(.all)
           VStack(spacing:0){
               HStack(){

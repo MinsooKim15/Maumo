@@ -15,17 +15,12 @@ struct ChattingModel{
     
 
     mutating func snapshotsToMessages(snapshots:[QueryDocumentSnapshot]){
-        print("새로운 데이터")
-        print(snapshots.count)
         self.messages = snapshots.compactMap{(querySnapshot) -> Message? in
 //            return try? querySnapshot.data(as:Message.self)
             do{
                 return try querySnapshot.data(as:Message.self)
             } catch{
-                print("원본 값@@@@@@@")
-                print(querySnapshot.data())
-                print("----error--------")
-                print(error)
+
                 var message_:Message? = nil
                 return message_
             }

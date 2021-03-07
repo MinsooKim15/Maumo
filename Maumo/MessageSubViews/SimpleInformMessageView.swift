@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct SimpleInformMessageView: View {
-    
+    var text : String = ""
     var body: some View {
-        Text("SimpleInform")
+        Text(text)
             .padding(10)
             .foregroundColor(Color.white)
             .background(Color.blue)

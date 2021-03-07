@@ -17,17 +17,12 @@ struct ContentView: View {
     }
     func getUserSession(){
         session.listen(){
-            print("done")
+            print("Yeah")
         }
     }
-    func signOutTemp(){
-        self.session.signOut()
-    }
+    
     var body: some View {
         VStack{
-//            Text("로그 아웃").onTapGesture {
-//                signOutTemp()
-//            }
             Group{
                 if session.session != nil {
                     HomeView(modelView:self.modelView)

@@ -18,24 +18,40 @@ class MainModelView:ObservableObject{
     private var db = Firestore.firestore()
     private var currentContexts:[Context]?
 //    MARK:- User/Session 정의되면 변경
-    private var userId :String = "arcaine34@gmail.com"
+    var userId :String?
     private var currentSessionId : String = UUID().uuidString
-    init(){
+    func setUserId(_ userId: String){
+        self.userId = userId
         connectData()
     }
-    
+    var getUserid:String{
+        return self.userId!
+    }
+    func userCameback(){
+        // User 복귀시 로직을 다룸.
+        if let lastMessage = self.chattingModel.messages.last{
+            let calendar = Calendar.current
+            let today = Date()
+            if calendar.compare(today, to : lastMessage.sentTime, toGranularity: .day) == .orderedDescending{
+                self.send(eventName: "user_cameback")
+            }
+        }
+    }
     func connectData(){
         // TODO :- 여기서 연동 코드를 작성한다.
-        db.collection("messages")
-            .addSnapshotListener(includeMetadataChanges: true)  { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(error!)")
-                    return
+        if let userIdString = self.userId{
+//            print("userId가 \(userIdString)인 것을 가져온다." )
+            db.collection("messages").whereField("userId", isEqualTo: userIdString)
+                .addSnapshotListener(includeMetadataChanges: true)  { querySnapshot, error in
+                    guard let documents = querySnapshot?.documents else {
+                        print("Error fetching documents: \(error!)")
+                        return
+                    }
+                    self.chattingModel.snapshotsToMessages(snapshots: querySnapshot!.documents)
+                    self.currentContexts = self.chattingModel.getLastContexts()
+                    self.checkTimerAndSet()
                 }
-                self.chattingModel.snapshotsToMessages(snapshots: querySnapshot!.documents)
-                self.currentContexts = self.chattingModel.getLastContexts()
-                self.checkTimerAndSet()
-            }
+        }
     }
     private func checkTimerAndSet(){
         var timerMessage = self.chattingModel.getUnusedTimer()
@@ -64,6 +80,7 @@ class MainModelView:ObservableObject{
         }
     }
     func setAllUsed(){
+        self.timerModel.finishTimer()
         for (index,message) in self.chattingModel.messages.enumerated(){
             if (!message.used){
                 self.chattingModel.messages[index].setReplyDone()
@@ -72,36 +89,38 @@ class MainModelView:ObservableObject{
         }
     }
     func send(text : String){
-        let newMessage = Message(
-            text:text,
-            userId: userId,
-            sessionId:currentSessionId,
-            contexts : currentContexts
-        )
-        self.setAllUsed()
-        addMessage(message:newMessage)
+        if let userIdString = self.userId {
+            let newMessage = Message(
+                text:text,
+                userId: userIdString,
+                sessionId:currentSessionId,
+                contexts : currentContexts
+            )
+            self.setAllUsed()
+            addMessage(message:newMessage)
+        }
     }
     func send(eventName: String){
-        let newEvent = Event(name: eventName)
-        let newMessage = Message(
-            event:newEvent,
-            userId: userId,
-            sessionId:currentSessionId,
-            contexts : currentContexts
-        )
-        self.setAllUsed()
-        addMessage(message: newMessage)
+        if let userIdString = self.userId{
+            let newEvent = Event(name: eventName)
+            let newMessage = Message(
+                event:newEvent,
+                userId: userIdString,
+                sessionId:currentSessionId,
+                contexts : currentContexts
+            )
+            self.setAllUsed()
+            addMessage(message: newMessage)
+        }
     }
     func tapQuickReply(at quickReply: QuickReply, of message:Message){
-        let index = self.chattingModel.messages.firstIndex(matching: message)
-        self.chattingModel.messages[index!].setReplyDone()
-        self.updateMessage(message: self.chattingModel.messages[index!])
+        setAllUsed()
         sendPostback(postback: quickReply.payload)
     }
     func sendPostback(postback: PostbackPayload){
         switch(postback.postbackType){
         case .event:
-            if let eventName = postback.eventName{
+            if let eventName = postback.event{
                 send(eventName: eventName)
             }
         case .text:
@@ -134,7 +153,7 @@ class MainModelView:ObservableObject{
         self.timerModel.timerMode = .running
         
         self.timerModel.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
-            print(self.timerModel.secondsLeft)
+//            print(self.timerModel.secondsLeft)
             if self.timerModel.secondsLeft == 0 {
                 self.endTimer()
             }else{

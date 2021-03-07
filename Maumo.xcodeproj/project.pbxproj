@@ -48,6 +48,7 @@
 		025180EC25DC399E004D17DE /* NanumSquareOTFLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B825CEC4940085DFC4 /* NanumSquareOTFLight.otf */; };
 		025180ED25DC39A3004D17DE /* NanumSquareOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B725CEC4940085DFC4 /* NanumSquareOTFBold.otf */; };
 		025180F125DC39A4004D17DE /* NanumSquareOTFBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B725CEC4940085DFC4 /* NanumSquareOTFBold.otf */; };
+		0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */; };
 		02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */; };
 		02A3E2A325CEBF9B0085DFC4 /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */; };
 		02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */; };
@@ -65,6 +66,9 @@
 		02F2D4F125DEB838007EED58 /* Array+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4F025DEB838007EED58 /* Array+Identifiable.swift */; };
 		02F2D4F625DFA5A0007EED58 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4F525DFA5A0007EED58 /* CustomNavigationBar.swift */; };
 		02F2D4FB25DFC304007EED58 /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4FA25DFC304007EED58 /* HideKeyboard.swift */; };
+		02F2D50125E214F9007EED58 /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D50025E214F8007EED58 /* SettingModel.swift */; };
+		02F2D50925E21522007EED58 /* SettingModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D50825E21522007EED58 /* SettingModelView.swift */; };
+		02F2D50E25E2153E007EED58 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D50D25E2153E007EED58 /* SettingView.swift */; };
 		C8D64040279A0195BEF308E2 /* Pods_MaumoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */; };
 		EA2F63A336A197025EBD2C83 /* Pods_Maumo_MaumoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563EF2D282F5937A9564D643 /* Pods_Maumo_MaumoUITests.framework */; };
 /* End PBXBuildFile section */
@@ -125,6 +129,7 @@
 		0230AB6325C8183B00D6A771 /* UserContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserContext.swift; sourceTree = "<group>"; };
 		0230AB6825C8199C00D6A771 /* MissionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionInfo.swift; sourceTree = "<group>"; };
 		0230AB6D25C83AA800D6A771 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToKeyboard.swift; sourceTree = "<group>"; };
 		02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthErrorCode+Message.swift"; sourceTree = "<group>"; };
 		02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
 		02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CustomNames.swift"; sourceTree = "<group>"; };
@@ -142,6 +147,9 @@
 		02F2D4F025DEB838007EED58 /* Array+Identifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Identifiable.swift"; sourceTree = "<group>"; };
 		02F2D4F525DFA5A0007EED58 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		02F2D4FA25DFC304007EED58 /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
+		02F2D50025E214F8007EED58 /* SettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
+		02F2D50825E21522007EED58 /* SettingModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModelView.swift; sourceTree = "<group>"; };
+		02F2D50D25E2153E007EED58 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		279B0035132B1EE2669C7A31 /* Pods-MaumoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaumoTests.release.xcconfig"; path = "Target Support Files/Pods-MaumoTests/Pods-MaumoTests.release.xcconfig"; sourceTree = "<group>"; };
 		37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaumoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BBB810DE765F1CAB2E3D85F /* Pods-Maumo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maumo.debug.xcconfig"; path = "Target Support Files/Pods-Maumo/Pods-Maumo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -206,6 +214,7 @@
 		0230AA3F25C6EC9A00D6A771 /* Maumo */ = {
 			isa = PBXGroup;
 			children = (
+				02F2D4FF25E214E5007EED58 /* Setting */,
 				02F2D4C425DD5B30007EED58 /* DrawResource */,
 				02A3E2B625CEC4940085DFC4 /* Fonts */,
 				02A3E2A125CEBF8B0085DFC4 /* CommonUI */,
@@ -332,6 +341,7 @@
 				02F2D4D525DE07DC007EED58 /* View+Navigation.swift */,
 				02F2D4F525DFA5A0007EED58 /* CustomNavigationBar.swift */,
 				02F2D4FA25DFC304007EED58 /* HideKeyboard.swift */,
+				0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -363,6 +373,16 @@
 				02F2D4E025DE27B2007EED58 /* LoginTextField.swift */,
 			);
 			path = AuthSubViews;
+			sourceTree = "<group>";
+		};
+		02F2D4FF25E214E5007EED58 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				02F2D50025E214F8007EED58 /* SettingModel.swift */,
+				02F2D50825E21522007EED58 /* SettingModelView.swift */,
+				02F2D50D25E2153E007EED58 /* SettingView.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		15266B6A78A6F732B370A4C9 /* Frameworks */ = {
@@ -681,6 +701,7 @@
 				0230AA9825C6ED4500D6A771 /* TimerMessageView.swift in Sources */,
 				0230AA4325C6EC9A00D6A771 /* ContentView.swift in Sources */,
 				0230AAB725C6EDD600D6A771 /* ChatView.swift in Sources */,
+				02F2D50E25E2153E007EED58 /* SettingView.swift in Sources */,
 				0230AA7925C6ECDA00D6A771 /* ImageLoader.swift in Sources */,
 				0230AB6E25C83AA800D6A771 /* SignUpView.swift in Sources */,
 				0230AA9325C6ED3900D6A771 /* SimpleInformMessageView.swift in Sources */,
@@ -691,6 +712,7 @@
 				0230AB6925C8199C00D6A771 /* MissionInfo.swift in Sources */,
 				02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */,
 				0230AB5125C79D5000D6A771 /* User.swift in Sources */,
+				02F2D50125E214F9007EED58 /* SettingModel.swift in Sources */,
 				02A3E2B225CEC3CF0085DFC4 /* AdjustFont.swift in Sources */,
 				0230AA8925C6ED1800D6A771 /* ImageMessageView.swift in Sources */,
 				02F2D4F625DFA5A0007EED58 /* CustomNavigationBar.swift in Sources */,
@@ -702,10 +724,12 @@
 				02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */,
 				0230AA7F25C6ED0200D6A771 /* TextMessageView.swift in Sources */,
 				0230AB6425C8183B00D6A771 /* UserContext.swift in Sources */,
+				0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */,
 				0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */,
 				0230AB5725C8182100D6A771 /* PersonName.swift in Sources */,
 				02A3E2A325CEBF9B0085DFC4 /* HorizontalLine.swift in Sources */,
 				0230AABC25C6EDE500D6A771 /* MainModelView.swift in Sources */,
+				02F2D50925E21522007EED58 /* SettingModelView.swift in Sources */,
 				0230AA8E25C6ED2D00D6A771 /* QuickReplyMessageView.swift in Sources */,
 				0230AAC625C6EDFD00D6A771 /* TimerModel.swift in Sources */,
 				0230AAB225C6ED9900D6A771 /* CustomParameters.swift in Sources */,

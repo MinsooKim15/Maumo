@@ -41,7 +41,7 @@ struct MessageView : View {
             }else if(currentMessage.category == MessageCategory.reply){
                 ReplyView(message : currentMessage, replyType : currentMessage.replyType!, replyData: currentMessage.data, fromUser: currentMessage.fromUser, modelView:modelView)
              }else{
-                Text("이벤트")
+                EmptyView()
             }
         }
         }

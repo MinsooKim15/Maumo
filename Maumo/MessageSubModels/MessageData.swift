@@ -49,7 +49,7 @@ struct QuickReply:Codable,Hashable{
 struct PostbackPayload:Codable, Hashable{
     var postbackType : PostbackType
     var text: String?
-    var eventName : String?
+    var event : String?
 
 }
 enum PostbackType:String, Codable, Hashable{

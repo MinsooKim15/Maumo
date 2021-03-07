@@ -19,15 +19,19 @@ struct ChatView:View{
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
     }
+
     @ObservedObject var modelView: MainModelView
     @State var typingMessage : String = "입력"
     func sendMessage(){
         modelView.send(text:typingMessage)
     }
+    //MARK:-이거 사용은 다시 고민해봅시다. 단일한 Event로 처리할 수 있을듯
     func sendEventMessage(){
         modelView.send(eventName:"actions_intent_WELCOME")
     }
-    
+    func userCameback(){
+        modelView.userCameback()
+    }
     var body: some View{
         ZStack{
             VStack {
@@ -38,21 +42,26 @@ struct ChatView:View{
                             ForEach(modelView.chattingModel.messages) { msg in
                                 MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg)
                             }
-                            
                         }
-                        
                         .padding([.leading],20)
                         .padding([.trailing],12)
                     }
+
                     .onChange(of: modelView.chattingModel.messages.count){ count in
-                        withAnimation{value.scrollTo(modelView.chattingModel.messages[count-1])}
+                        if modelView.chattingModel.messages.count > 0{
+                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                        }
+
                     }
                     .onAppear{
-                        withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                        if modelView.chattingModel.messages.count > 0{
+                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                        }
+                        self.userCameback()
                     }
                 }
                 Spacer().frame(maxHeight:8)
-                ChattingTextField(modelView: self.modelView, textFieldActice: self.modelView.timerIsActive)
+                ChattingTextField(modelView: self.modelView)
                 Spacer().frame(maxHeight:8)
             }
             VStack{
@@ -70,7 +79,6 @@ struct ChatView:View{
 struct ChattingTextField:View{
     @ObservedObject var modelView : MainModelView
     @State var typingMessage : String = ""
-    var textFieldActice : Bool
     var buttonActive: Bool{
         return !(typingMessage == "")
     }
@@ -84,20 +92,24 @@ struct ChattingTextField:View{
             sendMessage()
         }
     }
+    var computedTextField: some View{
+        return Group{
+            VStack{
+                if !self.modelView.timerIsActive{
+                    TextField("입력", text: $typingMessage).padding([.leading],8)
+                }
+                if self.modelView.timerIsActive{
+                    Text("지금은 사용할 수 없어요.")
+                }
+            }
+        }
+    }
     var body: some View{
             HStack{
                 Group{
                     ZStack{
                         RoundedRectangle(cornerRadius: 10).foregroundColor(.whiteGray)
-                        Group{
-                            if (textFieldActice){
-                                TextField("입력", text: $typingMessage).padding([.leading],8)
-                            }else{
-                                Text("지금은 사용할 수 없어요.")
-                            }
-
-                        }
-
+                        computedTextField
                     }
                     .frame(height:36)
 

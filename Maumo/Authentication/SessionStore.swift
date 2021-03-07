@@ -24,7 +24,7 @@ class SessionStore: ObservableObject {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener{(auth, user) in
             if let user = user{
-                print("user 변화")
+
                 self.setUserInfo(uid:user.uid)
             } else{
                 // if we don't have a user, set our session to nil
@@ -68,15 +68,12 @@ class SessionStore: ObservableObject {
 //        Auth.auth().createUser(withEmail: email, password: password, completion: handler)
         Auth.auth().createUser(withEmail: email, password: password){(result, error) in
             if let authResult = result{
-                print(authResult.user.uid)
+
                 self.addUserInfo(uid:authResult.user.uid,firstName:firstName,lastName: lastName, email:email)
             }
             if let authError = error{
-                print(authError)
-                print(authError._code)
-                print(AuthErrorCode(rawValue: authError._code)?.errorMessage)
                 self.signUpErrorMessage = AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
-                print(self.signUpErrorMessage)
+
             }
         }
     }
@@ -88,11 +85,9 @@ class SessionStore: ObservableObject {
         Auth.auth().signIn(withEmail:email, password: password){(result, error) in
             
             if let authError = error{
-                print(authError)
-                print(authError._code)
-                print(AuthErrorCode(rawValue: authError._code)?.errorMessage)
+
                 self.signUpErrorMessage = AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
-                print(self.signUpErrorMessage)
+
             }
             
         }

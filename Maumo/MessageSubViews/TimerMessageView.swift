@@ -97,11 +97,8 @@ struct TimerView:View{
 }
 struct UsedTimerView:View{
     var body : some View{
-        Text("지나간 Timer")
-            .padding(10)
-            .foregroundColor(Color.white)
-            .background(Color.blue)
-            .cornerRadius(10)    }
+        EmptyView()
+    }
 }
 struct TimerPlayButton:View{
     var body: some View{

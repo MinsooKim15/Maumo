@@ -11,10 +11,16 @@ struct HomeView: View{
     @ObservedObject var modelView: MainModelView
     @EnvironmentObject var session:SessionStore
     @State var willMoveToChatView:Bool = false
+    @State var willMoveToSettingView:Bool = false
     let textFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
+    func setUserId(){
+        if let userIdString =  self.session.session?.uid{
+            self.modelView.setUserId(userIdString)
+        }
+    }
     var body : some View{
             ZStack{
-                    Image("HomeBackground")
+                Image("HomeBackground")
                         .resizable()
                         .scaledToFill()
                         .edgesIgnoringSafeArea(.all)
@@ -24,6 +30,9 @@ struct HomeView: View{
                         SettingButton()
                             .padding([.trailing],30)
                             .padding([.top],60)
+                            .onTapGesture {
+                                self.willMoveToSettingView = true
+                            }
                     }
                     Spacer().frame(height:280)
                     HStack{
@@ -46,7 +55,11 @@ struct HomeView: View{
                     Spacer()
                 }
             }
+            .onAppear{
+                self.setUserId()
+            }
             .navigate(to: ChatView(modelView: modelView), when: $willMoveToChatView)
+            .navigate(to: SettingView(modelView: SettingModelView()), when: $willMoveToSettingView)
     }
 }
 struct SettingButton:View{
