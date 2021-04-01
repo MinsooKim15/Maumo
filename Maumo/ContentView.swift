@@ -17,7 +17,9 @@ struct ContentView: View {
     }
     func getUserSession(){
         session.listen(){
-            print("Yeah")
+            if let userIdString = self.session.session?.uid{
+                self.modelView.setUserId(userIdString)
+            }
         }
     }
     
@@ -34,22 +36,10 @@ struct ContentView: View {
                 }
             }
             EmptyView()
-        }.onAppear(perform: {
+        }
+        .onAppear(perform: {
             getUserSession()
         })
-//        Group{
-//            if session.session != nil {
-//                HomeView(modelView:self.modelView)
-//            }
-            
-//            if !(session.session){
-//                SignUpView()
-//            }
-//            if (session.session){
-//                HomeView(modelView:self.modelView)
-//            }
-//        }
-
     }
 }
 

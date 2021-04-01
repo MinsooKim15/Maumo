@@ -24,8 +24,8 @@ class SessionStore: ObservableObject {
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener{(auth, user) in
             if let user = user{
-
                 self.setUserInfo(uid:user.uid)
+                completion()
             } else{
                 // if we don't have a user, set our session to nil
                 self.session = nil

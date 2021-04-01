@@ -50,7 +50,7 @@ struct PostbackPayload:Codable, Hashable{
     var postbackType : PostbackType
     var text: String?
     var event : String?
-
+    var parameters : CustomParameters?
 }
 enum PostbackType:String, Codable, Hashable{
     case text

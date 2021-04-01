@@ -9,4 +9,7 @@ import Foundation
 struct PersonName:Codable{
     var first : String
     var last : String
+    var full : String {
+        return last + first
+    }
 }

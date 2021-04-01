@@ -50,11 +50,11 @@ struct SignUpView:View{
                         HStack{
                             LoginTextField(
                                 placeHolder: "성",
-                                text: $firstName)
+                                text: $lastName)
                                 .frame(width: 100)
                             LoginTextField(
                                 placeHolder: "이름",
-                                text: $lastName)
+                                text: $firstName)
                             
                         }
                         .padding([.bottom], 16)
@@ -158,5 +158,10 @@ struct LoginSecureField: View{
             .adjustFont(fontSetting: textFieldFontSetting)
             HorizontalLine(color: .beige)
         }.frame(height:30)
+    }
+}
+struct Login_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView().environmentObject(SessionStore())
     }
 }

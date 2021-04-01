@@ -19,7 +19,7 @@ struct ChatView:View{
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
     }
-
+    @EnvironmentObject var session:SessionStore
     @ObservedObject var modelView: MainModelView
     @State var typingMessage : String = "입력"
     func sendMessage(){
@@ -31,6 +31,13 @@ struct ChatView:View{
     }
     func userCameback(){
         modelView.userCameback()
+    }
+    func setUserId(){
+        print("setUserId")
+        if let userIdString =  self.session.session?.uid{
+            print(userIdString)
+            self.modelView.setUserId(userIdString)
+        }
     }
     var body: some View{
         ZStack{
@@ -58,6 +65,7 @@ struct ChatView:View{
                             withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
                         }
                         self.userCameback()
+                        self.setUserId()
                     }
                 }
                 Spacer().frame(maxHeight:8)
@@ -89,7 +97,16 @@ struct ChattingTextField:View{
     }
     func sendButtonTapped(){
         if self.buttonActive{
+            print("sendMessage")
+            print(typingMessage)
             sendMessage()
+        }
+    }
+    var textFieldColor : Color{
+        if !self.modelView.timerIsActive{
+            return Color.whiteGray
+        }else{
+            return Color.whiteGray
         }
     }
     var computedTextField: some View{
@@ -99,7 +116,7 @@ struct ChattingTextField:View{
                     TextField("입력", text: $typingMessage).padding([.leading],8)
                 }
                 if self.modelView.timerIsActive{
-                    Text("지금은 사용할 수 없어요.")
+                    Text("지금은 입력할 수 없어요.").foregroundColor(.gray).padding([.leading],8)
                 }
             }
         }
@@ -108,11 +125,10 @@ struct ChattingTextField:View{
             HStack{
                 Group{
                     ZStack{
-                        RoundedRectangle(cornerRadius: 10).foregroundColor(.whiteGray)
+                        RoundedRectangle(cornerRadius: 10).foregroundColor(self.textFieldColor)
                         computedTextField
                     }
                     .frame(height:36)
-
                     SendChatButton(isActive: buttonActive)
                         .onTapGesture {
                             sendButtonTapped()

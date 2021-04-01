@@ -12,71 +12,143 @@ struct HomeView: View{
     @EnvironmentObject var session:SessionStore
     @State var willMoveToChatView:Bool = false
     @State var willMoveToSettingView:Bool = false
-    let textFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
+    
     func setUserId(){
+
         if let userIdString =  self.session.session?.uid{
+            print(userIdString)
             self.modelView.setUserId(userIdString)
         }
     }
+    var settingButtonMarginToTop: CGFloat{
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGFloat(400)
+        } else {
+            return CGFloat(40)
+        }
+    }
+    var startChatButtonMarginTopToSettingButton: CGFloat{
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return CGFloat(360)
+        } else {
+            return CGFloat(200)
+        }
+    }
+    
     var body : some View{
-            ZStack{
-                Image("HomeBackground")
-                        .resizable()
-                        .scaledToFill()
-                        .edgesIgnoringSafeArea(.all)
-                VStack{
-                    HStack{
+        GeometryReader{ geometry in
+            NavigationView{
+                ZStack{
+                    Image("HomeBackground")
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                    NavigationLink(
+                        destination: SettingView(modelView:SettingModelView())                            .navigationBarTitle("")
+                            .navigationBarHidden(true),
+                        isActive: $willMoveToSettingView
+                    ) {
+                        EmptyView()
+                    }
+                    NavigationLink(
+                        destination: ChatView(modelView: modelView)                            .navigationBarTitle("")
+                            .navigationBarHidden(true),
+                        isActive: $willMoveToChatView
+                    ) {
+                        EmptyView()
+                    }
+                    VStack{
                         Spacer()
-                        SettingButton()
+                            .frame(maxHeight:44)
+                        HStack{
+                            Spacer()
+                            SettingButton()
                             .padding([.trailing],30)
-                            .padding([.top],60)
                             .onTapGesture {
                                 self.willMoveToSettingView = true
                             }
-                    }
-                    Spacer().frame(height:280)
-                    HStack{
-                        VStack{
-                            Text("대화하기")
-                                .adjustFont(fontSetting: textFontSetting)
-                                .foregroundColor(.navy)
-        //                                .padding([.leading],24)
-                            Image(systemName: "arrow.right")
-                                .font(.system(size: 40))
-                                .foregroundColor(.salmon)
-                                .padding([.leading],36)
                         }
-                        .onTapGesture {
-                            self.willMoveToChatView = true
-                        }
-                        .padding([.leading],40)
+                        .padding([.top],self.settingButtonMarginToTop)
+                        HStack{
+                            startChatButton()
+                            .onTapGesture {
+                                self.willMoveToChatView = true
+                            }
+                            .padding([.leading],40)
+                            Spacer()
+                        }.padding([.top], self.startChatButtonMarginTopToSettingButton)
                         Spacer()
-                    }
-                    Spacer()
+//                        Group{
+//                            ZStack{
+//                                HStack{
+//                                    startChatButton()
+//                                    .onTapGesture {
+//                                        self.willMoveToChatView = true
+//                                    }
+//                                    .padding([.leading],40)
+//                                    Spacer()
+//                                }
+//
+//                            }.padding([.top], self.startChatButtonMarginTopToSettingButton)
+//                                Spacer()
+//                            }
+                        
+                        }
                 }
             }
+            .navigationViewStyle(StackNavigationViewStyle())
+        }
+
             .onAppear{
                 self.setUserId()
             }
-            .navigate(to: ChatView(modelView: modelView), when: $willMoveToChatView)
-            .navigate(to: SettingView(modelView: SettingModelView()), when: $willMoveToSettingView)
+//            .navigate(to: ChatView(modelView: modelView), when: $willMoveToChatView)
+//            .navigate(to: SettingView(modelView: SettingModelView()), when: $willMoveToSettingView)
+//            .navigationViewStyle(DefaultNavigationViewStyle())
+//                    .padding(0)
     }
 }
 struct SettingButton:View{
+//    var action : ()->Void
     var body: some View{
-        ZStack{
-            Circle().frame(width:48, height:48)
-                .foregroundColor(.white)
-            Image(systemName: "ellipsis")
-                .font(.system(size: 20))
-                .foregroundColor(.black)
+            Group{
+                ZStack{
+                    Circle()
+                        .frame(width:48, height:48)
+                        .foregroundColor(.white)
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
+                }
+                .frame(width:80, height:80)
+                .shadow(radius: 5)
+            }        
+    }
+}
+struct startChatButton:View{
+    @EnvironmentObject var session:SessionStore
+    var helloText : String{
+        return "안녕! " + (self.session.session?.name?.full ?? "")
+    }
+    let textFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
+    let helloTextFontSetting = FontSetting(fontWeight: .regular, fontSize: .small14)
+    var body: some View{
+        VStack(alignment: .leading){
+            Text(self.helloText)
+                .adjustFont(fontSetting: helloTextFontSetting)
+                .foregroundColor(.navy)
+            Text("대화하기")
+                .adjustFont(fontSetting: textFontSetting)
+                .foregroundColor(.navy)
+            Image(systemName: "arrow.right")
+                .font(.system(size: 40))
+                .foregroundColor(.salmon)
+                .padding([.leading],36)
         }
-        .shadow(radius: 5)
-        .padding([.top],20)
     }
 }
 struct SettingButton_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(modelView: MainModelView())
+        HomeView(modelView: MainModelView()).environmentObject(SessionStore())
     }
 }

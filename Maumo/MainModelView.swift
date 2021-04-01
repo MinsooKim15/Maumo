@@ -21,12 +21,12 @@ class MainModelView:ObservableObject{
     var userId :String?
     private var currentSessionId : String = UUID().uuidString
     func setUserId(_ userId: String){
-        self.userId = userId
-        connectData()
+        if self.userId == nil{
+            self.userId = userId
+            connectData()
+        }
     }
-    var getUserid:String{
-        return self.userId!
-    }
+
     func userCameback(){
         // User 복귀시 로직을 다룸.
         if let lastMessage = self.chattingModel.messages.last{
@@ -90,6 +90,7 @@ class MainModelView:ObservableObject{
     }
     func send(text : String){
         if let userIdString = self.userId {
+            print("userId 정상")
             let newMessage = Message(
                 text:text,
                 userId: userIdString,
@@ -98,11 +99,26 @@ class MainModelView:ObservableObject{
             )
             self.setAllUsed()
             addMessage(message:newMessage)
+        }else{
+            print("userId비어있음")
         }
     }
     func send(eventName: String){
         if let userIdString = self.userId{
             let newEvent = Event(name: eventName)
+            let newMessage = Message(
+                event:newEvent,
+                userId: userIdString,
+                sessionId:currentSessionId,
+                contexts : currentContexts
+            )
+            self.setAllUsed()
+            addMessage(message: newMessage)
+        }
+    }
+    func send(eventName: String,parameters:CustomParameters){
+        if let userIdString = self.userId{
+            let newEvent = Event(name: eventName,parameters: parameters)
             let newMessage = Message(
                 event:newEvent,
                 userId: userIdString,
@@ -121,7 +137,12 @@ class MainModelView:ObservableObject{
         switch(postback.postbackType){
         case .event:
             if let eventName = postback.event{
-                send(eventName: eventName)
+                if let parameters = postback.parameters{
+                    send(eventName: eventName,parameters: parameters)
+                }else{
+                    send(eventName: eventName)
+                }
+
             }
         case .text:
             if let textInput = postback.text{
