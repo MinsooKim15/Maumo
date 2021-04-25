@@ -12,22 +12,61 @@ import FirebaseFirestore
 
 struct ChattingModel{
     var messages: Array<Message> = []
+    public private(set) var chattingStatus : ChattingModel.ChattingStatus = .idle{
+        didSet{
+            if oldValue == .thinking{
+                self.secondsLeftForThinkingTimer = self.secondsToWaitForThinking
+                self.endThinkingTimer()
+            }else if oldValue == .replying{
+                self.clearCurrentReplyMessage()
+            }
+        }
+    }
     
+    private let secondsToWaitForThinking = 60
+    public var secondsLeftForThinkingTimer = 60
+    var thinkingTimer = Timer()
 
+    public private(set) var currentReplyType: ReplyType?
+    public private(set) var currentReplyMessage : Message?
     mutating func snapshotsToMessages(snapshots:[QueryDocumentSnapshot]){
         self.messages = snapshots.compactMap{(querySnapshot) -> Message? in
 //            return try? querySnapshot.data(as:Message.self)
             do{
-                return try querySnapshot.data(as:Message.self)
+                let message =  try querySnapshot.data(as:Message.self)
+//                Reply면 필요한 세팅을 위한 확인
+                if let message_ = message {
+                    if message_.category == .reply, !message_.used{
+                        self.setCurrentReplyMessage(message_)
+                    }else if message_.category == .text, !message_.fromUser{
+                        self.gotTextMessage()
+                    }
+                }
+                return message
             } catch{
-
-                var message_:Message? = nil
+                let message_:Message? = nil
                 return message_
             }
-
         }
         self.messages = self.messages.sorted(by: {$0.sentTime < $1.sentTime})
-        
+    }
+    mutating func endThinkingTimer(){
+        self.secondsLeftForThinkingTimer = self.secondsToWaitForThinking
+        self.thinkingTimer.invalidate()
+    }
+    mutating func setCurrentReplyMessage(_  currentReplyMessage:Message){
+        self.chattingStatus = .replying
+        self.currentReplyType = currentReplyMessage.replyType
+        self.currentReplyMessage = currentReplyMessage
+    }
+    mutating func clearCurrentReplyMessage(){
+        self.currentReplyType = nil
+        self.currentReplyMessage = nil
+    }
+    mutating func gotTextMessage(){
+        if self.chattingStatus == .thinking{
+            self.chattingStatus = .idle
+        }
     }
     func getUnusedTimer()->Message?{
         for message in self.messages{
@@ -42,8 +81,27 @@ struct ChattingModel{
         return nil
     }
 
-    
+    mutating func setChattingStatus(_ status: ChattingModel.ChattingStatus){
+        self.chattingStatus = status
+        switch(status){
+        case .idle:
+            self.currentReplyType = nil
+            self.currentReplyMessage = nil
+        case .textEditing:
+            return
+        case .replying:
+            return
+        case .thinking:
+            return
+        }
+    }
     mutating func getLastContexts()->[Context]?{
         return self.messages.last?.contexts
+    }
+    enum ChattingStatus:String{
+        case idle
+        case textEditing
+        case replying
+        case thinking
     }
 }

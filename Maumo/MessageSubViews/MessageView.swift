@@ -67,7 +67,7 @@ struct ReplyView:View{
     var body: some View{
         Group{
             if (replyType == ReplyType.quickReply){
-                QuickReplyMessageView(message:message, quickReplies: replyData.quickReplies ?? [QuickReply](), modelView: modelView)
+                EmptyView()
             }else if(replyType == ReplyType.simpleInform){
                 SimpleInformMessageView()
             }else if(replyType == ReplyType.timer){

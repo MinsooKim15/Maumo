@@ -69,7 +69,8 @@ struct ChatView:View{
                     }
                 }
                 Spacer().frame(maxHeight:8)
-                ChattingTextField(modelView: self.modelView)
+                ChattingInputField(modelView:self.modelView)
+//                ChattingTextField(modelView: self.modelView)
                 Spacer().frame(maxHeight:8)
             }
             VStack{
@@ -84,9 +85,47 @@ struct ChatView:View{
         
     }
 }
+struct ChattingInputField:View{
+    // TODO: ChattingModel의 상태값을 기준으로 입력을 정의한다.
+    @ObservedObject var modelView : MainModelView
+    func computedView() -> AnyView{
+        switch(self.modelView.chattingModel.chattingStatus){
+        case .idle:
+            return AnyView(ChattingTextField(modelView: self.modelView))
+        case .thinking:
+            return AnyView(EmptyView())
+        case .textEditing:
+            return AnyView(ChattingTextField(modelView: self.modelView))
+        case .replying:
+            if let replyType = self.modelView.getCurrentReplyType(){
+                switch(replyType){
+                case .quickReply:
+                    return AnyView(QuickReplyMessageView(message: self.modelView.getCurrentReplyMessage()!, modelView: self.modelView))
+                case .simpleInform:
+                    // 하지만 simpleInform이 Replying으로 떨어지면 에러임.
+                    return AnyView(EmptyView())
+                case .timer:
+                    return AnyView(EmptyView())
+                }
+            }
+            return AnyView(ChattingTextField(modelView: self.modelView))
+        }
+    }
+    var body : some View{
+        computedView()
+    }
+}
 struct ChattingTextField:View{
     @ObservedObject var modelView : MainModelView
-    @State var typingMessage : String = ""
+    @State var typingMessage : String = ""{
+        didSet{
+            if typingMessage == ""{
+                self.modelView.stopTextEditing()
+            }else{
+                self.modelView.startTextEditing()
+            }
+        }
+    }
     var buttonActive: Bool{
         return !(typingMessage == "")
     }
@@ -97,8 +136,6 @@ struct ChattingTextField:View{
     }
     func sendButtonTapped(){
         if self.buttonActive{
-            print("sendMessage")
-            print(typingMessage)
             sendMessage()
         }
     }
@@ -109,24 +146,12 @@ struct ChattingTextField:View{
             return Color.whiteGray
         }
     }
-    var computedTextField: some View{
-        return Group{
-            VStack{
-                if !self.modelView.timerIsActive{
-                    TextField("입력", text: $typingMessage).padding([.leading],8)
-                }
-                if self.modelView.timerIsActive{
-                    Text("지금은 입력할 수 없어요.").foregroundColor(.gray).padding([.leading],8)
-                }
-            }
-        }
-    }
     var body: some View{
             HStack{
                 Group{
                     ZStack{
                         RoundedRectangle(cornerRadius: 10).foregroundColor(self.textFieldColor)
-                        computedTextField
+                        TextField("입력", text: $typingMessage).padding([.leading],8)
                     }
                     .frame(height:36)
                     SendChatButton(isActive: buttonActive)

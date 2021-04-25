@@ -26,7 +26,6 @@ class MainModelView:ObservableObject{
             connectData()
         }
     }
-
     func userCameback(){
         // User 복귀시 로직을 다룸.
         if let lastMessage = self.chattingModel.messages.last{
@@ -90,7 +89,6 @@ class MainModelView:ObservableObject{
     }
     func send(text : String){
         if let userIdString = self.userId {
-            print("userId 정상")
             let newMessage = Message(
                 text:text,
                 userId: userIdString,
@@ -102,6 +100,7 @@ class MainModelView:ObservableObject{
         }else{
             print("userId비어있음")
         }
+        self.sentMessage()
     }
     func send(eventName: String){
         if let userIdString = self.userId{
@@ -115,6 +114,7 @@ class MainModelView:ObservableObject{
             self.setAllUsed()
             addMessage(message: newMessage)
         }
+        self.sentMessage()
     }
     func send(eventName: String,parameters:CustomParameters){
         if let userIdString = self.userId{
@@ -128,6 +128,7 @@ class MainModelView:ObservableObject{
             self.setAllUsed()
             addMessage(message: newMessage)
         }
+        self.sentMessage()
     }
     func tapQuickReply(at quickReply: QuickReply, of message:Message){
         setAllUsed()
@@ -149,6 +150,7 @@ class MainModelView:ObservableObject{
                 send(text:textInput)
             }
         }
+        self.sentMessage()
     }
     // MARK: - Dealing with Timer
     @Published var timerModel = TimerModel()
@@ -210,5 +212,56 @@ class MainModelView:ObservableObject{
             }
         }
             return true
+    }
+//  MARK: - Chatting Status 관련
+
+    var thinkingTimer : Timer?
+    func startTextEditing(){
+        self.chattingModel.setChattingStatus(.textEditing)
+    }
+    func stopTextEditing(){
+        // sent해서 stopTextEditing이 들어온 거면 여기서 막는다.
+        if self.chattingModel.chattingStatus != .thinking{
+            self.chattingModel.setChattingStatus(.idle)
+        }
+
+    }
+    func sentMessage(){
+        self.chattingModel.setChattingStatus(.thinking)
+        self.startThinkingTimer()
+    }
+//    func gotMessageFromService(message: Message){
+//        if let replyType = message.replyType{
+//            switch(replyType) {
+//            case .quickReply:
+//                self.chattingModel.setChattingStatus(.replying)
+//                self.chattingModel.setCurrentReplyMessage(currentReplyType: replyType, currentReplyMessage: message)
+//            case .timer:
+//                // Timer 시작 관련 코드를 이리로 가져온다.
+//                self.chattingModel.setChattingStatus(.replying)
+//            case .simpleInform:
+//                self.chattingModel.setChattingStatus(.idle)
+//            }
+//        }else{
+//            // Reply가 아님
+//            self.chattingModel.setChattingStatus(.idle)
+//        }
+//        // Reply 받았을 때의 모든 동작 수행
+//
+//    }
+    func getCurrentReplyMessage()->Message?{
+        return self.chattingModel.currentReplyMessage
+    }
+    func getCurrentReplyType()->ReplyType?{
+        return self.chattingModel.currentReplyType
+    }
+    func startThinkingTimer(){
+        self.chattingModel.thinkingTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in
+            if self.chattingModel.secondsLeftForThinkingTimer == 0 {
+                self.chattingModel.setChattingStatus(.idle)
+                self.chattingModel.endThinkingTimer()
+            }
+            self.chattingModel.secondsLeftForThinkingTimer -= 1
+        })
     }
 }

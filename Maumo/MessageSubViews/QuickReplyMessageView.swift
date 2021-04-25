@@ -8,25 +8,30 @@
 import SwiftUI
 struct QuickReplyMessageView: View {
     var message: Message
-    var quickReplies: [QuickReply]
-
     @ObservedObject var modelView: MainModelView
     func tapQuickReply(quickReply: QuickReply){
-        self.modelView.tapQuickReply(at: quickReply, of:message)
+        self.modelView.tapQuickReply(at: quickReply, of:self.getMessage())
+    }
+    func getQuickReplies()->[QuickReply]{
+        return self.message.data.quickReplies!
+    }
+    func getMessage()-> Message{
+        return self.modelView.getCurrentReplyMessage()!
     }
     var body: some View {
         Group{
             if !self.message.used{
                 ScrollView(.horizontal){
-                    HStack{
-                        ForEach(quickReplies, id: \.self){ quickReply in
+                    HStack(alignment:.center){
+                        Spacer().frame(minWidth:80)
+                        ForEach(self.getQuickReplies(), id: \.self){ quickReply in
                             QuickReplyBurbble(text: quickReply.title)
                                 .onTapGesture {
                                     tapQuickReply(quickReply: quickReply)
                                 }
                         }
+                        Spacer()
                     }
-                    
                 }.onAppear{
                     UITableView.appearance().showsHorizontalScrollIndicator = false
                 }
