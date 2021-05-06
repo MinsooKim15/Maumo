@@ -65,7 +65,6 @@ class MainModelView:ObservableObject{
     func snapshotsToMessages(snapshots:[QueryDocumentSnapshot]){
         self.chattingModel.messages = snapshots.compactMap{(querySnapshot) -> Message? in
             do{
-                print("언제 언제 호출되나?")
                     
                         let message =  try querySnapshot.data(as:Message.self)
         //                Reply면 필요한 세팅을 위한 확인
@@ -104,8 +103,6 @@ class MainModelView:ObservableObject{
         }
     }
     func updateMessage(message:Message){
-        print("updateMessage")
-        print(message)
         do {
             let _ = try db.collection("messages").document(message.id!).setData(from: message)
         }
@@ -117,7 +114,6 @@ class MainModelView:ObservableObject{
         self.timerModel.finishTimer()
         for (index,message) in self.chattingModel.messages.enumerated(){
             if (!message.used){
-                print("Message is unused : \(message)")
                 self.chattingModel.messages[index].setReplyDone()
                 self.updateMessage(message: self.chattingModel.messages[index])
             }

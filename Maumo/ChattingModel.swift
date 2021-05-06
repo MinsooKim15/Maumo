@@ -27,11 +27,7 @@ struct ChattingModel{
     public var secondsLeftForThinkingTimer = 60
     var thinkingTimer = Timer()
 
-    public private(set) var currentReplyType: ReplyType?{
-        didSet{
-            print("currentReplyType Changed to : \(currentReplyType)")
-        }
-    }
+    public private(set) var currentReplyType: ReplyType?
     public private(set) var currentReplyMessage : Message?
     public var replyTypeChanged:Bool = false
 //    mutating func snapshotsToMessages(snapshots:[QueryDocumentSnapshot]){
@@ -61,8 +57,6 @@ struct ChattingModel{
         self.thinkingTimer.invalidate()
     }
     mutating func setCurrentReplyMessage(_  currentReplyMessage:Message){
-        print("set current reply message")
-        print(currentReplyMessage)
         self.chattingStatus = .replying
         self.currentReplyType = currentReplyMessage.replyType
         self.currentReplyMessage = currentReplyMessage
