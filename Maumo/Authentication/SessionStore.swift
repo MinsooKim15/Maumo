@@ -33,7 +33,17 @@ class SessionStore: ObservableObject {
             }
         }
     }
-
+    func signInAnonymous(){
+        Auth.auth().signInAnonymously(){(authResult, error) in
+            guard let user = authResult?.user else { return }
+            self.userIsAnonymous = user.isAnonymous  // true
+            let uid = user.uid
+            if error != nil{
+                print(error)
+            }
+            print("익명 로그인 성공")
+        }
+    }
     func setUserInfo(uid:String){
 //        User 데이터를 Firestore에서 가져와서 저장한다.
         let doc_ref = Firestore.firestore().collection("users").document(uid)

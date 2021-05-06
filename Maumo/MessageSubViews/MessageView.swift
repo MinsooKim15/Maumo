@@ -10,22 +10,32 @@ struct MessageView : View {
     var currentMessage: Message
     var isDifferentBefore: Bool
     @ObservedObject var modelView: MainModelView
+    var computedHeight : CGFloat{
+        if let replyType = self.currentMessage.replyType{
+            if (replyType == .signUp)||(replyType == .custom) || (replyType == .quickReply){
+                return CGFloat(0)
+            }else{
+                return CGFloat(37)
+            }
+        }else{
+            return CGFloat(37)
+        }
+    }
     var computedMaumoFace: some View{
         return Group{
             if self.isDifferentBefore{
                     Image("MaumoFace")
                     .resizable()
-                    .frame(width: 44, height: 37, alignment: .center)
+                    .frame(width: 44, height: computedHeight, alignment: .center)
                     .scaledToFit()
                 
             }else{
-                Spacer().frame(width: 44, height: 37, alignment: .center)
+                Spacer().frame(width: 44, height: computedHeight, alignment: .center)
             }
         }
     }
     var body: some View {
         HStack(alignment: .bottom, spacing: 15) {
-
         Group{
                 if(!currentMessage.fromUser){
                     computedMaumoFace
@@ -35,7 +45,7 @@ struct MessageView : View {
         }
         Group{
             if currentMessage.category == MessageCategory.text{
-                TextMessageView(contentMessage: currentMessage.data.text ?? "값이 없음", isCurrentUser: currentMessage.fromUser)
+                TextMessageView(contentMessage: currentMessage.data.text ?? " ", isCurrentUser: currentMessage.fromUser)
             }else if(currentMessage.category == MessageCategory.attachment){
                 AttachmentView(attachment: currentMessage.data.attachment!,fromUser: currentMessage.fromUser)
             }else if(currentMessage.category == MessageCategory.reply){
@@ -64,17 +74,29 @@ struct ReplyView:View{
     var replyData : MessageData
     var fromUser : Bool
     @ObservedObject var modelView: MainModelView
+    var computedFrameHeight: CGFloat{
+        switch(replyType){
+        case .quickReply:
+            return 0
+        case .custom:
+            return 0
+        case .signUp:
+            return 0
+        default:
+            return CGFloat.infinity
+        }
+    }
     var body: some View{
         Group{
             if (replyType == ReplyType.quickReply){
-                EmptyView()
+                EmptyView().frame(height:0.001)
             }else if(replyType == ReplyType.simpleInform){
                 SimpleInformMessageView()
             }else if(replyType == ReplyType.timer){
                 TimerMessageView(modelView:modelView,message:message)
             }else{
-                SimpleInformMessageView()
+                EmptyView().frame(height:0.001)
             }
-        }
+        }.frame(maxHeight:self.computedFrameHeight)
     }
 }

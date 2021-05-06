@@ -11,6 +11,9 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Firebase
+import AppTrackingTransparency
+
+
 // TODO : ChangeName
 class MainModelView:ObservableObject{
 //    MARK: - Chatting Stuffs
@@ -19,9 +22,16 @@ class MainModelView:ObservableObject{
     private var currentContexts:[Context]?
 //    MARK:- User/Session 정의되면 변경
     var userId :String?
+    private(set) var realUID:String?
+    private(set) var tutorialUID:String?
+    var isOnTutorial = false{
+        didSet{
+            print(isOnTutorial)
+        }
+    }
     private var currentSessionId : String = UUID().uuidString
     func setUserId(_ userId: String){
-        if self.userId == nil{
+        if self.realUID == nil{
             self.userId = userId
             connectData()
         }
@@ -39,19 +49,42 @@ class MainModelView:ObservableObject{
     func connectData(){
         // TODO :- 여기서 연동 코드를 작성한다.
         if let userIdString = self.userId{
-//            print("userId가 \(userIdString)인 것을 가져온다." )
+            print("userId가 \(userIdString)인 것을 가져온다." )
             db.collection("messages").whereField("userId", isEqualTo: userIdString)
                 .addSnapshotListener(includeMetadataChanges: true)  { querySnapshot, error in
                     guard let documents = querySnapshot?.documents else {
                         print("Error fetching documents: \(error!)")
                         return
                     }
-                    self.chattingModel.snapshotsToMessages(snapshots: querySnapshot!.documents)
+                    self.snapshotsToMessages(snapshots: querySnapshot!.documents)
                     self.currentContexts = self.chattingModel.getLastContexts()
                     self.checkTimerAndSet()
                 }
         }
     }
+    func snapshotsToMessages(snapshots:[QueryDocumentSnapshot]){
+        self.chattingModel.messages = snapshots.compactMap{(querySnapshot) -> Message? in
+            do{
+                print("언제 언제 호출되나?")
+                    
+                        let message =  try querySnapshot.data(as:Message.self)
+        //                Reply면 필요한 세팅을 위한 확인
+                        if let message_ = message {
+                            if message_.category == .reply, !message_.used{
+                                self.chattingModel.setCurrentReplyMessage(message_)
+                            }else if message_.category == .text, !message_.fromUser{
+                                self.chattingModel.gotTextMessage()
+                            }
+                        }
+                        return message
+                } catch{
+                    let message_:Message? = nil
+                    return message_
+                }
+
+            }
+        self.chattingModel.messages = self.chattingModel.messages.sorted(by: {$0.sentTime < $1.sentTime})
+        }
     private func checkTimerAndSet(){
         var timerMessage = self.chattingModel.getUnusedTimer()
         if let timerMessageTemp = timerMessage{
@@ -71,6 +104,8 @@ class MainModelView:ObservableObject{
         }
     }
     func updateMessage(message:Message){
+        print("updateMessage")
+        print(message)
         do {
             let _ = try db.collection("messages").document(message.id!).setData(from: message)
         }
@@ -82,6 +117,7 @@ class MainModelView:ObservableObject{
         self.timerModel.finishTimer()
         for (index,message) in self.chattingModel.messages.enumerated(){
             if (!message.used){
+                print("Message is unused : \(message)")
                 self.chattingModel.messages[index].setReplyDone()
                 self.updateMessage(message: self.chattingModel.messages[index])
             }
@@ -132,7 +168,15 @@ class MainModelView:ObservableObject{
     }
     func tapQuickReply(at quickReply: QuickReply, of message:Message){
         setAllUsed()
+        self.updateMessageDone(of: message)
         sendPostback(postback: quickReply.payload)
+    }
+    private func updateMessageDone(of message:Message){
+        let index = self.chattingModel.messages.firstIndex(of: message)
+        if let index_ = index{
+            self.chattingModel.messages[index_].setReplyDone()
+            self.updateMessage(message: self.chattingModel.messages[index_])
+        }
     }
     func sendPostback(postback: PostbackPayload){
         switch(postback.postbackType){
@@ -228,6 +272,7 @@ class MainModelView:ObservableObject{
     }
     func sentMessage(){
         self.chattingModel.setChattingStatus(.thinking)
+        self.chattingModel.clearCurrentReplyMessage()
         self.startThinkingTimer()
     }
 //    func gotMessageFromService(message: Message){
@@ -263,5 +308,40 @@ class MainModelView:ObservableObject{
             }
             self.chattingModel.secondsLeftForThinkingTimer -= 1
         })
+    }
+    // MARK: - Tutorial 관련 코드
+    func startTutorial(){
+    // Client에서 랜덤하게 생성함으로, 튜토리얼을 끝내자마자 모두 지운다고 해도 문제가 생길 수 있다. 현실적으로 UUID는 겹치기 어렵다. 따라서 기존 Tutorial을 삭제하는 로직을 추가하지는 않는다.
+        self.tutorialUID = UUID.init().uuidString
+        self.userId = tutorialUID
+        self.connectData()
+        self.isOnTutorial = true
+        self.send(eventName: "start_tutorial")
+    }
+    
+    private func endTutorial(){
+        if self.userId == self.tutorialUID{
+            self.userId = nil
+        }
+        self.isOnTutorial = false
+        
+    }
+    
+    public func signUpSuccessCompletion(){
+        if let successPostback = self.getCurrentReplyMessage()?.data.signUp?.successPostback{
+            self.sendPostback(postback: successPostback)
+            self.chattingModel.clearCurrentReplyMessage()
+        }
+        self.endTutorial()
+    }
+//    MARK: - App Tracking Transparency
+    func callTransparencyPopupIfNeeded(){
+        if #available(iOS 14, *) {
+            if AppTrackingTransparency.ATTrackingManager.trackingAuthorizationStatus == .notDetermined{
+                AppTrackingTransparency.ATTrackingManager.requestTrackingAuthorization{status in
+                    print(status)
+                }
+            }
+        }
     }
 }

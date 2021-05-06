@@ -22,19 +22,27 @@ struct ContentView: View {
             }
         }
     }
-    
     var body: some View {
         VStack{
             Group{
                 if session.session != nil {
-                    HomeView(modelView:self.modelView)
+                    if(session.session?.isAnonymous == false){
+                        HomeView(modelView:self.modelView)
+                    }
                 }
             }
             Group{
-                if session.session == nil {
-                    SignUpView()
+                if session.session == nil{
+                    StartView(modelView: self.modelView)
                 }
             }
+            Group{
+                if session.session?.isAnonymous == true{
+                    StartView(modelView: self.modelView)
+                }
+
+            }
+
             EmptyView()
         }
         .onAppear(perform: {

@@ -16,6 +16,8 @@ struct MessageData:Codable{
     var timer : ReplyTimer?
     var simpleInform : SimpleInform?
     var attachment: Attachment?
+    var signUp : SignUp?
+    var custom : Custom?
     init(text : String){
         self.text = text
     }
@@ -69,6 +71,13 @@ struct ReplyTimer:Codable,Hashable{
 }
 struct SimpleInform:Codable, Hashable{
     var title:String
+}
+struct SignUp:Codable,Hashable{
+    var successPostback: PostbackPayload
+    var failPostback: PostbackPayload
+}
+struct Custom:Codable, Hashable{
+    var data : CustomParameters
 }
 struct Attachment:Codable, Hashable{
     var attachmentType : AttachmentType

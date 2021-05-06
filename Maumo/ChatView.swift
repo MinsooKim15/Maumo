@@ -101,10 +101,12 @@ struct ChattingInputField:View{
                 switch(replyType){
                 case .quickReply:
                     return AnyView(QuickReplyMessageView(message: self.modelView.getCurrentReplyMessage()!, modelView: self.modelView))
-                case .simpleInform:
-                    // 하지만 simpleInform이 Replying으로 떨어지면 에러임.
-                    return AnyView(EmptyView())
-                case .timer:
+//                case .simpleInform:
+//                    // 하지만 simpleInform이 Replying으로 떨어지면 에러임.
+//                    return AnyView(EmptyView())
+//                case .timer:
+//                    return AnyView(EmptyView())
+                default:
                     return AnyView(EmptyView())
                 }
             }
@@ -112,7 +114,7 @@ struct ChattingInputField:View{
         }
     }
     var body : some View{
-        computedView()
+        computedView().transition(.opacity)
     }
 }
 struct ChattingTextField:View{

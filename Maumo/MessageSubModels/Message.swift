@@ -85,4 +85,6 @@ enum ReplyType:String,Codable{
     case quickReply
     case timer
     case simpleInform
+    case signUp
+    case custom
 }

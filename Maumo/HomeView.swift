@@ -78,21 +78,6 @@ struct HomeView: View{
                             Spacer()
                         }.padding([.top], self.startChatButtonMarginTopToSettingButton)
                         Spacer()
-//                        Group{
-//                            ZStack{
-//                                HStack{
-//                                    startChatButton()
-//                                    .onTapGesture {
-//                                        self.willMoveToChatView = true
-//                                    }
-//                                    .padding([.leading],40)
-//                                    Spacer()
-//                                }
-//
-//                            }.padding([.top], self.startChatButtonMarginTopToSettingButton)
-//                                Spacer()
-//                            }
-                        
                         }
                 }
             }
@@ -101,11 +86,8 @@ struct HomeView: View{
 
             .onAppear{
                 self.setUserId()
+                self.modelView.callTransparencyPopupIfNeeded()
             }
-//            .navigate(to: ChatView(modelView: modelView), when: $willMoveToChatView)
-//            .navigate(to: SettingView(modelView: SettingModelView()), when: $willMoveToSettingView)
-//            .navigationViewStyle(DefaultNavigationViewStyle())
-//                    .padding(0)
     }
 }
 struct SettingButton:View{
