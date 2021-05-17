@@ -9,7 +9,7 @@ import SwiftUI
 struct StartView:View{
     let startStringTextSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
     let signUpTextSetting = FontSetting(fontWeight: .light, fontSize: .small14)
-    var modelView: MainModelView
+    @ObservedObject var modelView: MainModelView
     @State var willNavigateToSignInView = false
     @State var willNavigateToTutorialView = false
     @EnvironmentObject var session:SessionStore
@@ -57,10 +57,12 @@ struct StartView:View{
                         }
                     }
             }
-            .navigationViewStyle(StackNavigationViewStyle())
+            
             }.onAppear{
                 session.signInAnonymous()
+                self.modelView.startViewSet()
             }
+            .navigationViewStyle(StackNavigationViewStyle())
     }
     }
 }

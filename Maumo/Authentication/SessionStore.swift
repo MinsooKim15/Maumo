@@ -16,24 +16,28 @@ import FirebaseFirestore
 // ViewModel For Authentication
 
 class SessionStore: ObservableObject {
-    var didChange = PassthroughSubject<SessionStore, Never>()
-    @Published var session: User?
-    var handle : AuthStateDidChangeListenerHandle?
-    var userIsAnonymous = true
-    func listen(completion: @escaping ()-> Void){
+    public var didChange = PassthroughSubject<SessionStore, Never>()
+    @Published var session: User?{
+        didSet{print("changed")}
+    }
+    private var handle : AuthStateDidChangeListenerHandle?
+    public var userIsAnonymous = true
+    public func listen(completion: @escaping ()-> Void){
         // monitor authentication changes using firebase
         handle = Auth.auth().addStateDidChangeListener{(auth, user) in
             if let user = user{
+                print("User 값 생김")
                 self.setUserInfo(uid:user.uid)
                 completion()
             } else{
                 // if we don't have a user, set our session to nil
+                print("User가 없음")
                 self.session = nil
                 completion()
             }
         }
     }
-    func signInAnonymous(){
+    public func signInAnonymous(){
         Auth.auth().signInAnonymously(){(authResult, error) in
             guard let user = authResult?.user else { return }
             self.userIsAnonymous = user.isAnonymous  // true
@@ -44,7 +48,7 @@ class SessionStore: ObservableObject {
             print("익명 로그인 성공")
         }
     }
-    func setUserInfo(uid:String){
+    private func setUserInfo(uid:String){
 //        User 데이터를 Firestore에서 가져와서 저장한다.
         let doc_ref = Firestore.firestore().collection("users").document(uid)
         doc_ref.getDocument{(document,error) in
@@ -58,7 +62,7 @@ class SessionStore: ObservableObject {
             }
         }
     }
-    func addUserInfo(uid:String, firstName:String, lastName:String, email:String){
+    private func addUserInfo(uid:String, firstName:String, lastName:String, email:String){
         let user = User(uid: uid, firstName: firstName, lastName: lastName, email: email)
 //        .document(uid).setData(from:user)
         do{
@@ -69,7 +73,7 @@ class SessionStore: ObservableObject {
         }
     }
     
-    func signUp(
+    public func signUp(
         email: String,
         password: String,
         firstName: String,
@@ -81,28 +85,22 @@ class SessionStore: ObservableObject {
 
                 self.addUserInfo(uid:authResult.user.uid,firstName:firstName,lastName: lastName, email:email)
             }
-            if let authError = error{
-                self.signUpErrorMessage = AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
-
-            }
+            handler(result,error)
         }
     }
 
-    func signIn(
+    public func signIn(
         email: String,
         password: String,
         handler : @escaping AuthDataResultCallback){
         Auth.auth().signIn(withEmail:email, password: password){(result, error) in
-            
-            if let authError = error{
-
-                self.signUpErrorMessage = AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
-
-            }
-            
+            handler(result,error)
         }
     }
-    func signOut() -> Bool{
+    public func getErrorMessage(authError:Error) -> String{
+        return AuthErrorCode(rawValue: authError._code)?.errorMessage ?? ""
+    }
+    public func signOut() -> Bool{
         do {
             try Auth.auth().signOut()
             self.session = nil
@@ -115,11 +113,5 @@ class SessionStore: ObservableObject {
         if let handle = handle{
             Auth.auth().removeStateDidChangeListener(handle)
         }
-    }
-    
-    // SignUpView용 Variables
-    @Published var signUpErrorMessage : String = ""
-    func cleanErrorMessage(){
-        signUpErrorMessage = ""
     }
 }

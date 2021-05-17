@@ -16,6 +16,10 @@ extension View {
         GeometryReader { geometry in
             NavigationView {
                 ZStack {
+//                    MARK: - 14.5.1에서 내비게이션이 튀는 것을 해결하기 위함
+                    NavigationLink(destination: EmptyView(), label: {})
+                    NavigationLink(destination: EmptyView(), label: {})
+                    NavigationLink(destination: EmptyView(), label: {})
                     self
                         .navigationBarTitle("")
                         .navigationBarHidden(true)

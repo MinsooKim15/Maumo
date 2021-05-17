@@ -50,6 +50,8 @@ struct HomeView: View{
                     ) {
                         EmptyView()
                     }
+//                    MARK:- 14.5.1에서 계속 튕기는 현상을 막기 위한 임시 처리임.
+                    NavigationLink(destination: EmptyView(), label: {})
                     NavigationLink(
                         destination: ChatView(modelView: modelView)                            .navigationBarTitle("")
                             .navigationBarHidden(true),

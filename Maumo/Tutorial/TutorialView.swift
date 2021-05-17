@@ -29,61 +29,64 @@ struct TutorialView:View{
     //MARK:-이거 사용은 다시 고민해봅시다. 단일한 Event로 처리할 수 있을듯
 
     func userTutorialStart(){
-        
         modelView.startTutorial()
     }
     var body: some View{
-        ZStack{
-            VStack {
-                CustomNavigationBar(hasTitleText: true, titleText: "대화")
-                Spacer()
-                ScrollViewReader{value in
-                    ScrollView{
-                        LazyVStack(alignment: .leading){
-                            Spacer().frame(height:50)
-                            ForEach(modelView.chattingModel.messages) { msg in
-                                MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg)
-                            }
-                            if self.modelView.chattingModel.currentReplyType == .signUp{
-                                HStack{
-                                    Spacer().frame(width: 44, height: 37, alignment: .center)
-                                    MessageButtonView(buttonAction: {self.showSignUp.toggle()}, buttonMessage: "이름 소개하기")
+        GeometryReader{_ in
+            ZStack{
+                VStack {
+                    CustomNavigationBar(hasTitleText: true, titleText: "대화")
+                    Spacer()
+                    ScrollViewReader{value in
+                        ScrollView{
+                            LazyVStack(alignment: .leading){
+                                Spacer().frame(height:50)
+                                ForEach(modelView.chattingModel.messages) { msg in
+                                    MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg)
                                 }
-                                
+                                if self.modelView.chattingModel.currentReplyType == .signUp{
+                                    HStack{
+                                        Spacer().frame(width: 44, height: 37, alignment: .center)
+                                        MessageButtonView(buttonAction: {self.showSignUp.toggle()}, buttonMessage: "이름 소개하기")
+                                    }
+                                    
+                                }
                             }
-                        }
-                        .padding([.leading],20)
-                        .padding([.trailing],12)
-                    }.transition(AnyTransition.scale)
+                            .padding([.leading],20)
+                            .padding([.trailing],12)
+                        }.transition(AnyTransition.scale)
 
-                    .onChange(of: modelView.chattingModel.messages.count){ count in
-                        if modelView.chattingModel.messages.count > 0{
-                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
-                        }
+                        .onChange(of: modelView.chattingModel.messages.count){ count in
+                            if modelView.chattingModel.messages.count > 0{
+                                withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                            }
 
-                    }
-                    .onAppear{
-                        if modelView.chattingModel.messages.count > 0{
-                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
                         }
-                        self.userTutorialStart()
+                        .onAppear{
+                            if modelView.chattingModel.messages.count > 0{
+                                withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                            }
+                            self.userTutorialStart()
+                        }
+                        
                     }
-                    
+                    Spacer().frame(maxHeight:8)
+                    ChattingInputField(modelView:self.modelView)
+                    Spacer().frame(maxHeight:8)
                 }
-                Spacer().frame(maxHeight:8)
-                ChattingInputField(modelView:self.modelView)
-                Spacer().frame(maxHeight:8)
-            }
-            Group{
-                if self.showSignUp{
-                    Color.black.opacity(0.5).ignoresSafeArea(.all, edges: .all)
-                    SignUpSmallView(signUpSuccessClousure: self.modelView.signUpSuccessCompletion)
-                        .frame(width: 340, height : 640)
-                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                Group{
+                    if self.showSignUp{
+                        Color.black.opacity(0.5).ignoresSafeArea(.all, edges: .all)
+                        SignUpSmallView(signUpSuccessClousure: self.modelView.signUpSuccessCompletion)
+                            .frame(width: 340, height : 640)
+                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                    }
                 }
             }
-        }.onTapGesture {
+        }
+        .onTapGesture {
             hideKeyboard()
         }
+        
     }
 }

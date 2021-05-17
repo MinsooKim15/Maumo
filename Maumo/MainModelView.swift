@@ -308,10 +308,8 @@ class MainModelView:ObservableObject{
     // MARK: - Tutorial 관련 코드
     func startTutorial(){
     // Client에서 랜덤하게 생성함으로, 튜토리얼을 끝내자마자 모두 지운다고 해도 문제가 생길 수 있다. 현실적으로 UUID는 겹치기 어렵다. 따라서 기존 Tutorial을 삭제하는 로직을 추가하지는 않는다.
-        self.tutorialUID = UUID.init().uuidString
-        self.userId = tutorialUID
-        self.connectData()
-        self.isOnTutorial = true
+        
+        
         self.send(eventName: "start_tutorial")
     }
     
@@ -320,7 +318,13 @@ class MainModelView:ObservableObject{
             self.userId = nil
         }
         self.isOnTutorial = false
-        
+    }
+    func startViewSet(){
+//  MARK: - Tutorial View가 떴을 때 세팅할 필요가 없는 것들이 세팅되면서, 앱의 튕김 현상이 생긴다. 이리 옮기자
+        self.tutorialUID = UUID.init().uuidString
+        self.userId = tutorialUID
+        self.isOnTutorial = true
+        self.connectData()
     }
     
     public func signUpSuccessCompletion(){

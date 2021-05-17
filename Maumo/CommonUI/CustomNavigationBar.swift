@@ -34,6 +34,7 @@ struct CustomNavigationBar : View{
                         self.presentationMode.wrappedValue.dismiss()
                     }
                   Spacer()
+                NavigationLink(destination: EmptyView(), label: {})
                 Group{
                     if hasTitleText{
                         Text(self.titleText)

@@ -16,18 +16,20 @@ struct SignUpView:View{
     @State var lastName:String = ""
     @State var password:String = ""
     @State var willMoveToSignInView: Bool = false
+    @State var errorMessage = ""
     let titleTextSetting = FontSetting(fontWeight: .regular, fontSize: .large40)
     let signUpMessageSetting = FontSetting(fontWeight: .bold, fontSize : .small14)
     let signUpErrorMessageSetting = FontSetting(fontWeight: .bold, fontSize : .small14)
     func signUp(){
         session.signUp(email: emailAddress, password: password,firstName:firstName, lastName: lastName){(result,error) in
-            print(result)
-            print(error)
+            if let authError = error{
+                self.errorMessage = self.session.getErrorMessage(authError: authError)
+            }
         }
     }
     func moveToSignIn(){
         self.willMoveToSignInView = true
-        self.session.cleanErrorMessage()
+//        self.session.cleanErrorMessage()
     }
     var body:some View{
         ZStack{
@@ -49,7 +51,9 @@ struct SignUpView:View{
                         .padding([.top], 10)
                         .padding([.bottom], 40)
                         .padding([.leading], 46)
-                        
+//                       MARK: - 14.5.1에서 튕기는 현상 해결을 위한 처리
+                        NavigationLink(destination: EmptyView(), label: {})
+                        NavigationLink(destination: EmptyView(), label: {})
                         Group{
                             Group{
                                 HStack{
@@ -71,7 +75,7 @@ struct SignUpView:View{
                                     placeHolder : "비밀 번호",
                                     text: $password
                                 )
-                                Text(self.session.signUpErrorMessage)
+                                Text(self.errorMessage)
                                     .padding([.leading], 16)
                                     .adjustFont(fontSetting: self.signUpErrorMessageSetting)
                                     .foregroundColor(.salmon)
@@ -108,7 +112,15 @@ struct SignUpView:View{
                         }
                         .padding([.bottom], 74)
                     }
-                }.navigate(to: SignInView(), when: $willMoveToSignInView)
+                }
+
+//                NavigationLink(
+//                    destination: SignInView(modelView:self.modelView)
+//                        .navigationBarTitle("")
+//                        .navigationBarHidden(true),
+//                    isActive: $willMoveToSignInView,
+//                    label: {})
+//                .navigate(to: SignInView(), when: $willMoveToSignInView)
             }
         }
         

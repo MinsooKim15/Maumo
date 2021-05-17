@@ -40,9 +40,7 @@ struct ContentView: View {
                 if session.session?.isAnonymous == true{
                     StartView(modelView: self.modelView)
                 }
-
             }
-
             EmptyView()
         }
         .onAppear(perform: {
