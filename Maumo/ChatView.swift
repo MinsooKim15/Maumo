@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct ChatView:View{
-    init(modelView:MainModelView) {
+    init(modelView:ChattingModelView) {
         self.modelView = modelView
         if #available(iOS 14.0, *) {
             // iOS 14 doesn't have extra separators below the list by default.
@@ -20,7 +20,7 @@ struct ChatView:View{
         UITableView.appearance().separatorStyle = .none
     }
     @EnvironmentObject var session:SessionStore
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     @State var typingMessage : String = "입력"
     func sendMessage(){
         modelView.send(text:typingMessage)
@@ -87,7 +87,7 @@ struct ChatView:View{
 }
 struct ChattingInputField:View{
     // TODO: ChattingModel의 상태값을 기준으로 입력을 정의한다.
-    @ObservedObject var modelView : MainModelView
+    @ObservedObject var modelView : ChattingModelView
     func computedView() -> AnyView{
         switch(self.modelView.chattingModel.chattingStatus){
         case .idle:
@@ -118,7 +118,7 @@ struct ChattingInputField:View{
     }
 }
 struct ChattingTextField:View{
-    @ObservedObject var modelView : MainModelView
+    @ObservedObject var modelView : ChattingModelView
     @State var typingMessage : String = ""{
         didSet{
             if typingMessage == ""{
@@ -188,6 +188,6 @@ struct SendChatButton: View{
 }
 struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatView(modelView: MainModelView())
+        ChatView(modelView: ChattingModelView())
     }
 }

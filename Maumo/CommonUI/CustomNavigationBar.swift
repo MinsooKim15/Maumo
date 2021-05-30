@@ -16,6 +16,18 @@ struct CustomNavigationBar : View{
     var hasTitleText : Bool
     var titleText : String
     var backgroundColor : Color = Color.white.opacity(0.95)
+    var showCustomButton : Bool = false
+
+    var customButtonLabel: ()->AnyView = {AnyView(Image(systemName: "check.mark"))}
+    var customButtonAction: ()->Void = {print("done")}
+    var computedRightSide : AnyView{
+        if self.showCustomButton{
+            return AnyView(Button(action: self.customButtonAction, label: self.customButtonLabel))
+                
+        }else{
+            return AnyView(Spacer())
+        }
+    }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body : some View{
         ZStack{
@@ -45,7 +57,7 @@ struct CustomNavigationBar : View{
                     }
                 }
               Spacer()
-              Spacer().frame(width:self.navBarBackButtonSize, height:self.navBarBackButtonSize).padding([.trailing], self.navBarPaddingToLead)
+              computedRightSide.frame(width:self.navBarBackButtonSize, height:self.navBarBackButtonSize).padding([.trailing], self.navBarPaddingToLead)
               .padding([.top], self.navBarPaddingToTop)
             }
             Spacer()

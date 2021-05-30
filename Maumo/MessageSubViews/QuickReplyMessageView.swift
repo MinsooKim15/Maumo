@@ -8,7 +8,7 @@
 import SwiftUI
 struct QuickReplyMessageView: View {
     var message: Message
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     func tapQuickReply(quickReply: QuickReply){
         self.modelView.tapQuickReply(at: quickReply, of:self.getMessage())
     }

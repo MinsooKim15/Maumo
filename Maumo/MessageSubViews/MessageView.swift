@@ -9,7 +9,7 @@ import SwiftUI
 struct MessageView : View {
     var currentMessage: Message
     var isDifferentBefore: Bool
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     var computedHeight : CGFloat{
         if let replyType = self.currentMessage.replyType{
             if (replyType == .signUp)||(replyType == .custom) || (replyType == .quickReply){
@@ -73,7 +73,7 @@ struct ReplyView:View{
     var replyType : ReplyType
     var replyData : MessageData
     var fromUser : Bool
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     var computedFrameHeight: CGFloat{
         switch(replyType){
         case .quickReply:

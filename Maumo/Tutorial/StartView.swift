@@ -9,7 +9,7 @@ import SwiftUI
 struct StartView:View{
     let startStringTextSetting = FontSetting(fontWeight: .bold, fontSize: .medium20)
     let signUpTextSetting = FontSetting(fontWeight: .light, fontSize: .small14)
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     @State var willNavigateToSignInView = false
     @State var willNavigateToTutorialView = false
     @EnvironmentObject var session:SessionStore
@@ -68,6 +68,6 @@ struct StartView:View{
 }
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView(modelView:MainModelView())
+        StartView(modelView:ChattingModelView())
     }
 }

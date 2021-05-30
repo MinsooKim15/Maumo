@@ -9,7 +9,7 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     @EnvironmentObject var session:SessionStore
     
     func touched(){

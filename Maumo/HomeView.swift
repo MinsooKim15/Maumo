@@ -8,7 +8,8 @@
 import SwiftUI
 struct HomeView: View{
     
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
+    @ObservedObject var journalView = MaumJournalModelView()
     @EnvironmentObject var session:SessionStore
     @State var willMoveToChatView:Bool = false
     @State var willMoveToSettingView:Bool = false
@@ -80,16 +81,24 @@ struct HomeView: View{
                             Spacer()
                         }.padding([.top], self.startChatButtonMarginTopToSettingButton)
                         Spacer()
+                        MaumJournalSummaryView(modelView:journalView)
+                        Spacer()
                         }
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }
-
             .onAppear{
                 self.setUserId()
                 self.modelView.callTransparencyPopupIfNeeded()
             }
+        .onDisappear{
+            print("없어짐")
+        }
+        .onReceive(self.modelView.$chattingModel, perform: {data in
+                    print("model변경 전달")
+            
+        })
     }
 }
 struct SettingButton:View{
@@ -131,8 +140,8 @@ struct startChatButton:View{
         }
     }
 }
-struct SettingButton_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(modelView: MainModelView()).environmentObject(SessionStore())
-    }
-}
+//struct SettingButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(modelView: MainModelView()).environmentObject(SessionStore())
+//    }
+//}

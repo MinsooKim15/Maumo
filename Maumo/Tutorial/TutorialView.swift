@@ -7,7 +7,7 @@
 
 import SwiftUI
 struct TutorialView:View{
-    init(modelView:MainModelView) {
+    init(modelView:ChattingModelView) {
         self.modelView = modelView
         if #available(iOS 14.0, *) {
             // iOS 14 doesn't have extra separators below the list by default.
@@ -20,7 +20,7 @@ struct TutorialView:View{
         UITableView.appearance().separatorStyle = .none
     }
     @EnvironmentObject var session:SessionStore
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     @State var typingMessage : String = "입력"
     @State var showSignUp: Bool = false
     func sendMessage(){

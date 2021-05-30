@@ -15,9 +15,9 @@ import AppTrackingTransparency
 
 
 // TODO : ChangeName
-class MainModelView:ObservableObject{
+class ChattingModelView:ObservableObject{
 //    MARK: - Chatting Stuffs
-    @Published var chattingModel:ChattingModel = MainModelView.createChattingModel()
+    @Published var chattingModel:ChattingModel = ChattingModelView.createChattingModel()
     private var db = Firestore.firestore()
     private var currentContexts:[Context]?
 //    MARK:- User/Session 정의되면 변경
@@ -28,7 +28,7 @@ class MainModelView:ObservableObject{
         didSet{
             print(isOnTutorial)
         }
-    }
+    }u7  
     private var currentSessionId : String = UUID().uuidString
     func setUserId(_ userId: String){
         if self.realUID == nil{
@@ -334,14 +334,5 @@ class MainModelView:ObservableObject{
         }
         self.endTutorial()
     }
-//    MARK: - App Tracking Transparency
-    func callTransparencyPopupIfNeeded(){
-        if #available(iOS 14, *) {
-            if AppTrackingTransparency.ATTrackingManager.trackingAuthorizationStatus == .notDetermined{
-                AppTrackingTransparency.ATTrackingManager.requestTrackingAuthorization{status in
-                    print(status)
-                }
-            }
-        }
-    }
+
 }

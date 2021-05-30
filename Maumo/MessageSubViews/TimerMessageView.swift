@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimerMessageView: View {
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     var message: Message
     var body: some View {
         Group{
@@ -22,7 +22,7 @@ struct TimerMessageView: View {
     }
 }
 struct TimerView:View{
-    @ObservedObject var modelView: MainModelView
+    @ObservedObject var modelView: ChattingModelView
     let timerTitleFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium18)
     let timerSecondsLeftFontSetting = FontSetting(fontWeight: .bold, fontSize: .medium18)
     func finishTimerWithSuccess(){
