@@ -29,7 +29,7 @@
 		0230AAAD25C6ED8E00D6A771 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AAAC25C6ED8E00D6A771 /* Event.swift */; };
 		0230AAB225C6ED9900D6A771 /* CustomParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AAB125C6ED9900D6A771 /* CustomParameters.swift */; };
 		0230AAB725C6EDD600D6A771 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AAB625C6EDD600D6A771 /* ChatView.swift */; };
-		0230AABC25C6EDE500D6A771 /* MainModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AABB25C6EDE500D6A771 /* MainModelView.swift */; };
+		0230AABC25C6EDE500D6A771 /* ChattingModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AABB25C6EDE500D6A771 /* ChattingModelView.swift */; };
 		0230AAC125C6EDF500D6A771 /* ChattingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AAC025C6EDF500D6A771 /* ChattingModel.swift */; };
 		0230AAC625C6EDFD00D6A771 /* TimerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AAC525C6EDFD00D6A771 /* TimerModel.swift */; };
 		0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AB2025C798DF00D6A771 /* HomeView.swift */; };
@@ -67,7 +67,7 @@
 		02A3E2BD25CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B925CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf */; };
 		02A3E2BE25CEC4940085DFC4 /* NanumSquareOTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */; };
 		02AC0248263AE31A0039529C /* SignUpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0247263AE31A0039529C /* SignUpButtonView.swift */; };
-		02D72FB92663BE9600558DE6 /* ChattingModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D72FB82663BE9600558DE6 /* ChattingModelView.swift */; };
+		02B9F8492664B905006E5013 /* HomeModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F8482664B905006E5013 /* HomeModelView.swift */; };
 		02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */; };
 		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
 		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
@@ -129,7 +129,7 @@
 		0230AAAC25C6ED8E00D6A771 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		0230AAB125C6ED9900D6A771 /* CustomParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomParameters.swift; sourceTree = "<group>"; };
 		0230AAB625C6EDD600D6A771 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
-		0230AABB25C6EDE500D6A771 /* MainModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModelView.swift; sourceTree = "<group>"; };
+		0230AABB25C6EDE500D6A771 /* ChattingModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingModelView.swift; sourceTree = "<group>"; };
 		0230AAC025C6EDF500D6A771 /* ChattingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingModel.swift; sourceTree = "<group>"; };
 		0230AAC525C6EDFD00D6A771 /* TimerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerModel.swift; sourceTree = "<group>"; };
 		0230AACD25C6F04000D6A771 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 		02A3E2B925CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFExtraBold.otf; sourceTree = "<group>"; };
 		02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFRegular.otf; sourceTree = "<group>"; };
 		02AC0247263AE31A0039529C /* SignUpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButtonView.swift; sourceTree = "<group>"; };
-		02D72FB82663BE9600558DE6 /* ChattingModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingModelView.swift; sourceTree = "<group>"; };
+		02B9F8482664B905006E5013 /* HomeModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModelView.swift; sourceTree = "<group>"; };
 		02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud.swift; sourceTree = "<group>"; };
 		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
 		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
@@ -247,8 +247,8 @@
 				02A3E2A125CEBF8B0085DFC4 /* CommonUI */,
 				0230AB2B25C79C7900D6A771 /* Authentication */,
 				0230AAB625C6EDD600D6A771 /* ChatView.swift */,
-				02D72FB82663BE9600558DE6 /* ChattingModelView.swift */,
-				0230AABB25C6EDE500D6A771 /* MainModelView.swift */,
+				02B9F8482664B905006E5013 /* HomeModelView.swift */,
+				0230AABB25C6EDE500D6A771 /* ChattingModelView.swift */,
 				0230AAC025C6EDF500D6A771 /* ChattingModel.swift */,
 				0230AAC525C6EDFD00D6A771 /* TimerModel.swift */,
 				0230AB2025C798DF00D6A771 /* HomeView.swift */,
@@ -797,7 +797,7 @@
 				0230AA7325C6ECB900D6A771 /* TimerHelper.swift in Sources */,
 				0230AA9825C6ED4500D6A771 /* TimerMessageView.swift in Sources */,
 				0230AA4325C6EC9A00D6A771 /* ContentView.swift in Sources */,
-				02D72FB92663BE9600558DE6 /* ChattingModelView.swift in Sources */,
+				02B9F8492664B905006E5013 /* HomeModelView.swift in Sources */,
 				0230AAB725C6EDD600D6A771 /* ChatView.swift in Sources */,
 				02F2D50E25E2153E007EED58 /* SettingView.swift in Sources */,
 				0230AA7925C6ECDA00D6A771 /* ImageLoader.swift in Sources */,
@@ -833,7 +833,7 @@
 				0259EA7F263586910068717E /* TutorialView.swift in Sources */,
 				0230AB5725C8182100D6A771 /* PersonName.swift in Sources */,
 				02A3E2A325CEBF9B0085DFC4 /* HorizontalLine.swift in Sources */,
-				0230AABC25C6EDE500D6A771 /* MainModelView.swift in Sources */,
+				0230AABC25C6EDE500D6A771 /* ChattingModelView.swift in Sources */,
 				02F2D50925E21522007EED58 /* SettingModelView.swift in Sources */,
 				0259EA77263582760068717E /* StartView.swift in Sources */,
 				0230AA8E25C6ED2D00D6A771 /* QuickReplyMessageView.swift in Sources */,

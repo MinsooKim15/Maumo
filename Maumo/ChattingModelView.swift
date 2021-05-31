@@ -16,6 +16,18 @@ import AppTrackingTransparency
 
 // TODO : ChangeName
 class ChattingModelView:ObservableObject{
+    init(){
+        print("done!")
+    }
+    init(userId:String?){
+        self.userId = userId
+    }
+    init(userId:String?, isTutorial:Bool){
+        self.tutorialUID = userId
+        self.userId = tutorialUID
+        self.isOnTutorial = true
+        self.connectData()
+    }
 //    MARK: - Chatting Stuffs
     @Published var chattingModel:ChattingModel = ChattingModelView.createChattingModel()
     private var db = Firestore.firestore()
@@ -24,11 +36,7 @@ class ChattingModelView:ObservableObject{
     var userId :String?
     private(set) var realUID:String?
     private(set) var tutorialUID:String?
-    var isOnTutorial = false{
-        didSet{
-            print(isOnTutorial)
-        }
-    }u7  
+    var isOnTutorial = false
     private var currentSessionId : String = UUID().uuidString
     func setUserId(_ userId: String){
         if self.realUID == nil{
@@ -321,10 +329,7 @@ class ChattingModelView:ObservableObject{
     }
     func startViewSet(){
 //  MARK: - Tutorial View가 떴을 때 세팅할 필요가 없는 것들이 세팅되면서, 앱의 튕김 현상이 생긴다. 이리 옮기자
-        self.tutorialUID = UUID.init().uuidString
-        self.userId = tutorialUID
-        self.isOnTutorial = true
-        self.connectData()
+        
     }
     
     public func signUpSuccessCompletion(){

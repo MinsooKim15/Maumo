@@ -27,7 +27,7 @@ class SessionStore: ObservableObject {
         handle = Auth.auth().addStateDidChangeListener{(auth, user) in
             if let user = user{
                 print("User 값 생김")
-                self.setUserInfo(uid:user.uid)
+                self.setUserInfo(uid:user.uid, isAnonymous:user.isAnonymous)
                 completion()
             } else{
                 // if we don't have a user, set our session to nil
@@ -48,17 +48,18 @@ class SessionStore: ObservableObject {
             print("익명 로그인 성공")
         }
     }
-    private func setUserInfo(uid:String){
+    private func setUserInfo(uid:String , isAnonymous:Bool){
 //        User 데이터를 Firestore에서 가져와서 저장한다.
         let doc_ref = Firestore.firestore().collection("users").document(uid)
         doc_ref.getDocument{(document,error) in
             if document?.exists ?? false{
                 do{
-                   try                 self.session = document?.data(as: User.self)
+                   try self.session = document?.data(as: User.self)
                 }catch{
                     print(error)
                 }
-
+            }else if isAnonymous{
+                self.session = User(uid: uid, firstName: "", lastName: "", email: "",isAnonymous:isAnonymous)
             }
         }
     }

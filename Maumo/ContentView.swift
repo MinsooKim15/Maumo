@@ -27,18 +27,18 @@ struct ContentView: View {
             Group{
                 if session.session != nil {
                     if(session.session?.isAnonymous == false){
-                        HomeView(modelView:self.modelView)
+                        HomeView(modelView:HomeModelView())
                     }
                 }
             }
             Group{
                 if session.session == nil{
-                    StartView(modelView: self.modelView)
+                    StartView()
                 }
             }
             Group{
                 if session.session?.isAnonymous == true{
-                    StartView(modelView: self.modelView)
+                    StartView()
                 }
             }
             EmptyView()

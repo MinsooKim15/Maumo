@@ -8,19 +8,18 @@
 import SwiftUI
 struct HomeView: View{
     
-    @ObservedObject var modelView: ChattingModelView
+    @ObservedObject var modelView: HomeModelView
     @ObservedObject var journalView = MaumJournalModelView()
     @EnvironmentObject var session:SessionStore
     @State var willMoveToChatView:Bool = false
     @State var willMoveToSettingView:Bool = false
     
-    func setUserId(){
-
-        if let userIdString =  self.session.session?.uid{
-            print(userIdString)
-            self.modelView.setUserId(userIdString)
-        }
-    }
+//    func setUserId(){
+//        if let userIdString =  self.session.session?.uid{
+//            print(userIdString)
+//            self.modelView.setUserId(userIdString)
+//        }
+//    }
     var settingButtonMarginToTop: CGFloat{
         if UIDevice.current.userInterfaceIdiom == .pad {
             return CGFloat(400)
@@ -54,7 +53,7 @@ struct HomeView: View{
 //                    MARK:- 14.5.1에서 계속 튕기는 현상을 막기 위한 임시 처리임.
                     NavigationLink(destination: EmptyView(), label: {})
                     NavigationLink(
-                        destination: ChatView(modelView: modelView)                            .navigationBarTitle("")
+                        destination: ChatView(modelView: ChattingModelView(userId:self.session.session?.uid))                         .navigationBarTitle("")
                             .navigationBarHidden(true),
                         isActive: $willMoveToChatView
                     ) {
@@ -89,16 +88,9 @@ struct HomeView: View{
             .navigationViewStyle(StackNavigationViewStyle())
         }
             .onAppear{
-                self.setUserId()
                 self.modelView.callTransparencyPopupIfNeeded()
             }
-        .onDisappear{
-            print("없어짐")
-        }
-        .onReceive(self.modelView.$chattingModel, perform: {data in
-                    print("model변경 전달")
-            
-        })
+        
     }
 }
 struct SettingButton:View{
