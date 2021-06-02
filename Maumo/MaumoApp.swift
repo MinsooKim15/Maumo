@@ -15,7 +15,7 @@ struct MaumoApp: App {
       }
     var body: some Scene {
         WindowGroup {
-            ContentView(modelView:ChattingModelView()).environmentObject(session)
+            ContentView().environmentObject(session)
         }
     }
 }

@@ -24,4 +24,7 @@ extension Color{
     public static var whiteGray: Color{
         return Color(UIColor(red: 241.0 / 255.0, green: 241.0 / 255.0, blue: 241.0 / 255.0, alpha: 1.0))
     }
+    public static var purplishGrey: Color{
+        return Color(UIColor(red: 98.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0))
+    }
 }

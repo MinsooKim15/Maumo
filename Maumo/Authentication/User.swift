@@ -26,4 +26,14 @@ struct User:Codable{
         self.linkedServiceInfo = LinkedServiceInfo(serviceId: uid, sourceService: "maumo")
         self.userContext = UserContext(doingMission: false, doingMissionName: "", notificationGreeting: "", hasNotificationGreeting: false)
     }
+    init(uid:String, firstName:String, lastName:String, email:String, isAnonymous: Bool){
+        self.uid = uid
+        self.name = PersonName(first: firstName, last: lastName)
+        self.email = email
+        self.isAnonymous = false
+        self.missionInfo = MissionInfo(totalCount: 0, missionsDone: [], stamps: [], emotionTypeCount: [String:Int](), latestMission: "")
+        self.linkedServiceInfo = LinkedServiceInfo(serviceId: uid, sourceService: "maumo")
+        self.userContext = UserContext(doingMission: false, doingMissionName: "", notificationGreeting: "", hasNotificationGreeting: false)
+        self.isAnonymous = isAnonymous
+    }
 }

@@ -57,10 +57,11 @@ struct StartView:View{
                         }
                     }
             }
-            }.onAppear{
-                session.signInAnonymous()
-
             }
+//            .onAppear{
+//                session.signInAnonymous()
+//
+//            }
             .navigationViewStyle(StackNavigationViewStyle())
     }
     }

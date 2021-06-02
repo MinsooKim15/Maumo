@@ -15,15 +15,11 @@ struct MaumJournalModel{
     
     var journalItemList: Array<JournalItem> = []
     {didSet{
-        print("journalItemListchanged")
-        print(self.journalItemList)
-        print("journalItem Count in model : \(self.journalItemList.count)")
-        
-//        if (self.journalItemList.count > 4){
-//            self.journalItemListInSummary = Array(self.journalItemList[0..<4])
-//        }else if(self.journalItemList.count>0){
-//            self.journalItemListInSummary = Array(self.journalItemList[0..<self.journalItemList.count])
-//        }
+        if (self.journalItemList.count > 4){
+            self.journalItemListInSummary = Array(self.journalItemList[0..<4])
+        }else if(self.journalItemList.count>0){
+            self.journalItemListInSummary = Array(self.journalItemList[0..<self.journalItemList.count])
+        }
     }}
     public private(set) var journalItemListInSummary:Array<JournalItem> = []
     public mutating func snapshotsToJournalItem(snapshots:[QueryDocumentSnapshot]){

@@ -29,8 +29,6 @@ struct MaumJournalSummaryView: View {
 
             VStack{
                 Spacer()
-                Text("\(self.modelView.maumJournalModel.journalItemList.count)")
-//                SummaryGrid(journalItemList: modelView.maumJournalModel.journalItemList)
                 SummaryGrid(modelView:self.modelView)
                 Spacer()
                 SummaryActionButton(title:"마음 일기 쓰기", completion: {
@@ -68,13 +66,13 @@ struct SummaryGrid : View{
 //        return Array(journalItemList[..<4])
 //    }
     var additionalItemCount : Int{
-        return max(4 - self.modelView.maumJournalModel.journalItemList.count,0)
+        return max(4 - self.modelView.maumJournalModel.journalItemListInSummary.count,0)
     }
     var body : some View{
             HStack{
-                Text("\(self.modelView.maumJournalModel.journalItemList.count)")
+                Text("\(self.modelView.maumJournalModel.journalItemListInSummary.count)")
                 Spacer()
-                ForEach(self.modelView.maumJournalModel.journalItemList){item in
+                ForEach(self.modelView.maumJournalModel.journalItemListInSummary){item in
                     SummaryEachGrid(journalItem: item, showJournalItem: true)
                     Spacer()
                 }

@@ -70,6 +70,7 @@ enum CustomFontSize:Int{
     case small16 = 16
     case medium18 = 18
     case medium20 = 20
+    case medium22 = 22
     case large40 = 40
 }
 

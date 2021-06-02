@@ -32,7 +32,7 @@ class SessionStore: ObservableObject {
             } else{
                 // if we don't have a user, set our session to nil
                 print("User가 없음")
-                self.session = nil
+                self.signInAnonymous()
                 completion()
             }
         }

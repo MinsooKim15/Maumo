@@ -9,36 +9,30 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @ObservedObject var modelView: ChattingModelView
     @EnvironmentObject var session:SessionStore
-    
-    func touched(){
-        print(modelView.chattingModel.messages)
-    }
+    @State var showScreen:Bool = false
+    @State var showStart:Bool = false
     func getUserSession(){
         session.listen(){
-            if let userIdString = self.session.session?.uid{
-                self.modelView.setUserId(userIdString)
+            if self.session.session != nil, !(self.session.session?.isAnonymous ?? true){
+                self.showScreen = true
+            }else{
+                self.showScreen = true
+                self.showStart = true
             }
         }
     }
     var body: some View {
         VStack{
             Group{
-                if session.session != nil {
-                    if(session.session?.isAnonymous == false){
-                        HomeView(modelView:HomeModelView())
-                    }
+                if self.session.session == nil {
+                    WaitingView()
                 }
-            }
-            Group{
-                if session.session == nil{
+                if self.session.session?.isAnonymous == true{
                     StartView()
                 }
-            }
-            Group{
-                if session.session?.isAnonymous == true{
-                    StartView()
+                if self.session.session?.isAnonymous == false{
+                    HomeView(modelView: HomeModelView())
                 }
             }
             EmptyView()

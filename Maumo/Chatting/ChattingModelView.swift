@@ -28,6 +28,10 @@ class ChattingModelView:ObservableObject{
         self.isOnTutorial = true
         self.connectData()
     }
+    init(userId:String?, with event:Event){
+        self.userId = userId
+        self.send(eventName: event.name)
+    }
 //    MARK: - Chatting Stuffs
     @Published var chattingModel:ChattingModel = ChattingModelView.createChattingModel()
     private var db = Firestore.firestore()

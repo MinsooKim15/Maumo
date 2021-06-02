@@ -59,30 +59,35 @@ struct HomeView: View{
                     ) {
                         EmptyView()
                     }
-                    VStack{
-                        Spacer()
-                            .frame(maxHeight:44)
-                        HStack{
+                    ScrollView(.vertical){
+                        VStack{
                             Spacer()
-                            SettingButton()
-                            .padding([.trailing],30)
-                            .onTapGesture {
-                                self.willMoveToSettingView = true
+                                .frame(maxHeight:44)
+                            HStack{
+                                Spacer()
+                                SettingButton()
+                                .padding([.trailing],30)
+                                .onTapGesture {
+                                    self.willMoveToSettingView = true
+                                }
                             }
-                        }
-                        .padding([.top],self.settingButtonMarginToTop)
-                        HStack{
-                            startChatButton()
-                            .onTapGesture {
-                                self.willMoveToChatView = true
-                            }
-                            .padding([.leading],40)
+                            .padding([.top],self.settingButtonMarginToTop)
+                            HStack{
+                                startChatButton()
+                                .onTapGesture {
+                                    self.willMoveToChatView = true
+                                }
+                                .padding([.leading],40)
+                                Spacer()
+                            }.padding([.top], self.startChatButtonMarginTopToSettingButton)
                             Spacer()
-                        }.padding([.top], self.startChatButtonMarginTopToSettingButton)
-                        Spacer()
-                        MaumJournalSummaryView(modelView:journalView)
-                        Spacer()
-                        }
+                            TriggerCollectionView()
+                            MaumJournalSummaryView(modelView:journalView)
+                            Spacer().frame(height:400)
+                            Spacer()
+                            }
+                    }
+
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())

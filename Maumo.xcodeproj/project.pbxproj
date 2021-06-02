@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		016C38C7DE8A2926FB720222 /* Pods_Maumo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D130F7EF4021870C3841C084 /* Pods_Maumo.framework */; };
 		020C3FA526510C2E000B4FA8 /* SmallCloud3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020C3FA426510C2E000B4FA8 /* SmallCloud3.swift */; };
+		0214F3FC2667CA0A00B50B55 /* WaitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0214F3FB2667CA0A00B50B55 /* WaitingView.swift */; };
 		0230AA4125C6EC9A00D6A771 /* MaumoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AA4025C6EC9A00D6A771 /* MaumoApp.swift */; };
 		0230AA4325C6EC9A00D6A771 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0230AA4225C6EC9A00D6A771 /* ContentView.swift */; };
 		0230AA4525C6EC9C00D6A771 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0230AA4425C6EC9C00D6A771 /* Assets.xcassets */; };
@@ -68,6 +69,12 @@
 		02A3E2BE25CEC4940085DFC4 /* NanumSquareOTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */; };
 		02AC0248263AE31A0039529C /* SignUpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AC0247263AE31A0039529C /* SignUpButtonView.swift */; };
 		02B9F8492664B905006E5013 /* HomeModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F8482664B905006E5013 /* HomeModelView.swift */; };
+		02B9F84D2664C767006E5013 /* TriggerButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F84C2664C767006E5013 /* TriggerButtonItem.swift */; };
+		02B9F84F2664C826006E5013 /* TriggerCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F84E2664C826006E5013 /* TriggerCollection.swift */; };
+		02B9F8522664C8B5006E5013 /* TriggerButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F8512664C8B5006E5013 /* TriggerButtonView.swift */; };
+		02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F85326663B5E006E5013 /* TriggerCollectionView.swift */; };
+		02B9F8562666437D006E5013 /* TriggerCollectiionModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F8552666437D006E5013 /* TriggerCollectiionModelView.swift */; };
+		02B9F858266643E0006E5013 /* TriggerCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F857266643E0006E5013 /* TriggerCollectionModel.swift */; };
 		02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */; };
 		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
 		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
@@ -103,6 +110,7 @@
 
 /* Begin PBXFileReference section */
 		020C3FA426510C2E000B4FA8 /* SmallCloud3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud3.swift; sourceTree = "<group>"; };
+		0214F3FB2667CA0A00B50B55 /* WaitingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitingView.swift; sourceTree = "<group>"; };
 		0230AA3D25C6EC9A00D6A771 /* Maumo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Maumo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0230AA4025C6EC9A00D6A771 /* MaumoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumoApp.swift; sourceTree = "<group>"; };
 		0230AA4225C6EC9A00D6A771 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,6 +170,12 @@
 		02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareOTFRegular.otf; sourceTree = "<group>"; };
 		02AC0247263AE31A0039529C /* SignUpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpButtonView.swift; sourceTree = "<group>"; };
 		02B9F8482664B905006E5013 /* HomeModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModelView.swift; sourceTree = "<group>"; };
+		02B9F84C2664C767006E5013 /* TriggerButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerButtonItem.swift; sourceTree = "<group>"; };
+		02B9F84E2664C826006E5013 /* TriggerCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollection.swift; sourceTree = "<group>"; };
+		02B9F8512664C8B5006E5013 /* TriggerButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerButtonView.swift; sourceTree = "<group>"; };
+		02B9F85326663B5E006E5013 /* TriggerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectionView.swift; sourceTree = "<group>"; };
+		02B9F8552666437D006E5013 /* TriggerCollectiionModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectiionModelView.swift; sourceTree = "<group>"; };
+		02B9F857266643E0006E5013 /* TriggerCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectionModel.swift; sourceTree = "<group>"; };
 		02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud.swift; sourceTree = "<group>"; };
 		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
 		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
@@ -238,6 +252,8 @@
 		0230AA3F25C6EC9A00D6A771 /* Maumo */ = {
 			isa = PBXGroup;
 			children = (
+				02B9F84B2664C748006E5013 /* Chatting */,
+				02B9F84A2664C737006E5013 /* Home */,
 				023DBEE2265A241B00DC3ED4 /* MaumJournal */,
 				0259EA752635825D0068717E /* Tutorial */,
 				0262E2EB25F4D9B700EC787C /* Firebase */,
@@ -246,12 +262,7 @@
 				02A3E2B625CEC4940085DFC4 /* Fonts */,
 				02A3E2A125CEBF8B0085DFC4 /* CommonUI */,
 				0230AB2B25C79C7900D6A771 /* Authentication */,
-				0230AAB625C6EDD600D6A771 /* ChatView.swift */,
-				02B9F8482664B905006E5013 /* HomeModelView.swift */,
-				0230AABB25C6EDE500D6A771 /* ChattingModelView.swift */,
-				0230AAC025C6EDF500D6A771 /* ChattingModel.swift */,
 				0230AAC525C6EDFD00D6A771 /* TimerModel.swift */,
-				0230AB2025C798DF00D6A771 /* HomeView.swift */,
 				0230AA9C25C6ED5D00D6A771 /* MessageSubModels */,
 				0230AA7D25C6ECED00D6A771 /* MessageSubViews */,
 				0230AA7725C6ECC800D6A771 /* Util */,
@@ -418,6 +429,7 @@
 				02F2D4FA25DFC304007EED58 /* HideKeyboard.swift */,
 				0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */,
 				023DBEE8265A2BFC00DC3ED4 /* ImageView.swift */,
+				0214F3FB2667CA0A00B50B55 /* WaitingView.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -433,6 +445,39 @@
 			name = Fonts;
 			path = Maumo/Fonts;
 			sourceTree = SOURCE_ROOT;
+		};
+		02B9F84A2664C737006E5013 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				02B9F8502664C897006E5013 /* TriggerButtonCollection */,
+				0230AB2025C798DF00D6A771 /* HomeView.swift */,
+				02B9F8482664B905006E5013 /* HomeModelView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		02B9F84B2664C748006E5013 /* Chatting */ = {
+			isa = PBXGroup;
+			children = (
+				0230AABB25C6EDE500D6A771 /* ChattingModelView.swift */,
+				0230AAB625C6EDD600D6A771 /* ChatView.swift */,
+				0230AAC025C6EDF500D6A771 /* ChattingModel.swift */,
+			);
+			path = Chatting;
+			sourceTree = "<group>";
+		};
+		02B9F8502664C897006E5013 /* TriggerButtonCollection */ = {
+			isa = PBXGroup;
+			children = (
+				02B9F84C2664C767006E5013 /* TriggerButtonItem.swift */,
+				02B9F84E2664C826006E5013 /* TriggerCollection.swift */,
+				02B9F8512664C8B5006E5013 /* TriggerButtonView.swift */,
+				02B9F85326663B5E006E5013 /* TriggerCollectionView.swift */,
+				02B9F8552666437D006E5013 /* TriggerCollectiionModelView.swift */,
+				02B9F857266643E0006E5013 /* TriggerCollectionModel.swift */,
+			);
+			path = TriggerButtonCollection;
+			sourceTree = "<group>";
 		};
 		02F2D4C425DD5B30007EED58 /* DrawResource */ = {
 			isa = PBXGroup;
@@ -791,6 +836,7 @@
 			files = (
 				02AC0248263AE31A0039529C /* SignUpButtonView.swift in Sources */,
 				02F2D4FB25DFC304007EED58 /* HideKeyboard.swift in Sources */,
+				0214F3FC2667CA0A00B50B55 /* WaitingView.swift in Sources */,
 				0230AA8425C6ED0C00D6A771 /* MessageView.swift in Sources */,
 				02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */,
 				023DBEE9265A2BFC00DC3ED4 /* ImageView.swift in Sources */,
@@ -806,6 +852,8 @@
 				027A6266265A61B100DB5471 /* MaumJournalModel.swift in Sources */,
 				0230AAC125C6EDF500D6A771 /* ChattingModel.swift in Sources */,
 				02F2D4E125DE27B2007EED58 /* LoginTextField.swift in Sources */,
+				02B9F8522664C8B5006E5013 /* TriggerButtonView.swift in Sources */,
+				02B9F858266643E0006E5013 /* TriggerCollectionModel.swift in Sources */,
 				0230AB2D25C79C9600D6A771 /* SessionStore.swift in Sources */,
 				0230AA9E25C6ED6F00D6A771 /* Message.swift in Sources */,
 				0230AB6925C8199C00D6A771 /* MissionInfo.swift in Sources */,
@@ -829,6 +877,7 @@
 				0230AB6425C8183B00D6A771 /* UserContext.swift in Sources */,
 				027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */,
 				0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */,
+				02B9F8562666437D006E5013 /* TriggerCollectiionModelView.swift in Sources */,
 				0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */,
 				0259EA7F263586910068717E /* TutorialView.swift in Sources */,
 				0230AB5725C8182100D6A771 /* PersonName.swift in Sources */,
@@ -836,9 +885,12 @@
 				0230AABC25C6EDE500D6A771 /* ChattingModelView.swift in Sources */,
 				02F2D50925E21522007EED58 /* SettingModelView.swift in Sources */,
 				0259EA77263582760068717E /* StartView.swift in Sources */,
+				02B9F84D2664C767006E5013 /* TriggerButtonItem.swift in Sources */,
+				02B9F84F2664C826006E5013 /* TriggerCollection.swift in Sources */,
 				0230AA8E25C6ED2D00D6A771 /* QuickReplyMessageView.swift in Sources */,
 				0230AAC625C6EDFD00D6A771 /* TimerModel.swift in Sources */,
 				0230AAB225C6ED9900D6A771 /* CustomParameters.swift in Sources */,
+				02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */,
 				0230AAAD25C6ED8E00D6A771 /* Event.swift in Sources */,
 				02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */,
 				026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */,
