@@ -113,6 +113,7 @@ class ChattingModelView:ObservableObject{
         catch{
             print(error)
         }
+        print("발송 완료")
     }
     func updateMessage(message:Message){
         do {

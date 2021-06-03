@@ -15,14 +15,10 @@ struct TriggerCollectionView:View{
     }
     var body: some View{
             VStack{
-                Text("개수:\(self.modelView.triggerCollectionCount)" )
                 ForEach(self.modelView.triggerCollectionModel.triggerCollectionList){item in
                     TriggerCollectionItemView(triggerCollection: item, modelView: self.modelView)
                 }
-                NavigationLink(destination: ChatView(modelView:ChattingModelView()).navigationBarTitle("")
-                                .navigationBarHidden(true), isActive: self.$modelView.triggerCollectionModel.willNavigateToChatView){
-                    EmptyView()
-                }
+
             }
             .frame(height:self.height)
     }
@@ -40,6 +36,8 @@ struct TriggerCollectionItemView: View {
     @State var willNavigateToChatView: Bool = false
     @State var event : Event?
     func triggerTapped(item:TriggerButtonItem){
+        print("tapped")
+        print(item)
         self.event = self.modelView.triggerTapped(item:item, of:triggerCollection)
         self.willNavigateToChatView = true
     }
@@ -54,12 +52,16 @@ struct TriggerCollectionItemView: View {
                 ScrollView(.horizontal){
                     HStack(alignment:.center, spacing:0){
                         Spacer().frame(width:self.collectionTitleAndFirstItemPaddingToLeading)
-                        ForEach(self.triggerCollection.itemList){item in
+                        ForEach(self.triggerCollection.itemList, id: \.self){item in
                             TriggerButtonView(triggerItem: item, clickClosure: {self.triggerTapped(item:item)}).padding([.trailing],self.itemPaddingToLeft)
                         }
                         
                     }
                     .padding([.bottom,.top],self.listPaddingToBottom)
+                }
+                NavigationLink(destination: ChatView(modelView:ChattingModelView(userId: self.session.session?.uid, with: event ?? Event(name: "user_cameback") )).navigationBarTitle("")
+                                .navigationBarHidden(true), isActive: self.$modelView.triggerCollectionModel.willNavigateToChatView){
+                    EmptyView()
                 }
     //            .padding([.bottom], self.listPaddingToBottom)
             }.frame(height:self.collectionHeight)
