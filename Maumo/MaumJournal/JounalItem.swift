@@ -16,11 +16,11 @@ struct JournalItem:Hashable,Identifiable,Codable{
     var createDatetime : Date
     var updateDatetime : Date
     var content : String
-    var feeling : MaumJournalFeeling
+    var feeling : MaumJournalFeelingEnum
     var feelingImage : String
     var userId:String
     var verticalServiceId:String
-    init(title:String,content:String, targetDatetime:Date, feeling:MaumJournalFeeling, feelingImage:String, userId:String, verticalServiceId:String) {
+    init(title:String,content:String, targetDatetime:Date, feeling:MaumJournalFeelingEnum, feelingImage:String, userId:String, verticalServiceId:String) {
         self.title = title
         self.content = content
         self.targetDatetime = targetDatetime
@@ -34,6 +34,30 @@ struct JournalItem:Hashable,Identifiable,Codable{
     }
 }
 
-enum MaumJournalFeeling:String,Codable{
+struct MaumJournalFeeling{
+    func imageUrl(of feelingEnum: MaumJournalFeelingEnum) -> String{
+        switch feelingEnum{
+            case .veryHappy:
+                return "VeryHappy"
+            case .happy:
+                return "happy"
+            case .soso:
+                return "soso"
+            case .sad:
+                return "sad"
+            case .angry:
+                return "angry"
+            case .cloudy:
+                return "cloudy"
+        }
+    }
+}
+
+enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable{
+    case veryHappy
     case happy
+    case soso
+    case sad
+    case cloudy
+    case angry
 }

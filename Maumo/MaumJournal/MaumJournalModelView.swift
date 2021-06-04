@@ -67,7 +67,7 @@ class MaumJournalModelView:ObservableObject {
         self.userId = userId
     }
     // MARK: - Writing 관련 Intent
-    public func saveJournal(title:String, content:String,targetDate:Date,feeling:MaumJournalFeeling,feelingImage:String){
+    public func saveJournal(title:String, content:String,targetDate:Date,feeling:MaumJournalFeelingEnum,feelingImage:String){
         if let userIdString = self.userId{
             let journalItem = JournalItem(title: title,
                         content: content,

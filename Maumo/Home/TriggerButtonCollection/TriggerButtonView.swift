@@ -53,8 +53,8 @@ struct TriggerButtonView: View {
     }
 }
 //
-//ㅋstruct TriggerButtonView_Previews: PreviewProvider {
-//ㅋ    static var previews: some View {
-//ㅋ        TriggerButtonView(clickClosure: {print("done")})
-//ㅋ    }
-//ㅋ}
+//struct TriggerButtonView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TriggerButtonView(clickClosure: {print("done")})
+//    }
+//}

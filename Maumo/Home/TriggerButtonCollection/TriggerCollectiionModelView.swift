@@ -20,7 +20,6 @@ class TriggerCollectionModelView : ObservableObject {
         self.triggerCollectionModel = TriggerCollectionModel()
         self.getData()
     }
-    
     func triggerTapped(item:TriggerButtonItem, of triggerCollection:TriggerCollection)->Event{
         self.triggerCollectionModel.willNavigateToChatView = true
         return item.triggerEvent
@@ -38,8 +37,6 @@ class TriggerCollectionModelView : ObservableObject {
                         print("Error fetching documents: \(error!)")
                         return
                     }
-                    print("TriggerCollection 호출")
-                    print("\(querySnapshot!.documents.count)")
                     self.triggerCollectionModel.snapshotsToTriggerCollection(snapshots: querySnapshot!.documents)
                 }
         }

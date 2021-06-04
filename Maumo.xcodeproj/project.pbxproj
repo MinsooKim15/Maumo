@@ -75,6 +75,7 @@
 		02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F85326663B5E006E5013 /* TriggerCollectionView.swift */; };
 		02B9F8562666437D006E5013 /* TriggerCollectiionModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F8552666437D006E5013 /* TriggerCollectiionModelView.swift */; };
 		02B9F858266643E0006E5013 /* TriggerCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B9F857266643E0006E5013 /* TriggerCollectionModel.swift */; };
+		02BD7FC2266A5458002F91FE /* MaumChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD7FC1266A5458002F91FE /* MaumChooseView.swift */; };
 		02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */; };
 		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
 		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
@@ -176,6 +177,7 @@
 		02B9F85326663B5E006E5013 /* TriggerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectionView.swift; sourceTree = "<group>"; };
 		02B9F8552666437D006E5013 /* TriggerCollectiionModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectiionModelView.swift; sourceTree = "<group>"; };
 		02B9F857266643E0006E5013 /* TriggerCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerCollectionModel.swift; sourceTree = "<group>"; };
+		02BD7FC1266A5458002F91FE /* MaumChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumChooseView.swift; sourceTree = "<group>"; };
 		02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud.swift; sourceTree = "<group>"; };
 		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
 		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 				027A6265265A61B100DB5471 /* MaumJournalModel.swift */,
 				023DBEE6265A2A9500DC3ED4 /* JounalItem.swift */,
 				026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */,
+				02BD7FC1266A5458002F91FE /* MaumChooseView.swift */,
 			);
 			path = MaumJournal;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */,
 				0230AAAD25C6ED8E00D6A771 /* Event.swift in Sources */,
 				02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */,
+				02BD7FC2266A5458002F91FE /* MaumChooseView.swift in Sources */,
 				026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */,
 				0230AB5F25C8182D00D6A771 /* LinkedServiceInfo.swift in Sources */,
 				0230AAA825C6ED8500D6A771 /* MessageData.swift in Sources */,
