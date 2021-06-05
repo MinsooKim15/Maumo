@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MaumChooseView: View {
-    let viewHeight:CGFloat = 40
-    let imageWidth:CGFloat = 30
-    let imageHeight:CGFloat = 30
+    let viewHeight:CGFloat = 60
+    let imageWidth:CGFloat = 44
+    let imageHeight:CGFloat = 40
     let itemPaddingToTrailing:CGFloat = 20
     let viewPaddingToLeading:CGFloat = 20
     var backgroundColor:Color = .beigeWhite
@@ -21,9 +21,10 @@ struct MaumChooseView: View {
             ScrollView(.horizontal){
                 HStack{
                     ForEach(MaumJournalFeelingEnum.allCases, id:\.self){feeling in
-                        Image("SmallCloud2").resizable()
+                        Image(feeling.rawValue).resizable()
                             .frame(width: self.imageWidth, height:self.imageHeight)
                             .padding([.trailing],self.itemPaddingToTrailing)
+                            .aspectRatio(contentMode: .fit)
                             .onTapGesture {
                                 self.closure(feeling)
                             }

@@ -58,6 +58,9 @@
 		026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */; };
 		027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6263265A614A00DB5471 /* MaumJournalModelView.swift */; };
 		027A6266265A61B100DB5471 /* MaumJournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6265265A61B100DB5471 /* MaumJournalModel.swift */; };
+		02A1EAC2266B5713000FDA65 /* MaumJournalMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */; };
+		02A1EAC4266B5A82000FDA65 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1EAC3266B5A82000FDA65 /* DateUtil.swift */; };
+		02A1EAC6266BBF5D000FDA65 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1EAC5266BBF5D000FDA65 /* CalendarView.swift */; };
 		02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */; };
 		02A3E2A325CEBF9B0085DFC4 /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */; };
 		02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */; };
@@ -160,6 +163,9 @@
 		026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalWritingFullView.swift; sourceTree = "<group>"; };
 		027A6263265A614A00DB5471 /* MaumJournalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModelView.swift; sourceTree = "<group>"; };
 		027A6265265A61B100DB5471 /* MaumJournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModel.swift; sourceTree = "<group>"; };
+		02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalMonthlyView.swift; sourceTree = "<group>"; };
+		02A1EAC3266B5A82000FDA65 /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		02A1EAC5266BBF5D000FDA65 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		02A3E29C25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthErrorCode+Message.swift"; sourceTree = "<group>"; };
 		02A3E2A225CEBF9B0085DFC4 /* HorizontalLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
 		02A3E2A725CEC1C50085DFC4 /* Color+CustomNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CustomNames.swift"; sourceTree = "<group>"; };
@@ -382,6 +388,7 @@
 				023DBEE6265A2A9500DC3ED4 /* JounalItem.swift */,
 				026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */,
 				02BD7FC1266A5458002F91FE /* MaumChooseView.swift */,
+				02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */,
 			);
 			path = MaumJournal;
 			sourceTree = "<group>";
@@ -433,6 +440,8 @@
 				0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */,
 				023DBEE8265A2BFC00DC3ED4 /* ImageView.swift */,
 				0214F3FB2667CA0A00B50B55 /* WaitingView.swift */,
+				02A1EAC3266B5A82000FDA65 /* DateUtil.swift */,
+				02A1EAC5266BBF5D000FDA65 /* CalendarView.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -847,6 +856,7 @@
 				0230AA9825C6ED4500D6A771 /* TimerMessageView.swift in Sources */,
 				0230AA4325C6EC9A00D6A771 /* ContentView.swift in Sources */,
 				02B9F8492664B905006E5013 /* HomeModelView.swift in Sources */,
+				02A1EAC6266BBF5D000FDA65 /* CalendarView.swift in Sources */,
 				0230AAB725C6EDD600D6A771 /* ChatView.swift in Sources */,
 				02F2D50E25E2153E007EED58 /* SettingView.swift in Sources */,
 				0230AA7925C6ECDA00D6A771 /* ImageLoader.swift in Sources */,
@@ -856,6 +866,7 @@
 				0230AAC125C6EDF500D6A771 /* ChattingModel.swift in Sources */,
 				02F2D4E125DE27B2007EED58 /* LoginTextField.swift in Sources */,
 				02B9F8522664C8B5006E5013 /* TriggerButtonView.swift in Sources */,
+				02A1EAC2266B5713000FDA65 /* MaumJournalMonthlyView.swift in Sources */,
 				02B9F858266643E0006E5013 /* TriggerCollectionModel.swift in Sources */,
 				0230AB2D25C79C9600D6A771 /* SessionStore.swift in Sources */,
 				0230AA9E25C6ED6F00D6A771 /* Message.swift in Sources */,
@@ -881,6 +892,7 @@
 				027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */,
 				0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */,
 				02B9F8562666437D006E5013 /* TriggerCollectiionModelView.swift in Sources */,
+				02A1EAC4266B5A82000FDA65 /* DateUtil.swift in Sources */,
 				0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */,
 				0259EA7F263586910068717E /* TutorialView.swift in Sources */,
 				0230AB5725C8182100D6A771 /* PersonName.swift in Sources */,

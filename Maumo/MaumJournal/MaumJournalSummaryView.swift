@@ -12,6 +12,7 @@ struct MaumJournalSummaryView: View {
     
     @ObservedObject var modelView : MaumJournalModelView
     @State var willMoveToWritingFullView = false
+    @State var willMoveToMonthlyView = false
     let viewWidth :CGFloat = 368
     let viewHeight :CGFloat = 184
     let viewRadius :CGFloat = 10.0
@@ -28,16 +29,30 @@ struct MaumJournalSummaryView: View {
                 .foregroundColor(.beigeWhite)
 
             VStack{
-                Spacer()
-                SummaryGrid(modelView:self.modelView)
-                Spacer()
+                Group{
+                    Spacer()
+                    SummaryGrid(modelView:self.modelView)
+                    Spacer()
+                }
+                .onTapGesture {
+                    self.willMoveToMonthlyView = true
+                }
                 SummaryActionButton(title:"마음 일기 쓰기", completion: {
-                                        self.willMoveToWritingFullView = true
+                    self.modelView.startNewEditing()
+                    self.willMoveToWritingFullView = true
                 }).padding([.bottom], self.paddingFromActionButtonToBottom)
                 NavigationLink(
                     destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
                         .navigationBarHidden(true),
                     isActive: $willMoveToWritingFullView
+                ) {
+                    EmptyView()
+                }
+                NavigationLink(
+                    destination: MaumJournalMonthlyView(modelView: self.modelView)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true),
+                    isActive: $willMoveToMonthlyView
                 ) {
                     EmptyView()
                 }
@@ -70,7 +85,6 @@ struct SummaryGrid : View{
     }
     var body : some View{
             HStack{
-                Text("\(self.modelView.maumJournalModel.journalItemListInSummary.count)")
                 Spacer()
                 ForEach(self.modelView.maumJournalModel.journalItemListInSummary){item in
                     SummaryEachGrid(journalItem: item, showJournalItem: true)
@@ -95,11 +109,11 @@ struct SummaryEachGrid: View{
                 if self.showJournalItem == true{
                     VStack{
 //TODO:- 변경 필요
-                        Image("SmallCloud2")
+                        Image(self.journalItem?.feeling.rawValue ?? "")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 48, height: 48)
-                        Text("4/17")
+                        Text(self.journalItem?.targetDate(month: true, day: true, weekDay: false) ?? "")
                             .adjustFont(fontSetting: fontSetting)
                     }
                 }else{

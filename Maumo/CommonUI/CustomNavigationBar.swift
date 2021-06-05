@@ -16,8 +16,9 @@ struct CustomNavigationBar : View{
     var hasTitleText : Bool
     var titleText : String
     var backgroundColor : Color = Color.white.opacity(0.95)
+    var showCustomTitle:Bool = false
+    
     var showCustomButton : Bool = false
-
     var customButtonLabel: ()->AnyView = {AnyView(Image(systemName: "check.mark"))}
     var customButtonAction: ()->Void = {print("done")}
     var computedRightSide : AnyView{

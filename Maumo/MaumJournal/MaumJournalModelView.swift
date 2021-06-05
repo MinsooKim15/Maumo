@@ -26,7 +26,31 @@ class MaumJournalModelView:ObservableObject {
         let model = MaumJournalModel()
         return model
     }
-    func connectData(){
+    public func startEditing(with journalItem:JournalItem){
+        self.maumJournalModel.editingJournalItem = journalItem
+    }
+    public func startNewEditing(){
+        self.maumJournalModel.editingJournalItem = nil
+    }
+    public var editingJournalItemTitle:String{
+        return self.maumJournalModel.editingJournalItem?.title ?? ""
+    }
+    public var editingJournalItemContent:String{
+        return self.maumJournalModel.editingJournalItem?.content ?? ""
+    }
+    public var editingJournalItemFeeling:MaumJournalFeelingEnum?{
+        return self.maumJournalModel.editingJournalItem?.feeling
+    }
+    public var editingJournalItemFeelingImage:String{
+        return self.maumJournalModel.editingJournalItem?.feelingImage ?? ""
+    }
+    public var editingJournalItemFeelingDate:Date{
+        return self.maumJournalModel.editingJournalItem?.targetDatetime ?? Date()
+    }
+    public var editingJournalItemId:String?{
+        return self.maumJournalModel.editingJournalItem?.id ?? nil
+    }
+    public func connectData(){
         // TODO :- 여기서 연동 코드를 작성한다.
         if let userIdString = self.userId{
             db.collection("journalItems").whereField("userId", isEqualTo: userIdString)
@@ -48,11 +72,23 @@ class MaumJournalModelView:ObservableObject {
         }
     }
     private func addJournalItem(journalItem:JournalItem){
+        
         do{
             let _ = try db.collection("journalItems").addDocument(from: journalItem)
         }
         catch{
             print(error)
+        }
+    }
+    private func updateJournalItem(journalItem:JournalItem){
+        if journalItem.id != nil{
+            do{
+                let _ = try db.collection("journalItems").document(journalItem.id!).setData(from: journalItem)
+            }
+            catch{
+                print(error)
+            }
+
         }
     }
     public var journalItemsInSummary:[JournalItem]{
@@ -67,7 +103,7 @@ class MaumJournalModelView:ObservableObject {
         self.userId = userId
     }
     // MARK: - Writing 관련 Intent
-    public func saveJournal(title:String, content:String,targetDate:Date,feeling:MaumJournalFeelingEnum,feelingImage:String){
+    public func saveJournal(title:String, content:String,targetDate:Date,feeling:MaumJournalFeelingEnum,feelingImage:String, id:String?){
         if let userIdString = self.userId{
             let journalItem = JournalItem(title: title,
                         content: content,
@@ -76,7 +112,27 @@ class MaumJournalModelView:ObservableObject {
                         feelingImage: feelingImage,
                         userId: userIdString,
                         verticalServiceId: "maumJournal")
-            self.addJournalItem(journalItem: journalItem)
+            var targetItem = journalItem
+            print("에디팅 아이디 : \(self.editingJournalItemId)")
+            print("아이디: \(id)")
+            if (self.editingJournalItemId != nil)&&(id != nil){
+                if self.editingJournalItemId! == id!{
+                    
+                    self.maumJournalModel.editingJournalItem?.update(with:journalItem)
+                    targetItem = self.maumJournalModel.editingJournalItem!
+                    print("update item")
+                    updateJournalItem(journalItem: targetItem)
+                    return
+                }
+            }
+            self.addJournalItem(journalItem: targetItem)
+        }
+    }
+    public func getSplitedJournalList(of index:Int, interval:Int, lastIndex:Int)->[JournalItem]{
+        if index == lastIndex-1{
+            return Array(self.maumJournalModel.journalItemList[index*interval..<self.maumJournalModel.journalItemList.count])
+        }else{
+            return Array(self.maumJournalModel.journalItemList[index*interval..<(index+1)*interval])
         }
     }
 }

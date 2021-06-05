@@ -26,38 +26,64 @@ struct JournalItem:Hashable,Identifiable,Codable{
         self.targetDatetime = targetDatetime
         self.createDatetime = Date()
         self.updateDatetime = Date()
-        self.content = content
         self.feeling = feeling
         self.feelingImage = feelingImage
         self.userId = userId
         self.verticalServiceId = verticalServiceId
     }
-}
-
-struct MaumJournalFeeling{
-    func imageUrl(of feelingEnum: MaumJournalFeelingEnum) -> String{
-        switch feelingEnum{
-            case .veryHappy:
-                return "VeryHappy"
-            case .happy:
-                return "happy"
-            case .soso:
-                return "soso"
-            case .sad:
-                return "sad"
-            case .angry:
-                return "angry"
-            case .cloudy:
-                return "cloudy"
-        }
+    mutating func update(with journalItem:JournalItem){
+        self.title = journalItem.title
+        self.content = journalItem.content
+        self.updateDatetime = Date()
+        self.feeling = journalItem.feeling
+        self.feelingImage = journalItem.feelingImage
     }
+    func targetDate(month: Bool, day:Bool,weekDay:Bool)->String{
+        let cal = Calendar(identifier: .gregorian)
+        let comps = cal.dateComponents([.weekday,.day,.month], from: self.targetDatetime)
+        if day&&weekDay{
+            return "\(comps.day!)(\(DateUtil.getWeekDayInKorean(of:comps.weekday ?? 1, inFull:false)))"
+        }else if day&&month{
+            return "\(comps.month!)/\(comps.day!)"
+        }else if day{
+            return "\(comps.month!)"
+        }
+        return ""
+    }
+    var targetDateInString:String{
+        let cal = Calendar(identifier: .gregorian)
+        let comps = cal.dateComponents([.weekday,.day], from: self.targetDatetime)
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MM-dd D"
+//        dateFormatter.string(from: self.date)
+        return "\(comps.day!)(\(DateUtil.getWeekDayInKorean(of:comps.weekday ?? 1, inFull:false)))"
+    }
+    
 }
 
-enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable{
-    case veryHappy
-    case happy
-    case soso
-    case sad
-    case cloudy
-    case angry
+//struct MaumJournalFeeling{
+//    func imageUrl(of feelingEnum: MaumJournalFeelingEnum) -> String{
+//        switch feelingEnum{
+//            case .veryHappy:
+//                return "VeryHappy"
+//            case .happy:
+//                return "happy"
+//            case .soso:
+//                return "soso"
+//            case .sad:
+//                return "sad"
+//            case .angry:
+//                return "angry"
+//            case .cloudy:
+//                return "cloudy"
+//        }
+//    }
+//}
+
+enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable,Hashable{
+    case happy = "happy"
+    case soso = "soso"
+    case sad = "sad"
+    case cloudy = "cloudy"
+    case angry = "angry"
 }
