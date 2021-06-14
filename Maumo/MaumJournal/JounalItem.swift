@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestoreSwift
+import SwiftUI
 
 struct JournalItem:Hashable,Identifiable,Codable{
     @DocumentID var id: String? = UUID().uuidString
@@ -61,24 +62,6 @@ struct JournalItem:Hashable,Identifiable,Codable{
     
 }
 
-//struct MaumJournalFeeling{
-//    func imageUrl(of feelingEnum: MaumJournalFeelingEnum) -> String{
-//        switch feelingEnum{
-//            case .veryHappy:
-//                return "VeryHappy"
-//            case .happy:
-//                return "happy"
-//            case .soso:
-//                return "soso"
-//            case .sad:
-//                return "sad"
-//            case .angry:
-//                return "angry"
-//            case .cloudy:
-//                return "cloudy"
-//        }
-//    }
-//}
 
 enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable,Hashable{
     case happy = "happy"
@@ -86,4 +69,18 @@ enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable,Hashable{
     case sad = "sad"
     case cloudy = "cloudy"
     case angry = "angry"
+    public static func colorValue(_ data :MaumJournalFeelingEnum)->Color{
+        switch(data){
+        case .happy:
+            return .red
+        case .soso:
+            return .green
+        case .sad:
+            return .blue
+        case .cloudy:
+            return .salmon
+        case .angry:
+            return .black
+        }
+    }
 }

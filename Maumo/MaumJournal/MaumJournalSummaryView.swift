@@ -49,6 +49,13 @@ struct MaumJournalSummaryView: View {
                     EmptyView()
                 }
                 NavigationLink(
+                    destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
+                        .navigationBarHidden(true),
+                    isActive: $willMoveToWritingFullView
+                ) {
+                    EmptyView()
+                }
+                NavigationLink(
                     destination: MaumJournalMonthlyView(modelView: self.modelView)
                         .navigationBarTitle("")
                         .navigationBarHidden(true),
@@ -59,17 +66,9 @@ struct MaumJournalSummaryView: View {
             }
         }
         .frame(width: self.viewWidth , height: self.viewHeight)
-        .onReceive(self.modelView.$maumJournalModel, perform: {data in
-                    print("View 변경 전달")
-                    print("view에서 받은 개수 : \(data.journalItemList.count)")})
         .onAppear{
             self.setUserId()
             self.modelView.connectData()
-            print("요약뷰 새로 등장!")
-        }
-        .onDisappear{
-            print("Summary View 없어짐")
-            print("없어지는 순간의 개수 : \(self.modelView.maumJournalModel.journalItemList.count)")
         }
     }
 }

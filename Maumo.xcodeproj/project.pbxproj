@@ -56,6 +56,7 @@
 		0259EA7F263586910068717E /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0259EA7E263586910068717E /* TutorialView.swift */; };
 		0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */; };
 		026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */; };
+		0277044E2677130900942438 /* Date+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0277044D2677130900942438 /* Date+Distance.swift */; };
 		027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6263265A614A00DB5471 /* MaumJournalModelView.swift */; };
 		027A6266265A61B100DB5471 /* MaumJournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6265265A61B100DB5471 /* MaumJournalModel.swift */; };
 		02A1EAC2266B5713000FDA65 /* MaumJournalMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */; };
@@ -161,6 +162,7 @@
 		0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToKeyboard.swift; sourceTree = "<group>"; };
 		0262E2EE25F4DA7F00EC787C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalWritingFullView.swift; sourceTree = "<group>"; };
+		0277044D2677130900942438 /* Date+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Distance.swift"; sourceTree = "<group>"; };
 		027A6263265A614A00DB5471 /* MaumJournalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModelView.swift; sourceTree = "<group>"; };
 		027A6265265A61B100DB5471 /* MaumJournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModel.swift; sourceTree = "<group>"; };
 		02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalMonthlyView.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				0214F3FB2667CA0A00B50B55 /* WaitingView.swift */,
 				02A1EAC3266B5A82000FDA65 /* DateUtil.swift */,
 				02A1EAC5266BBF5D000FDA65 /* CalendarView.swift */,
+				0277044D2677130900942438 /* Date+Distance.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -908,6 +911,7 @@
 				02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */,
 				0230AAAD25C6ED8E00D6A771 /* Event.swift in Sources */,
 				02A3E29D25CC9D0E0085DFC4 /* AuthErrorCode+Message.swift in Sources */,
+				0277044E2677130900942438 /* Date+Distance.swift in Sources */,
 				02BD7FC2266A5458002F91FE /* MaumChooseView.swift in Sources */,
 				026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */,
 				0230AB5F25C8182D00D6A771 /* LinkedServiceInfo.swift in Sources */,

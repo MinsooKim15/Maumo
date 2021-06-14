@@ -21,14 +21,30 @@ struct MaumJournalWritingFullView: View {
     }
     @State var date : Date = Date()
     @State var saveAble:Bool = false
+    @State var showCalendarView:Bool = true
     var editingJournalItemId: String?
+    @State var dateNotSet:Bool = false
+    public func chooseDateFromCalendar(_ date:Date)->Void{
+        self.showCalendarView = false
+        self.date = date
+        self.dateNotSet = false
+    }
     init(modelView:MaumJournalModelView){
         self.modelView = modelView
         UITextView.appearance().backgroundColor = .clear
         self._title = State(initialValue: self.modelView.editingJournalItemTitle)
         self._content = State(initialValue: self.modelView.editingJournalItemContent)
         self._feeling = State(initialValue: self.modelView.editingJournalItemFeeling ?? nil)
-        self._date = State(initialValue:self.modelView.editingJournalItemFeelingDate)
+        if let feelingDate = self.modelView.editingJournalItemFeelingDate{
+            
+            self._date = State(initialValue:feelingDate)
+            self._showCalendarView = State(initialValue: false)
+            self._dateNotSet = State(initialValue: false)
+        }else{
+            self._showCalendarView = State(initialValue: true)
+            self._dateNotSet = State(initialValue: true)
+        }
+        
         self.editingJournalItemId = self.modelView.editingJournalItemId
         if let feeling_ = self.feeling{
             self._choosingFeeling = State(initialValue: false)
@@ -48,7 +64,14 @@ struct MaumJournalWritingFullView: View {
         self._title = State(initialValue: self.modelView.editingJournalItemTitle)
         self._content = State(initialValue: self.modelView.editingJournalItemContent)
         self._feeling = State(initialValue: self.modelView.editingJournalItemFeeling ?? nil)
-        self._date = State(initialValue:self.modelView.editingJournalItemFeelingDate)
+        if let feelingDate = self.modelView.editingJournalItemFeelingDate{
+            self._date = State(initialValue:feelingDate)
+            self.showCalendarView = false
+            self._dateNotSet = State(initialValue: false)
+        }else{
+            self.showCalendarView = true
+            self._dateNotSet = State(initialValue: true)
+        }
         self.editingJournalItemId = self.modelView.editingJournalItemId
         UITextView.appearance().backgroundColor = .clear
         if let feeling_ = self.feeling{
@@ -115,6 +138,11 @@ struct MaumJournalWritingFullView: View {
         print(self.editingJournalItemId)
         self.presentationMode.wrappedValue.dismiss()
     }
+    private func closeCalendar(){
+        if !self.dateNotSet{
+            self.showCalendarView = false
+        }
+    }
     var body: some View {
         GeometryReader{_ in
             ZStack{
@@ -147,9 +175,13 @@ struct MaumJournalWritingFullView: View {
                                 Spacer().frame(width: self.imageWidth, height: self.imageHeight)
                             }
                         }
-                            
-                        Text(self.dateInString)
-                            .adjustFont(fontSetting: self.targetDateFontSetting)
+                        if !self.dateNotSet{
+                            Text(self.dateInString)
+                                .adjustFont(fontSetting: self.targetDateFontSetting)
+                                .onTapGesture{
+                                    self.showCalendarView = true
+                                }
+                        }
                         TextEditor(text:$title)
                             .onChange(of: self.title, perform: {[title] (newValue) in
                                 checkTitleCount(oldValue:title, newValue:newValue)
@@ -180,6 +212,34 @@ struct MaumJournalWritingFullView: View {
                                 self.feeling = maum
                             })
                         }
+                    }
+                    
+                }
+                if self.showCalendarView{
+                    VStack{
+                        Spacer()
+                        ZStack{
+                            Color.white
+                            VStack{
+                                
+                                    HStack{
+                                        Spacer()
+                                        Image(systemName:"xmark")
+                                            .foregroundColor(.salmon)
+                                            .onTapGesture {
+                                                self.closeCalendar()
+                                        }
+                                        Spacer().frame(width:40)
+                                    }
+                                    .frame(height:40)
+                                Divider().foregroundColor(.salmon)
+                                    CalendarMainView(
+                                        calendar: Calendar(identifier: .gregorian),
+                                        modelView: self.modelView,
+                                        clickClosure: self.chooseDateFromCalendar
+                                    ).frame(height:300)
+                            }
+                        }.frame(height:340)
                     }
                     
                 }

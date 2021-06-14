@@ -31,6 +31,14 @@ class MaumJournalModelView:ObservableObject {
     }
     public func startNewEditing(){
         self.maumJournalModel.editingJournalItem = nil
+        if !self.hasJournalItem(of: Date()){
+            if let userIdString = self.userId{
+                print("does not have one")
+                self.maumJournalModel.editingJournalItem = JournalItem(title: "", content: "", targetDatetime: Date(), feeling: .happy, feelingImage: "a", userId: userIdString, verticalServiceId: "maumJournal")
+            }
+        }else{
+            print("has one")
+        }
     }
     public var editingJournalItemTitle:String{
         return self.maumJournalModel.editingJournalItem?.title ?? ""
@@ -44,8 +52,8 @@ class MaumJournalModelView:ObservableObject {
     public var editingJournalItemFeelingImage:String{
         return self.maumJournalModel.editingJournalItem?.feelingImage ?? ""
     }
-    public var editingJournalItemFeelingDate:Date{
-        return self.maumJournalModel.editingJournalItem?.targetDatetime ?? Date()
+    public var editingJournalItemFeelingDate:Date?{
+        return self.maumJournalModel.editingJournalItem?.targetDatetime
     }
     public var editingJournalItemId:String?{
         return self.maumJournalModel.editingJournalItem?.id ?? nil
@@ -134,5 +142,32 @@ class MaumJournalModelView:ObservableObject {
         }else{
             return Array(self.maumJournalModel.journalItemList[index*interval..<(index+1)*interval])
         }
+    }
+//    MARK : CalenderMainView 관련
+    public func hasJournalItem(of targetDate:Date)->Bool{
+        let targetItem = self.getJournalItem(of: targetDate)
+        if targetItem != nil{
+            return true
+        }else{
+            return false
+        }
+    }
+    public func getJournalItemColor(of targetDate:Date)->Color{
+        let targetItem = self.getJournalItem(of: targetDate)
+        if targetItem != nil{
+            return MaumJournalFeelingEnum.colorValue(targetItem!.feeling ?? MaumJournalFeelingEnum.happy)
+        }else{
+            return .white
+        }
+    }
+    private func getJournalItem(of targetDate:Date)->JournalItem?{
+        for item in self.maumJournalModel.journalItemList{
+            if targetDate.distance(from: item.targetDatetime, only: .day) == 0{
+                if targetDate.distance(from: item.targetDatetime, only: .month) == 0, targetDate.distance(from: item.targetDatetime, only: .year) == 0{
+                    return item
+                }
+            }
+        }
+        return nil
     }
 }
