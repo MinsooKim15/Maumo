@@ -7,11 +7,13 @@
 
 import SwiftUI
 import Firebase
+import StoreKit
 @main
 struct MaumoApp: App {
     @StateObject var session: SessionStore = SessionStore()
     init() {
         FirebaseApp.configure()
+        
       }
     var body: some Scene {
         WindowGroup {

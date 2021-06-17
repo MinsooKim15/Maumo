@@ -57,6 +57,9 @@
 		0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */; };
 		026D98FF265BD7FF00406C3C /* MaumJournalWritingFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */; };
 		0277044E2677130900942438 /* Date+Distance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0277044D2677130900942438 /* Date+Distance.swift */; };
+		0277045026798D6E00942438 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0277044F26798D6E00942438 /* StoreKit.framework */; };
+		0277045326798D9600942438 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0277045226798D9600942438 /* StoreManager.swift */; };
+		02770455267A124C00942438 /* PurcahseMaumJournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02770454267A124C00942438 /* PurcahseMaumJournalView.swift */; };
 		027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6263265A614A00DB5471 /* MaumJournalModelView.swift */; };
 		027A6266265A61B100DB5471 /* MaumJournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A6265265A61B100DB5471 /* MaumJournalModel.swift */; };
 		02A1EAC2266B5713000FDA65 /* MaumJournalMonthlyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */; };
@@ -163,6 +166,9 @@
 		0262E2EE25F4DA7F00EC787C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		026D98FE265BD7FF00406C3C /* MaumJournalWritingFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalWritingFullView.swift; sourceTree = "<group>"; };
 		0277044D2677130900942438 /* Date+Distance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Distance.swift"; sourceTree = "<group>"; };
+		0277044F26798D6E00942438 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0277045226798D9600942438 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		02770454267A124C00942438 /* PurcahseMaumJournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurcahseMaumJournalView.swift; sourceTree = "<group>"; };
 		027A6263265A614A00DB5471 /* MaumJournalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModelView.swift; sourceTree = "<group>"; };
 		027A6265265A61B100DB5471 /* MaumJournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalModel.swift; sourceTree = "<group>"; };
 		02A1EAC1266B5713000FDA65 /* MaumJournalMonthlyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalMonthlyView.swift; sourceTree = "<group>"; };
@@ -215,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				016C38C7DE8A2926FB720222 /* Pods_Maumo.framework in Frameworks */,
+				0277045026798D6E00942438 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 		0230AA3F25C6EC9A00D6A771 /* Maumo */ = {
 			isa = PBXGroup;
 			children = (
+				0277045126798D8500942438 /* Purchase */,
 				02B9F84B2664C748006E5013 /* Chatting */,
 				02B9F84A2664C737006E5013 /* Home */,
 				023DBEE2265A241B00DC3ED4 /* MaumJournal */,
@@ -429,6 +437,15 @@
 			path = Release;
 			sourceTree = "<group>";
 		};
+		0277045126798D8500942438 /* Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				0277045226798D9600942438 /* StoreManager.swift */,
+				02770454267A124C00942438 /* PurcahseMaumJournalView.swift */,
+			);
+			path = Purchase;
+			sourceTree = "<group>";
+		};
 		02A3E2A125CEBF8B0085DFC4 /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +542,7 @@
 		15266B6A78A6F732B370A4C9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0277044F26798D6E00942438 /* StoreKit.framework */,
 				D130F7EF4021870C3841C084 /* Pods_Maumo.framework */,
 				563EF2D282F5937A9564D643 /* Pods_Maumo_MaumoUITests.framework */,
 				37E57054EE193AA550E268F8 /* Pods_MaumoTests.framework */,
@@ -862,6 +880,7 @@
 				02A1EAC6266BBF5D000FDA65 /* CalendarView.swift in Sources */,
 				0230AAB725C6EDD600D6A771 /* ChatView.swift in Sources */,
 				02F2D50E25E2153E007EED58 /* SettingView.swift in Sources */,
+				02770455267A124C00942438 /* PurcahseMaumJournalView.swift in Sources */,
 				0230AA7925C6ECDA00D6A771 /* ImageLoader.swift in Sources */,
 				0230AB6E25C83AA800D6A771 /* SignUpView.swift in Sources */,
 				0230AA9325C6ED3900D6A771 /* SimpleInformMessageView.swift in Sources */,
@@ -873,6 +892,7 @@
 				02B9F858266643E0006E5013 /* TriggerCollectionModel.swift in Sources */,
 				0230AB2D25C79C9600D6A771 /* SessionStore.swift in Sources */,
 				0230AA9E25C6ED6F00D6A771 /* Message.swift in Sources */,
+				0277045326798D9600942438 /* StoreManager.swift in Sources */,
 				0230AB6925C8199C00D6A771 /* MissionInfo.swift in Sources */,
 				023DBEE4265A247E00DC3ED4 /* MaumJournalSummaryView.swift in Sources */,
 				02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */,

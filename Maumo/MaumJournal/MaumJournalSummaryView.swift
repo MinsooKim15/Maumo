@@ -49,7 +49,9 @@ struct MaumJournalSummaryView: View {
                     EmptyView()
                 }
                 NavigationLink(
-                    destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
+//                    destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
+//                    PurchaseMaumJournalView
+                    destination: PurcahseMaumJournalView()
                         .navigationBarHidden(true),
                     isActive: $willMoveToWritingFullView
                 ) {
