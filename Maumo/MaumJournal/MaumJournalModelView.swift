@@ -21,20 +21,23 @@ class MaumJournalModelView:ObservableObject {
             print("count in modelView : \(self.maumJournalModel.journalItemList.count)")
         }
     }
+    @Published var state : MaumJournalState = .none
     private var db = Firestore.firestore()
     private static func createJournalItemModel()->MaumJournalModel{
         let model = MaumJournalModel()
         return model
     }
     public func startEditing(with journalItem:JournalItem){
+        self.state = .editing
         self.maumJournalModel.editingJournalItem = journalItem
     }
     public func startNewEditing(){
         self.maumJournalModel.editingJournalItem = nil
+        self.state = .creating
         if !self.hasJournalItem(of: Date()){
             if let userIdString = self.userId{
-                print("does not have one")
                 self.maumJournalModel.editingJournalItem = JournalItem(title: "", content: "", targetDatetime: Date(), feeling: .happy, feelingImage: "a", userId: userIdString, verticalServiceId: "maumJournal")
+                
             }
         }else{
             print("has one")
@@ -112,6 +115,7 @@ class MaumJournalModelView:ObservableObject {
     }
     // MARK: - Writing 관련 Intent
     public func saveJournal(title:String, content:String,targetDate:Date,feeling:MaumJournalFeelingEnum,feelingImage:String, id:String?){
+        self.state = .none
         if let userIdString = self.userId{
             let journalItem = JournalItem(title: title,
                         content: content,
@@ -170,4 +174,25 @@ class MaumJournalModelView:ObservableObject {
         }
         return nil
     }
+    public func checkNeedPurchase()->Bool{
+        if self.maumJournalModel.journalItemList.count > 4{
+            if self.state == .creating{
+                return !UserDefaults.standard.bool(forKey:"JournalService.MaumDiary")
+            }else{
+                return false
+            }
+        }else{
+            return false
+        }
+    }
+}
+enum MaumJournalState{
+    // 기존 일기를 수정 중임
+    case editing
+    // 기타 상태 -> 시작 상태임.
+    case none
+    // 기존 일기를 조회 중임. -> 개발 필요
+    case viewing
+    // 새로 만들고 있음
+    case creating
 }

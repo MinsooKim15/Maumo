@@ -8,9 +8,15 @@
 import Foundation
 import SwiftUI
 import StoreKit
-struct PurcahseMaumJournalView:View{
-    @ObservedObject var storeManager : StoreManager = StoreManager()
+struct PurchaseMaumJournalView:View{
+    init(closeClosure:@escaping ()->Void){
+        self.closeClosure = closeClosure
+        self.storeManager = StoreManager()
+        SKPaymentQueue.default().add(self.storeManager)
+    }
+    @ObservedObject var storeManager : StoreManager
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var allDone:Bool = false
     let notBuyTitle:String = "마음일기 열기"
     let notBuyDescription1:String = "결제 후에는 마음일기를 무제한으로 \n 사용할 수 있어요. \n지금 결제하고, 매일매일의 소중한 마음을 남겨보세요."
     let notBuyDescription2:String = "마음일기는 5일만 무료로 사용해볼 수 있어요. "
@@ -29,11 +35,23 @@ struct PurcahseMaumJournalView:View{
     var backgroundColor:Color{
         return self.purchased ? Color.gray:Color.salmon
     }
+    //    화면 위에 겹쳐 띄워야 해서, Dismiss를 사용하지 않고 외부에서 값을 바꾼다.
+    var closeClosure:()->Void
+    func purchaseButtonAction()->Void{
+        // 원래는 App시작시에 띄워야 한다. 이후에 Transaction Problem이 생기면 얘를 옮겨보자
+        
+        if !self.purchased, self.storeManager.myProducts.count > 0{
+            let product = self.storeManager.myProducts[0]
+            self.storeManager.purchaseProduct(product: product,with:self.completePurchase)
+        }
+    }
     func completePurchase()->Void{
+        print("Complete Purchase!!")
+        self.allDone = true
         let seconds = 4.0
         DispatchQueue.main.asyncAfter(deadline: .now() + seconds) {
             // Put your code which should be executed with a delay here
-            self.presentationMode.wrappedValue.dismiss()
+            self.closeClosure()
         }
     }
     
@@ -44,8 +62,13 @@ struct PurcahseMaumJournalView:View{
                 .shadow(radius: 10)
             VStack{
                 Spacer()
-                    .frame(height:80)
-                PurchaseMaumJournalBackgroundView()
+                    .frame(height:20)
+                HStack{
+                    Spacer()
+                    CloseButton(closeClosure: {return})
+                    Spacer().frame(width:20)
+                }
+                PurchaseMaumJournalBackgroundView(storeManager: self.storeManager, purchaseDone:$allDone)
                 Spacer()
             }
             VStack{
@@ -79,8 +102,7 @@ struct PurcahseMaumJournalView:View{
                 HStack{
                     Spacer()
                     PurchaseActionButton(title:self.buttonTitle, backgroundColor: self.backgroundColor , foregroundColor:self.foregroundColor, completion: {
-                        let product = self.storeManager.myProducts[0]
-                        self.storeManager.purchaseProduct(product: product,with:self.completePurchase)
+                        purchaseButtonAction()
                     })
                     Spacer()
                 }
@@ -88,10 +110,9 @@ struct PurcahseMaumJournalView:View{
             }
         }
         .onAppear{
-            // 원래는 App시작시에 띄워야 한다. 이후에 Transaction Problem이 생기면 얘를 옮겨보자
-            SKPaymentQueue.default().add(storeManager)
-            self.storeManager.getProducts(productIDs: ["JournalService.MaumDiary"])
+            print("APPEAR!")
             
+//            self.storeManager.getProducts(productIDs: ["JournalService.MaumDiary"])
         }
         .onTapGesture{
             self.storeManager.restoreProducts()
@@ -103,11 +124,13 @@ struct PurcahseMaumJournalView:View{
 }
 
 struct PurchaseMaumJournalBackgroundView:View{
+    @ObservedObject var storeManager : StoreManager
+    @Binding var purchaseDone:Bool
     var purchased:Bool{
-        return UserDefaults.standard.bool(forKey:"JournalService.MaumDiary")
+        return self.storeManager.transactionState == .purchased
     }
     var maumCircleHeight:CGFloat{
-        self.purchased ? 210:0
+        self.purchaseDone ? 210:0
     }
     var maumJournalImageHeight :CGFloat{
 //        self.purchased ? 100:89
@@ -124,15 +147,17 @@ struct PurchaseMaumJournalBackgroundView:View{
                 Spacer()
                     .frame(height:60)
                 ZStack{
-                    Circle().foregroundColor(.whiteGreen.opacity(0.6)).frame(width:self.maumCircleHeight, height:self.maumCircleHeight)
+                    Circle().foregroundColor(.whiteGreen.opacity(0.6))
+                        .frame(width:self.maumCircleHeight, height:self.maumCircleHeight)
                         .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 100.0))
-                    Circle().foregroundColor(.whiteGreen).frame(width:self.maumCircleHeight*0.6,height:self.maumCircleHeight*0.6)
+                    Circle().foregroundColor(.whiteGreen)
+                        .frame(width:self.maumCircleHeight*0.6,height:self.maumCircleHeight*0.6)
                         .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 100.0))
                     Image("MaumJournalIcon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: self.maumJournalImageWidth, height: self.maumJournalImageHeight)
-                        .scaleEffect(self.purchased ? 1.2 : 1.0)
+                        .scaleEffect(self.purchaseDone ? 1.2 : 1.0)
     //                    .animation(.interpolatingSpring(stiffness: 350, damping: 1))
                         .animation(.spring(response: 0.5, dampingFraction: 0.5, blendDuration: 100.0))
                 }
@@ -186,7 +211,7 @@ struct PurcahseMaumJournalView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
             Color.red
-            PurcahseMaumJournalView()
+//            PurcahseMaumJournalView()
         }
 
     }

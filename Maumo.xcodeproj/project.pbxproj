@@ -44,6 +44,8 @@
 		023DBEE4265A247E00DC3ED4 /* MaumJournalSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBEE3265A247E00DC3ED4 /* MaumJournalSummaryView.swift */; };
 		023DBEE7265A2A9500DC3ED4 /* JounalItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBEE6265A2A9500DC3ED4 /* JounalItem.swift */; };
 		023DBEE9265A2BFC00DC3ED4 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023DBEE8265A2BFC00DC3ED4 /* ImageView.swift */; };
+		02448165267C54B8008EF743 /* StoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02448164267C54B8008EF743 /* StoreModel.swift */; };
+		02448167267C61C2008EF743 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02448166267C61C2008EF743 /* CloseButton.swift */; };
 		025180E425DC3996004D17DE /* NanumSquareOTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */; };
 		025180E825DC3997004D17DE /* NanumSquareOTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2BA25CEC4940085DFC4 /* NanumSquareOTFRegular.otf */; };
 		025180E925DC399A004D17DE /* NanumSquareOTFExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 02A3E2B925CEC4940085DFC4 /* NanumSquareOTFExtraBold.otf */; };
@@ -160,6 +162,8 @@
 		023DBEE3265A247E00DC3ED4 /* MaumJournalSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumJournalSummaryView.swift; sourceTree = "<group>"; };
 		023DBEE6265A2A9500DC3ED4 /* JounalItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JounalItem.swift; sourceTree = "<group>"; };
 		023DBEE8265A2BFC00DC3ED4 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		02448164267C54B8008EF743 /* StoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreModel.swift; sourceTree = "<group>"; };
+		02448166267C61C2008EF743 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		0259EA76263582760068717E /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		0259EA7E263586910068717E /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		0262E2E625F1D13F00EC787C /* AdaptsToKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptsToKeyboard.swift; sourceTree = "<group>"; };
@@ -442,6 +446,7 @@
 			children = (
 				0277045226798D9600942438 /* StoreManager.swift */,
 				02770454267A124C00942438 /* PurcahseMaumJournalView.swift */,
+				02448164267C54B8008EF743 /* StoreModel.swift */,
 			);
 			path = Purchase;
 			sourceTree = "<group>";
@@ -462,6 +467,7 @@
 				02A1EAC3266B5A82000FDA65 /* DateUtil.swift */,
 				02A1EAC5266BBF5D000FDA65 /* CalendarView.swift */,
 				0277044D2677130900942438 /* Date+Distance.swift */,
+				02448166267C61C2008EF743 /* CloseButton.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -897,6 +903,7 @@
 				023DBEE4265A247E00DC3ED4 /* MaumJournalSummaryView.swift in Sources */,
 				02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */,
 				0230AB5125C79D5000D6A771 /* User.swift in Sources */,
+				02448167267C61C2008EF743 /* CloseButton.swift in Sources */,
 				02F2D50125E214F9007EED58 /* SettingModel.swift in Sources */,
 				02A3E2B225CEC3CF0085DFC4 /* AdjustFont.swift in Sources */,
 				0230AA8925C6ED1800D6A771 /* ImageMessageView.swift in Sources */,
@@ -914,6 +921,7 @@
 				0230AB6425C8183B00D6A771 /* UserContext.swift in Sources */,
 				027A6264265A614A00DB5471 /* MaumJournalModelView.swift in Sources */,
 				0262E2E725F1D13F00EC787C /* AdaptsToKeyboard.swift in Sources */,
+				02448165267C54B8008EF743 /* StoreModel.swift in Sources */,
 				02B9F8562666437D006E5013 /* TriggerCollectiionModelView.swift in Sources */,
 				02A1EAC4266B5A82000FDA65 /* DateUtil.swift in Sources */,
 				0230AB2125C798DF00D6A771 /* HomeView.swift in Sources */,

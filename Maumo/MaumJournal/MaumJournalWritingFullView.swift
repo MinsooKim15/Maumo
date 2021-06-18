@@ -19,11 +19,16 @@ struct MaumJournalWritingFullView: View {
             }
         }
     }
+    @State var showPurchaseView = false
     @State var date : Date = Date()
     @State var saveAble:Bool = false
     @State var showCalendarView:Bool = true
     var editingJournalItemId: String?
     @State var dateNotSet:Bool = false
+    public func appearCheck(){
+//        Appear했을 때 체크한다.
+        self.showPurchaseView = self.modelView.checkNeedPurchase()
+    }
     public func chooseDateFromCalendar(_ date:Date)->Void{
         self.showCalendarView = false
         self.date = date
@@ -244,7 +249,24 @@ struct MaumJournalWritingFullView: View {
                     
                 }
             }
-        }.onTapGesture {
+            
+            if self.showPurchaseView{
+                Color.black.opacity(0.6).ignoresSafeArea(.all)
+                HStack{
+                    Spacer()
+                    VStack{
+                        Spacer()
+                        PurchaseMaumJournalView(closeClosure: {self.showPurchaseView = false})
+                        Spacer()
+                    }
+                    Spacer()
+                }
+
+            }
+        }.onAppear{
+            self.appearCheck()
+        }
+        .onTapGesture {
             if self.feeling != nil{
                 self.choosingFeeling = false
             }

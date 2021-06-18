@@ -13,6 +13,7 @@ struct MaumJournalSummaryView: View {
     @ObservedObject var modelView : MaumJournalModelView
     @State var willMoveToWritingFullView = false
     @State var willMoveToMonthlyView = false
+    
     let viewWidth :CGFloat = 368
     let viewHeight :CGFloat = 184
     let viewRadius :CGFloat = 10.0
@@ -49,16 +50,14 @@ struct MaumJournalSummaryView: View {
                     EmptyView()
                 }
                 NavigationLink(
-//                    destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
-//                    PurchaseMaumJournalView
-                    destination: PurcahseMaumJournalView()
+                    destination: MaumJournalWritingFullView(modelView: self.modelView)                           .navigationBarTitle("")
                         .navigationBarHidden(true),
                     isActive: $willMoveToWritingFullView
                 ) {
                     EmptyView()
                 }
                 NavigationLink(
-                    destination: MaumJournalMonthlyView(modelView: self.modelView)
+                    destination:MaumJournalMonthlyView(modelView: self.modelView)
                         .navigationBarTitle("")
                         .navigationBarHidden(true),
                     isActive: $willMoveToMonthlyView

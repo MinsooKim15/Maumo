@@ -14,18 +14,24 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     var request: SKProductsRequest!
     @Published var myProducts = [SKProduct]()
     var completionClosure : ()->Void = {print("yeah")}
-//    func voidFunction()->Void{
-//
-//    }
-    func getProducts(productIDs: [String]) {
+    override init() {
+        super.init()
+        request = SKProductsRequest()
+        self.getProducts(["JournalService.MaumDiary"])
+    }
+    func getProducts(_ productIDs: [String]) {
         print("Start requesting products ...")
         let request = SKProductsRequest(productIdentifiers: Set(productIDs))
         request.delegate = self
         request.start()
     }
+    
+    func requestDidFinish(_ request: SKRequest) {
+        print("DONE?r")
+    }
+    
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         print("Did receive response")
-        
         if !response.products.isEmpty {
             for fetchedProduct in response.products {
                 DispatchQueue.main.async {
@@ -33,7 +39,6 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 }
             }
         }
-        
         for invalidIdentifier in response.invalidProductIdentifiers {
             print("Invalid identifiers found: \(invalidIdentifier)")
         }
@@ -63,19 +68,20 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     }
 
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        print("SKPaymentIdentifier")
-        print("@@@@@@@@@@@@@!!!!!!!!!!")
-        
         for transaction in transactions {
             print(transaction.payment.productIdentifier)
             switch transaction.transactionState {
             case .purchasing:
+                print("Purchasing!")
                 transactionState = .purchasing
             case .purchased:
+                print("Purchased!")
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .purchased
+                self.completionClosure()
             case .restored:
+                print("Restored!")
                 UserDefaults.standard.setValue(true, forKey: transaction.payment.productIdentifier)
                 queue.finishTransaction(transaction)
                 transactionState = .restored
@@ -84,14 +90,13 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 queue.finishTransaction(transaction)
                 transactionState = .failed
             default:
-                queue.finishTransaction(transaction)
-                self.completionClosure()
-            }
+                queue.finishTransaction(transaction)            }
         }
     }
     
     func restoreProducts() {
         print("Restoring products ...")
         SKPaymentQueue.default().restoreCompletedTransactions()
+        
     }
 }

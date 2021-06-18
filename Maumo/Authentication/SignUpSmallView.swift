@@ -123,20 +123,3 @@ struct SignUpSmallView: View {
         .ignoresSafeArea(.keyboard,edges:.all)
     }
 }
-struct CloseButton:View{
-    var body: some View{
-        Group{
-            ZStack{
-                Circle()
-                    .frame(width:48, height:48)
-                    .foregroundColor(.white)
-                Image(systemName: "xmark")
-                    .font(.system(size: 20))
-                    .foregroundColor(.black)
-            }
-            .frame(width:80, height:80)
-            .shadow(radius: 5)
-        }
-    }
-}
-
