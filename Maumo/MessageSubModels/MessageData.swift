@@ -18,11 +18,15 @@ struct MessageData:Codable{
     var attachment: Attachment?
     var signUp : SignUp?
     var custom : Custom?
+    var startVerticalService:StartVerticalService?
     init(text : String){
         self.text = text
     }
     init(event: Event){
         self.event = event
+    }
+    init(startVerticalService:StartVerticalService){
+        self.startVerticalService = startVerticalService
     }
 
 }
@@ -85,4 +89,9 @@ struct Attachment:Codable, Hashable{
 }
 enum AttachmentType:String, Codable{
     case image
+}
+struct StartVerticalService:Codable, Hashable{
+    var buttonTitle:String
+    var verticalServiceId:VerticalServiceId
+    var actionId:VerticalServiceActionId
 }

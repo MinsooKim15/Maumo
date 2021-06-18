@@ -77,7 +77,9 @@ struct ChatView:View{
                 CustomNavigationBar(hasTitleText: true, titleText: "대화")
                 Spacer()
             }
-
+            if self.modelView.chattingModel.currentReplyType == .startVerticalService{
+//                StartVerticalServiceView(currentReplyMessageData: <#T##MessageData#>, failCompletion: <#T##() -> Void#>, successCompletion: <#T##() -> Void#>)
+            }
         }.onTapGesture {
             hideKeyboard()
         }

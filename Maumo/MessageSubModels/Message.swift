@@ -87,4 +87,5 @@ enum ReplyType:String,Codable{
     case simpleInform
     case signUp
     case custom
+    case startVerticalService
 }
