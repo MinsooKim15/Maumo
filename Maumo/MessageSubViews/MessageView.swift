@@ -36,24 +36,24 @@ struct MessageView : View {
     }
     var body: some View {
         HStack(alignment: .bottom, spacing: 15) {
-        Group{
-                if(!currentMessage.fromUser){
-                    computedMaumoFace
-                }else{
-                    Spacer()
-                }
-        }
-        Group{
-            if currentMessage.category == MessageCategory.text{
-                TextMessageView(contentMessage: currentMessage.data.text ?? " ", isCurrentUser: currentMessage.fromUser)
-            }else if(currentMessage.category == MessageCategory.attachment){
-                AttachmentView(attachment: currentMessage.data.attachment!,fromUser: currentMessage.fromUser)
-            }else if(currentMessage.category == MessageCategory.reply){
-                ReplyView(message : currentMessage, replyType : currentMessage.replyType!, replyData: currentMessage.data, fromUser: currentMessage.fromUser, modelView:modelView)
-             }else{
-                EmptyView()
+            Group{
+                    if(!currentMessage.fromUser){
+                        computedMaumoFace
+                    }else{
+                        Spacer()
+                    }
             }
-        }
+            Group{
+                if currentMessage.category == MessageCategory.text{
+                    TextMessageView(contentMessage: currentMessage.data.text ?? " ", isCurrentUser: currentMessage.fromUser).addDateView(isCurrentUser: currentMessage.fromUser, sentDate: currentMessage.sentTime)
+                }else if(currentMessage.category == MessageCategory.attachment){
+                    AttachmentView(attachment: currentMessage.data.attachment!,fromUser: currentMessage.fromUser)
+                }else if(currentMessage.category == MessageCategory.reply){
+                    ReplyView(message : currentMessage, replyType : currentMessage.replyType!, replyData: currentMessage.data, fromUser: currentMessage.fromUser, modelView:modelView)
+                 }else{
+                    EmptyView()
+                }
+            }
         }
     }
 }

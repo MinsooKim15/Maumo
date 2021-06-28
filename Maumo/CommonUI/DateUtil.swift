@@ -14,17 +14,17 @@ struct DateUtil{
         case 1:
             dayString = "일"
         case 2:
-            dayString = "화"
+            dayString = "월"
         case 3:
-            dayString = "수"
+            dayString = "화"
         case 4:
-            dayString = "목"
+            dayString = "수"
         case 5:
-            dayString = "금"
+            dayString = "목"
         case 6:
-            dayString = "토"
+            dayString = "금"
         case 7:
-            dayString = "일"
+            dayString = "토"
         default:
             dayString = "일"
         }

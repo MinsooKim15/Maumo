@@ -94,6 +94,8 @@
 		02BD7FC2266A5458002F91FE /* MaumChooseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02BD7FC1266A5458002F91FE /* MaumChooseView.swift */; };
 		02EECCC926882AD300602BA7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EECCC826882AD300602BA7 /* HomeView.swift */; };
 		02EECCCB2689DA8400602BA7 /* DragToDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EECCCA2689DA8400602BA7 /* DragToDismiss.swift */; };
+		02EECCCD2689F2BE00602BA7 /* SentDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EECCCC2689F2BE00602BA7 /* SentDateView.swift */; };
+		02EECCCF2689F2DA00602BA7 /* AddDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EECCCE2689F2DA00602BA7 /* AddDateView.swift */; };
 		02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */; };
 		02F2D4D125DE023B007EED58 /* SmallCloud2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D025DE023B007EED58 /* SmallCloud2.swift */; };
 		02F2D4D625DE07DC007EED58 /* View+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F2D4D525DE07DC007EED58 /* View+Navigation.swift */; };
@@ -214,6 +216,8 @@
 		02BD7FC1266A5458002F91FE /* MaumChooseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaumChooseView.swift; sourceTree = "<group>"; };
 		02EECCC826882AD300602BA7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		02EECCCA2689DA8400602BA7 /* DragToDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragToDismiss.swift; sourceTree = "<group>"; };
+		02EECCCC2689F2BE00602BA7 /* SentDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentDateView.swift; sourceTree = "<group>"; };
+		02EECCCE2689F2DA00602BA7 /* AddDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDateView.swift; sourceTree = "<group>"; };
 		02F2D4C525DD5B4A007EED58 /* SmallCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud.swift; sourceTree = "<group>"; };
 		02F2D4D025DE023B007EED58 /* SmallCloud2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCloud2.swift; sourceTree = "<group>"; };
 		02F2D4D525DE07DC007EED58 /* View+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Navigation.swift"; sourceTree = "<group>"; };
@@ -373,6 +377,8 @@
 				02AC0247263AE31A0039529C /* MessageSimpleButtonView.swift */,
 				021F2B86267C929000A0CF0F /* StartVerticalServiceView.swift */,
 				021F2B8A267CC8F000A0CF0F /* MessageActionButtonView.swift */,
+				02EECCCC2689F2BE00602BA7 /* SentDateView.swift */,
+				02EECCCE2689F2DA00602BA7 /* AddDateView.swift */,
 			);
 			path = MessageSubViews;
 			sourceTree = "<group>";
@@ -960,6 +966,7 @@
 				02F2D4DB25DE0822007EED58 /* SignInView.swift in Sources */,
 				0230AA4125C6EC9A00D6A771 /* MaumoApp.swift in Sources */,
 				0230AAA325C6ED7A00D6A771 /* Context.swift in Sources */,
+				02EECCCF2689F2DA00602BA7 /* AddDateView.swift in Sources */,
 				02F2D4C625DD5B4A007EED58 /* SmallCloud.swift in Sources */,
 				02A3E2A825CEC1C50085DFC4 /* Color+CustomNames.swift in Sources */,
 				023DBEE7265A2A9500DC3ED4 /* JounalItem.swift in Sources */,
@@ -984,6 +991,7 @@
 				02B9F84D2664C767006E5013 /* TriggerButtonItem.swift in Sources */,
 				02B9F84F2664C826006E5013 /* TriggerCollection.swift in Sources */,
 				0230AA8E25C6ED2D00D6A771 /* QuickReplyMessageView.swift in Sources */,
+				02EECCCD2689F2BE00602BA7 /* SentDateView.swift in Sources */,
 				0230AAC625C6EDFD00D6A771 /* TimerModel.swift in Sources */,
 				0230AAB225C6ED9900D6A771 /* CustomParameters.swift in Sources */,
 				02B9F85426663B5E006E5013 /* TriggerCollectionView.swift in Sources */,

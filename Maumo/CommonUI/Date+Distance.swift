@@ -21,4 +21,12 @@ extension Date {
     func hasSame(_ component: Calendar.Component, as date: Date) -> Bool {
         distance(from: date, only: component) == 0
     }
+    func isSameDay(with date:Date)->Bool{
+        if self.distance(from: date, only: .day) == 0{
+            if self.distance(from: date, only: .month) == 0, self.distance(from: date, only: .year) == 0{
+                return true
+            }
+        }
+        return false
+    }
 }

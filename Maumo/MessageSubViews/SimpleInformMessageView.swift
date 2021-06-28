@@ -9,11 +9,20 @@ import SwiftUI
 
 struct SimpleInformMessageView: View {
     var text : String = ""
+    var fontSetting = FontSetting(fontWeight: .light, fontSize: .verySmall12)
     var body: some View {
-        Text(text)
-            .padding(10)
-            .foregroundColor(Color.white)
-            .background(Color.blue)
-            .cornerRadius(10)
+        ZStack{
+            HorizontalLine(color: .whiteGray)
+            HStack{
+                Spacer()
+                Text(text)
+                    .adjustFont(fontSetting: fontSetting)
+                    .padding(10)
+                    .background(Color.white)
+                    .foregroundColor(Color.purplishGrey)
+                Spacer()
+            }
+        }
+        
     }
 }

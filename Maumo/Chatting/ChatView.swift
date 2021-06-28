@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+//import Introspect
+
 struct ChatView:View{
     init(modelView:ChattingModelView) {
         self.modelView = modelView
@@ -33,70 +35,81 @@ struct ChatView:View{
         modelView.userCameback()
     }
     func setUserId(){
-        print("setUserId")
+
         if let userIdString =  self.session.session?.uid{
             print(userIdString)
             self.modelView.setUserId(userIdString)
         }
     }
+    func showDateSimpleDivider(msg: Message)-> AnyView{
+        if self.modelView.isDifferentDayBefore(message:msg){
+            
+            return AnyView(SimpleInformMessageView(text: "\(self.dateFormat(date: msg.sentTime))"))
+        }else{
+            return AnyView(EmptyView())
+        }
+    }
+    func dateFormat(date:Date)->String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY년 MM월 dd일"
+        let timeFromDate = dateFormatter.string(from: date)
+        let weekday = Calendar.current.component(.weekday, from: date)
+        let weekdayString = DateUtil.getWeekDayInKorean(of: weekday, inFull: true)
+        return timeFromDate + " " + weekdayString
+    }
 
     var body: some View{
         
-        ZStack{
-            VStack {
-
-                ScrollViewReader{value in
-                    ScrollView{
-                        LazyVStack(alignment: .leading){
-                            Spacer().frame(height:50)
-                            ForEach(modelView.chattingModel.messages) { msg in
-                                MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg)
+       
+            ZStack{
+                VStack {
+                    ScrollViewReader{proxy in
+                        ScrollView{
+                            LazyVStack(alignment: .leading){
+                                Spacer().frame(height:50)
+                                ForEach(modelView.chattingModel.messages) { msg in
+                                    self.showDateSimpleDivider(msg: msg)
+                                    MessageView(currentMessage: msg,isDifferentBefore: self.modelView.isDifferentBefore(message: msg), modelView:modelView).id(msg).padding([.bottom], 4)
+                                }
+                            }
+                            .padding([.leading],20)
+                            .padding([.trailing],12)
+                        }
+                        .onChange(of: modelView.chattingModel.messages.count){ count in
+                            if modelView.chattingModel.messages.count > 0{
+                                withAnimation{proxy.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
                             }
                         }
-                        .padding([.leading],20)
-                        .padding([.trailing],12)
-                    }
-
-                    .onChange(of: modelView.chattingModel.messages.count){ count in
-                        if modelView.chattingModel.messages.count > 0{
-                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
+                        .onAppear{
+                            if modelView.chattingModel.messages.count > 0{
+                                proxy.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1],anchor:.bottom)
+                            }
+                            self.userCameback()
+                            self.setUserId()
                         }
-
                     }
-                    .onAppear{
-                        if modelView.chattingModel.messages.count > 0{
-                            withAnimation{value.scrollTo(modelView.chattingModel.messages[modelView.chattingModel.messages.count - 1 ])}
-                        }
-                        self.userCameback()
-                        self.setUserId()
-                    }
+                    Spacer().frame(maxHeight:8)
+                    ChattingInputField(modelView:self.modelView)
+    //                ChattingTextField(modelView: self.modelView)
+                    Spacer().frame(maxHeight:8)
                 }
-                Spacer().frame(maxHeight:8)
-                ChattingInputField(modelView:self.modelView)
-//                ChattingTextField(modelView: self.modelView)
-                Spacer().frame(maxHeight:8)
+                VStack{
+                    CustomNavigationBar(hasTitleText: true, titleText: "대화")
+                    Spacer()
+                }
+                NavigationLink(
+                    destination: StartVerticalServiceView(modelView: self.modelView).navigationBarTitle("").navigationBarHidden(true),
+                    isActive: self.$modelView.chattingModel.showVerticalServiceView,
+                    label: {
+                        EmptyView()
+                    })
             }
-            VStack{
-                CustomNavigationBar(hasTitleText: true, titleText: "대화")
-                Spacer()
-            }
-            NavigationLink(
-                destination: StartVerticalServiceView(modelView: self.modelView).navigationBarTitle("").navigationBarHidden(true),
-                isActive: self.$modelView.chattingModel.showVerticalServiceView,
-                label: {
-                    EmptyView()
-                })
-        }
         .dragToDismiss()
         .onTapGesture {
             hideKeyboard()
             print("개수 : \(self.modelView.chattingModel.messages.count)")
             print(self.modelView.chattingModel.messages)
         }
-        
-        
-
-        
     }
 }
 struct ChattingInputField:View{
@@ -205,3 +218,14 @@ struct SendChatButton: View{
 //        ChatView(modelView: ChattingModelView())
 //    }
 //}
+extension UITableView {
+
+    func scrollToBottom(animated: Bool,
+                        yOffset: Binding<CGFloat?>) {
+
+        let y = contentSize.height - frame.size.height
+        if y < 0 { return }
+
+        yOffset.wrappedValue = y
+    }
+}

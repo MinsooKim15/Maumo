@@ -27,8 +27,6 @@ class MaumJournalModelView:ObservableObject {
         
     }
     init(userId:String?){
-        print("startModelView with userId")
-        print("userId:\(userId)")
         self.userId = userId
         self.connectData()
     }
@@ -149,8 +147,6 @@ class MaumJournalModelView:ObservableObject {
                         userId: userIdString,
                         verticalServiceId: "maumJournal")
             var targetItem = journalItem
-            print("에디팅 아이디 : \(self.editingJournalItemId)")
-            print("아이디: \(id)")
             if (self.editingJournalItemId != nil)&&(id != nil){
                 if self.editingJournalItemId! == id!{
                     

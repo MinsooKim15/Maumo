@@ -64,7 +64,7 @@ enum CustomFontWeight:String{
     case extraBold = "NanumSquareOTFEB"
 }
 enum CustomFontSize:Int{
-    
+    case verySmall8 = 8
     case verySmall12 = 12
     case small14 = 14
     case small16 = 16
