@@ -8,6 +8,6 @@
 import Foundation
 
 enum VerticalServiceActionId:String,Codable{
-    case StartWriting = "Start.Writing"
+    case StartWriting
 }
 

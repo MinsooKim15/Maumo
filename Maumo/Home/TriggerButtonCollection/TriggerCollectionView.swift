@@ -30,14 +30,12 @@ struct TriggerCollectionItemView: View {
     let collectionHeight : CGFloat = 240
     let fontSetting = FontSetting(fontWeight: .bold, fontSize:.medium22)
     let collectionTitleColor:Color = .purplishGrey
-    let collectionTitleAndFirstItemPaddingToLeading : CGFloat = 26
+    let collectionTitleAndFirstItemPaddingToLeading : CGFloat = 12
     let itemPaddingToLeft :CGFloat = 14
     let listPaddingToBottom : CGFloat = 12
     @State var willNavigateToChatView: Bool = false
     @State var event : Event?
     func triggerTapped(item:TriggerButtonItem){
-        print("tapped")
-        print(item)
         self.event = self.modelView.triggerTapped(item:item, of:triggerCollection)
         self.willNavigateToChatView = true
     }

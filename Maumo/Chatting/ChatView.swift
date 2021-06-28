@@ -39,9 +39,12 @@ struct ChatView:View{
             self.modelView.setUserId(userIdString)
         }
     }
+
     var body: some View{
+        
         ZStack{
             VStack {
+
                 ScrollViewReader{value in
                     ScrollView{
                         LazyVStack(alignment: .leading){
@@ -77,12 +80,21 @@ struct ChatView:View{
                 CustomNavigationBar(hasTitleText: true, titleText: "대화")
                 Spacer()
             }
-            if self.modelView.chattingModel.currentReplyType == .startVerticalService{
-//                StartVerticalServiceView(currentReplyMessageData: <#T##MessageData#>, failCompletion: <#T##() -> Void#>, successCompletion: <#T##() -> Void#>)
-            }
-        }.onTapGesture {
-            hideKeyboard()
+            NavigationLink(
+                destination: StartVerticalServiceView(modelView: self.modelView).navigationBarTitle("").navigationBarHidden(true),
+                isActive: self.$modelView.chattingModel.showVerticalServiceView,
+                label: {
+                    EmptyView()
+                })
         }
+        .dragToDismiss()
+        .onTapGesture {
+            hideKeyboard()
+            print("개수 : \(self.modelView.chattingModel.messages.count)")
+            print(self.modelView.chattingModel.messages)
+        }
+        
+        
 
         
     }

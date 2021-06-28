@@ -94,6 +94,12 @@ struct ReplyView:View{
                 SimpleInformMessageView()
             }else if(replyType == ReplyType.timer){
                 TimerMessageView(modelView:modelView,message:message)
+            }else if(replyType == ReplyType.startVerticalService){
+                MessageActionButtonView(
+                            buttonAction: {self.modelView.showVerticalService(message: message)},
+                            buttonMessage: self.message.data.startVerticalService!.buttonTitle,
+                            failClosure: {self.modelView.sendPostback(postback: self.message.data.startVerticalService!.failPostback)},
+                            image: self.message.data.startVerticalService!.image)
             }else{
                 EmptyView().frame(height:0.001)
             }

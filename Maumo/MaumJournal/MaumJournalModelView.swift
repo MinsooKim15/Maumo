@@ -13,13 +13,24 @@ import FirebaseFirestoreSwift
 import Firebase
 
 class MaumJournalModelView:ObservableObject {
-    private var userId:String?
+    public var userId:String?
+//    CalendarView 그리기와 JournalItem 리스트 가져오기가 동시에 수행되어서, 보이지가 않는다. 조금 들고 있다가, 바뀌는 순간에 그리자
+    @Published var readyToShowCalendar:Bool = false
     @Published var maumJournalModel:MaumJournalModel = MaumJournalModelView.createJournalItemModel(){
         didSet{
             print("model Changed")
             print(maumJournalModel.journalItemList.count)
             print("count in modelView : \(self.maumJournalModel.journalItemList.count)")
         }
+    }
+    init(){
+        
+    }
+    init(userId:String?){
+        print("startModelView with userId")
+        print("userId:\(userId)")
+        self.userId = userId
+        self.connectData()
     }
     @Published var state : MaumJournalState = .none
     private var db = Firestore.firestore()
@@ -38,6 +49,17 @@ class MaumJournalModelView:ObservableObject {
             if let userIdString = self.userId{
                 self.maumJournalModel.editingJournalItem = JournalItem(title: "", content: "", targetDatetime: Date(), feeling: .happy, feelingImage: "a", userId: userIdString, verticalServiceId: "maumJournal")
                 
+            }
+        }else{
+            print("has one")
+        }
+    }
+    public func startCreatingFromChat(){
+        self.maumJournalModel.editingJournalItem = nil
+        self.state = .creating
+        if !self.hasJournalItem(of: Date()){
+            if let userIdString = self.userId{
+                self.maumJournalModel.editingJournalItem = JournalItem(title: "", content: "", targetDatetime: Date(), feeling: .happy, feelingImage: "a", userId: userIdString, verticalServiceId: "maumJournal")
             }
         }else{
             print("has one")
@@ -64,22 +86,24 @@ class MaumJournalModelView:ObservableObject {
     public func connectData(){
         // TODO :- 여기서 연동 코드를 작성한다.
         if let userIdString = self.userId{
-            db.collection("journalItems").whereField("userId", isEqualTo: userIdString)
-                .addSnapshotListener { querySnapshot, error in
-                    guard let documents = querySnapshot?.documents else {
-                        print("Error fetching documents: \(error!)")
-                        return
-                    }
-                    self.maumJournalModel.snapshotsToJournalItem(snapshots: querySnapshot!.documents)
-                }
-//            let doc_ref = db.collection("journalItems").whereField("userId", isEqualTo: userIdString)
-//            doc_ref.getDocuments{(querySnapshot,error) in
-//                guard let documents = querySnapshot?.documents else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
+            print("UserId가 있어서 journalIttems가져옴")
+//            db.collection("journalItems").whereField("userId", isEqualTo: userIdString)
+//                .addSnapshotListener { querySnapshot, error in
+//                    guard let documents = querySnapshot?.documents else {
+//                        print("Error fetching documents: \(error!)")
+//                        return
+//                    }
+//                    self.maumJournalModel.snapshotsToJournalItem(snapshots: querySnapshot!.documents)
 //                }
-//                self.maumJournalModel.snapshotsToJournalItem(snapshots: querySnapshot!.documents)
-//            }
+            let doc_ref = db.collection("journalItems").whereField("userId", isEqualTo: userIdString)
+            doc_ref.getDocuments{(querySnapshot,error) in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                self.maumJournalModel.snapshotsToJournalItem(snapshots: querySnapshot!.documents)
+                self.readyToShowCalendar = true
+            }
         }
     }
     private func addJournalItem(journalItem:JournalItem){
@@ -177,7 +201,7 @@ class MaumJournalModelView:ObservableObject {
     public func checkNeedPurchase()->Bool{
         if self.maumJournalModel.journalItemList.count > 4{
             if self.state == .creating{
-                return !UserDefaults.standard.bool(forKey:"JournalService.MaumDiary")
+                return !UserDefaults.standard.bool(forKey:VerticalServiceId.JournalService_MaumDiary.rawValue)
             }else{
                 return false
             }

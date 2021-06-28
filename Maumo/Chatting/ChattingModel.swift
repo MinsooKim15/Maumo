@@ -22,7 +22,7 @@ struct ChattingModel{
             }
         }
     }
-    
+    public var showVerticalServiceView:Bool = false
     private let secondsToWaitForThinking = 60
     public var secondsLeftForThinkingTimer = 60
     var thinkingTimer = Timer()

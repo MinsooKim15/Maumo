@@ -94,4 +94,7 @@ struct StartVerticalService:Codable, Hashable{
     var buttonTitle:String
     var verticalServiceId:VerticalServiceId
     var actionId:VerticalServiceActionId
+    var successPostback: PostbackPayload
+    var failPostback: PostbackPayload
+    var image:String
 }

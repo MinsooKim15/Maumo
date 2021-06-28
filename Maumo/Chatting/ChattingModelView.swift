@@ -34,6 +34,7 @@ class ChattingModelView:ObservableObject{
     }
 //    MARK: - Chatting Stuffs
     @Published var chattingModel:ChattingModel = ChattingModelView.createChattingModel()
+    
     private var db = Firestore.firestore()
     private var currentContexts:[Context]?
 //    MARK:- User/Session 정의되면 변경
@@ -89,6 +90,7 @@ class ChattingModelView:ObservableObject{
                         }
                         return message
                 } catch{
+                    print("message 변환 중 에러:\(error)")
                     let message_:Message? = nil
                     return message_
                 }
@@ -343,6 +345,27 @@ class ChattingModelView:ObservableObject{
             self.chattingModel.clearCurrentReplyMessage()
         }
         self.endTutorial()
+    }
+    
+    
+    public func showVerticalService(message:Message){
+        self.chattingModel.setChattingStatus(.replying)
+        self.chattingModel.setCurrentReplyMessage(message)
+        self.chattingModel.showVerticalServiceView = true
+    }
+    public func verticalServiceFailCompletion(){
+        if let fail = self.chattingModel.currentReplyMessage?.data.startVerticalService?.failPostback{
+            self.sendPostback(postback: fail)
+        }
+        self.chattingModel.showVerticalServiceView = false
+        self.chattingModel.clearCurrentReplyMessage()
+    }
+    public func verticalServiceSuccessCompletion(){
+        if let success = self.chattingModel.currentReplyMessage?.data.startVerticalService?.successPostback{
+            self.sendPostback(postback: success)
+        }
+        self.chattingModel.showVerticalServiceView = false
+        self.chattingModel.clearCurrentReplyMessage()
     }
 
 }

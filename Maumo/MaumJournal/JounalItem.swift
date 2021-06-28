@@ -72,15 +72,15 @@ enum MaumJournalFeelingEnum:String,Codable,CaseIterable,Equatable,Hashable{
     public static func colorValue(_ data :MaumJournalFeelingEnum)->Color{
         switch(data){
         case .happy:
-            return .red
+            return .mustard
         case .soso:
-            return .green
-        case .sad:
-            return .blue
-        case .cloudy:
             return .salmon
+        case .sad:
+            return .navy
+        case .cloudy:
+            return .cloudyBlue
         case .angry:
-            return .black
+            return .pink
         }
     }
 }

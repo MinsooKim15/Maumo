@@ -22,9 +22,11 @@ struct PurchaseMaumJournalView:View{
     let notBuyDescription2:String = "마음일기는 5일만 무료로 사용해볼 수 있어요. "
     let buyDescription:String = "이제 MAUMO와 함께 \n매일의 마음을 기록해 보세요."
     let descriptionFontSetting : FontSetting = FontSetting(fontWeight: .regular, fontSize: .small14)
+    
     let titleFontSetting:FontSetting = FontSetting(fontWeight: .bold, fontSize: .medium22)
+    let restoreFontSetting:FontSetting = FontSetting(fontWeight: .regular, fontSize: .verySmall12)
     var purchased:Bool{
-        return UserDefaults.standard.bool(forKey:"JournalService.MaumDiary")
+        return UserDefaults.standard.bool(forKey:VerticalServiceId.JournalService_MaumDiary.rawValue)
     }
     var buttonTitle:String{
         return self.purchased ? "완료":"마음일기 무제한 ₩1,500"
@@ -44,6 +46,9 @@ struct PurchaseMaumJournalView:View{
             let product = self.storeManager.myProducts[0]
             self.storeManager.purchaseProduct(product: product,with:self.completePurchase)
         }
+    }
+    func tapRestoreButton(){
+        self.storeManager.restoreProducts()
     }
     func completePurchase()->Void{
         print("Complete Purchase!!")
@@ -65,7 +70,7 @@ struct PurchaseMaumJournalView:View{
                     .frame(height:20)
                 HStack{
                     Spacer()
-                    CloseButton(closeClosure: {return})
+                    CloseButton(closeClosure: {self.presentationMode.wrappedValue.dismiss()})
                     Spacer().frame(width:20)
                 }
                 PurchaseMaumJournalBackgroundView(storeManager: self.storeManager, purchaseDone:$allDone)
@@ -97,13 +102,22 @@ struct PurchaseMaumJournalView:View{
                         .adjustFont(fontSetting: self.descriptionFontSetting)
                         .foregroundColor(.gray)
                 }
-
                 Spacer()
                 HStack{
                     Spacer()
                     PurchaseActionButton(title:self.buttonTitle, backgroundColor: self.backgroundColor , foregroundColor:self.foregroundColor, completion: {
                         purchaseButtonAction()
                     })
+                    Spacer()
+                }
+                Spacer().frame(height:10)
+                HStack{
+                    Spacer()
+                    Text("구매 내역 복구하기").adjustFont(fontSetting: self.restoreFontSetting)
+                        .foregroundColor(.purplishGrey)
+                        .onTapGesture {
+                            self.tapRestoreButton()
+                        }
                     Spacer()
                 }
                 Spacer().frame(height:10)

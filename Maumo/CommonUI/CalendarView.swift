@@ -57,7 +57,6 @@ struct CalendarMainView: View {
             ) else {
                 return
             }
-
             selectedDate = newDate
         }
     }
@@ -72,7 +71,7 @@ struct CalendarMainView: View {
                     Button(action: { self.dateTapped(date: date) }) {
                         ZStack{
                             if self.modelView.hasJournalItem(of: date){
-                                Circle().frame(width:10, height:10).foregroundColor(self.modelView.getJournalItemColor(of: date))
+                                Circle().frame(width:10, height:10).foregroundColor(self.modelView.getJournalItemColor(of: date).opacity(0.6))
 //                                    Text(self.collection.getCalendarData(targetDate: date)!.title)
                             }
                             Text(dayFormatter.string(from: date))

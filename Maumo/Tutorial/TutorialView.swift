@@ -47,7 +47,7 @@ struct TutorialView:View{
                                 if self.modelView.chattingModel.currentReplyType == .signUp{
                                     HStack{
                                         Spacer().frame(width: 44, height: 37, alignment: .center)
-                                        MessageButtonView(buttonAction: {self.showSignUp.toggle()}, buttonMessage: "이름 소개하기")
+                                        MessageSimpleButtonView(buttonAction: {self.showSignUp.toggle()}, buttonMessage: "이름 소개하기")
                                     }
                                     
                                 }

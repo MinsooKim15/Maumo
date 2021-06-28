@@ -27,4 +27,16 @@ extension Color{
     public static var purplishGrey: Color{
         return Color(UIColor(red: 98.0 / 255.0, green: 97.0 / 255.0, blue: 99.0 / 255.0, alpha: 1.0))
     }
+    public static var mustard: Color{
+        return Color(UIColor(red: 255.0 / 255.0, green: 205.0 / 255.0, blue: 62.0 / 255.0, alpha: 1.0))
+    }
+    public static var cloudyBlue: Color{
+        return Color(UIColor(red: 159.0 / 255.0, green: 226.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0))
+    }
+    public static var exoticPurple: Color{
+        return Color(UIColor(red: 158.0 / 255.0, green: 52.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0))
+    }
+    public static var beigeWhiteDarker: Color{
+        return Color(UIColor(red: 248.0 / 255.0, green: 241.0 / 255.0, blue: 228.0 / 255.0, alpha: 1.0))
+    }
 }

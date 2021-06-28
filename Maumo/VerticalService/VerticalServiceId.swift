@@ -7,5 +7,5 @@
 
 import Foundation
 enum VerticalServiceId:String,Codable{    
-    case JournalService_MaumDiary = "JournalService.MaumDiary"
+    case JournalService_MaumDiary
 }

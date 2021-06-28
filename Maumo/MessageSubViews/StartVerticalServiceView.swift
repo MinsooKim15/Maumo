@@ -8,35 +8,43 @@
 import SwiftUI
 
 struct StartVerticalServiceView: View {
-    var currentReplyMessageData:MessageData
-    var failCompletion:()->Void
-    var successCompletion:()->Void
+//    이건 그냥 개별 View를 띄우고, 필요한 Completion을 수행하는데 쓰이는 View임.
+    @EnvironmentObject var session:SessionStore
+    @ObservedObject var modelView: ChattingModelView
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    func failCompletion()->Void{
+        self.modelView.verticalServiceFailCompletion()
+        presentationMode.wrappedValue.dismiss()
+    }
+    func successCompletion()->Void{
+        self.modelView.verticalServiceSuccessCompletion()
+        presentationMode.wrappedValue.dismiss()
+    }
     var computedView:AnyView{
-        switch(self.currentReplyMessageData.startVerticalService?.verticalServiceId){
+        switch(self.modelView.chattingModel.currentReplyMessage?.data.startVerticalService?.verticalServiceId){
         case .JournalService_MaumDiary:
-            return AnyView(MaumJournalWritingFullView(modelView: MaumJournalModelView()))
+            return AnyView(MaumJournalWritingFullView(modelView: MaumJournalModelView(userId: self.session.session?.uid),showInCard: true,successCompletion: {successCompletion()}))
         case .none:
-            return AnyView(MaumJournalWritingFullView(modelView: MaumJournalModelView()))
+            return AnyView(MaumJournalWritingFullView(modelView: MaumJournalModelView(userId:self.session.session?.uid),showInCard: true,successCompletion: {successCompletion()}))
         }
     }
     var body: some View {
         ZStack{
-            computedView.clipShape(RoundedRectangle(cornerRadius: 10.0))
-            VStack{
-                HStack{
+            computedView
+                VStack{
+                    HStack{
+                        Spacer()
+                        CloseButton(closeClosure: {failCompletion()})
+                        Spacer().frame(width:20)
+                    }.padding([.top],20)
                     Spacer()
-                    CloseButton(closeClosure: {failCompletion()})
-                    Spacer().frame(width:20)
-                }.padding([.top],20)
-                Spacer()
-            }
+                }
         }
-        .frame(width:340, height:640)
-    }
+        }
 }
 
-struct StartVerticalServiceView_Previews: PreviewProvider {
-    static var previews: some View {
-        StartVerticalServiceView(currentReplyMessageData: MessageData(startVerticalService: StartVerticalService(buttonTitle: "마음일기 쓰기", verticalServiceId: .JournalService_MaumDiary, actionId: .StartWriting)), failCompletion: {print("YEAH")}, successCompletion: {print("YEAH")})
-    }
-}
+//struct StartVerticalServiceView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        StartVerticalServiceView(currentReplyMessageData: MessageData(startVerticalService: StartVerticalService(buttonTitle: "마음일기 쓰기", verticalServiceId: .JournalService_MaumDiary, actionId: .StartWriting)), failCompletion: {print("YEAH")}, successCompletion: {print("YEAH")}).environmentObject(SessionStore())
+//    }
+//}

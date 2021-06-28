@@ -10,8 +10,9 @@ import SwiftUI
 struct CloseButton:View{
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var closeClosure:()->Void
+    var frameSize:CGFloat = 60
     func closeAction()->Void{
-        self.presentationMode.wrappedValue.dismiss()
+        
         self.closeClosure()
     }
     var body: some View{
@@ -19,13 +20,13 @@ struct CloseButton:View{
                label: {Group{
                 ZStack{
                     Circle()
-                        .frame(width:36, height:36)
+                        .frame(width:frameSize*0.6, height:frameSize*0.6)
                         .foregroundColor(.white)
                     Image(systemName: "xmark")
-                        .font(.system(size: 14))
+                        .font(.system(size: frameSize*0.2))
                         .foregroundColor(.black)
                 }
-                .frame(width:60, height:60)
+                .frame(width:self.frameSize, height:self.frameSize)
                 .shadow(radius: 5)
             }})
         

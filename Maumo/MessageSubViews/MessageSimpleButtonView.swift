@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MessageButtonView: View {
+struct MessageSimpleButtonView: View {
     var buttonAction : ()->Void
     var titleTextSetting = FontSetting(fontWeight: .regular, fontSize: .medium20)
     var buttonMessage : String
@@ -28,7 +28,6 @@ struct MessageButtonView: View {
     //            }
             }.frame(width: 280, height:80)
         }
-
     }
 }
 

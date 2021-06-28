@@ -17,7 +17,7 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     override init() {
         super.init()
         request = SKProductsRequest()
-        self.getProducts(["JournalService.MaumDiary"])
+        self.getProducts([VerticalServiceId.JournalService_MaumDiary.rawValue])
     }
     func getProducts(_ productIDs: [String]) {
         print("Start requesting products ...")

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-struct HomeView: View{
+struct OldHomeView: View{
     
     @ObservedObject var modelView: HomeModelView
     @ObservedObject var journalView = MaumJournalModelView()
@@ -39,55 +39,56 @@ struct HomeView: View{
         GeometryReader{ geometry in
             NavigationView{
                 ZStack{
-                    Image("HomeBackground")
-                            .resizable()
-                            .scaledToFill()
-                            .edgesIgnoringSafeArea(.all)
-                    NavigationLink(
-                        destination: SettingView(modelView:SettingModelView())                            .navigationBarTitle("")
-                            .navigationBarHidden(true),
-                        isActive: $willMoveToSettingView
-                    ) {
-                        EmptyView()
+
+                    // MARK: - 배경
+                    Group{
+                        Image("HomeBackground")
+                                .resizable()
+                                .scaledToFill()
+                                .edgesIgnoringSafeArea(.all)
                     }
-//                    MARK:- 14.5.1에서 계속 튕기는 현상을 막기 위한 임시 처리임.
-                    NavigationLink(destination: EmptyView(), label: {})
-                    NavigationLink(
-                        destination: ChatView(modelView: ChattingModelView(userId:self.session.session?.uid))                         .navigationBarTitle("")
-                            .navigationBarHidden(true),
-                        isActive: $willMoveToChatView
-                    ) {
-                        EmptyView()
-                    }
-                    ScrollView(.vertical){
-                        VStack{
+                    VStack{
+                        HStack{
                             Spacer()
-                                .frame(maxHeight:44)
-                            HStack{
-                                Spacer()
-                                SettingButton()
-                                .padding([.trailing],30)
-                                .onTapGesture {
-                                    self.willMoveToSettingView = true
-                                }
-                            }
-                            .padding([.top],self.settingButtonMarginToTop)
-                            HStack{
-                                startChatButton()
+                            ZStack{
+                                Color.red
+                                SettingButton(action: {self.willMoveToSettingView = true})
+                            }.frame(width:50, height:50)
+                            Spacer().frame(width:20)
+                        }.padding([.top],self.settingButtonMarginToTop)
+                        HStack{
+                            startChatButton()
                                 .onTapGesture {
                                     self.willMoveToChatView = true
                                 }
                                 .padding([.leading],40)
-                                Spacer()
-                            }.padding([.top], self.startChatButtonMarginTopToSettingButton)
                             Spacer()
-                            TriggerCollectionView()
-                            MaumJournalSummaryView(modelView:journalView)
-                            Spacer().frame(height:400)
-                            Spacer()
+                        }
+                        .frame(height:44)
+                        .padding([.top],140)
+                        Spacer()
+                        MaumJournalSummaryView(modelView:MaumJournalModelView())
+                        Spacer().frame(height:20)
+                        // MARK: - Navigation 모음
+                        Group{
+                            NavigationLink(
+                                destination: SettingView(modelView:SettingModelView())                            .navigationBarTitle("")
+                                    .navigationBarHidden(true),
+                                isActive: $willMoveToSettingView
+                            ) {
+                                EmptyView()
                             }
+        //                    MARK:- 14.5.1에서 계속 튕기는 현상을 막기 위한 임시 처리임.
+                            NavigationLink(destination: EmptyView(), label: {})
+                            NavigationLink(
+                                destination: ChatView(modelView: ChattingModelView(userId:self.session.session?.uid))                         .navigationBarTitle("")
+                                    .navigationBarHidden(true),
+                                isActive: $willMoveToChatView
+                            ) {
+                                EmptyView()
+                            }
+                        }
                     }
-
                 }
             }
             .navigationViewStyle(StackNavigationViewStyle())
@@ -99,20 +100,22 @@ struct HomeView: View{
     }
 }
 struct SettingButton:View{
-//    var action : ()->Void
+    var action : ()->Void
     var body: some View{
-            Group{
-                ZStack{
-                    Circle()
-                        .frame(width:48, height:48)
-                        .foregroundColor(.white)
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 20))
-                        .foregroundColor(.black)
+            Button(action: {action()}, label: {
+                Group{
+                    ZStack{
+                        Circle()
+                            .frame(width:48, height:48)
+                            .foregroundColor(.white)
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 20))
+                            .foregroundColor(.black)
+                    }
+                    .frame(width:80, height:80)
+                    .shadow(radius: 5)
                 }
-                .frame(width:80, height:80)
-                .shadow(radius: 5)
-            }        
+            }).frame(width:50, height:50)
     }
 }
 struct startChatButton:View{

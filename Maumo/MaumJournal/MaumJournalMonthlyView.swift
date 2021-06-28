@@ -18,6 +18,8 @@ struct MaumJournalMonthlyView: View {
                 JournalGridView(modelView: self.modelView)
                 Spacer()
             }
+        }.onAppear{
+            self.modelView.connectData()
         }
     }
 }

@@ -27,7 +27,7 @@ struct MaumJournalSummaryView: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: self.viewRadius)
-                .foregroundColor(.beigeWhite)
+                .foregroundColor(.beigeWhite).shadow(radius: 10.0)
 
             VStack{
                 Group{
